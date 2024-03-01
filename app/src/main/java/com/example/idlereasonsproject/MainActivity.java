@@ -18,7 +18,7 @@ import com.example.idlereasonsproject.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
-
+//some change :)
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
