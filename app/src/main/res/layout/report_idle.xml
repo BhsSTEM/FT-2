@@ -9,7 +9,6 @@
         android:id="@+id/report_idle_field"
         android:layout_width="409dp"
         android:layout_height="0dp"
-        android:entries="Select field, Field 1, Field 2"
         app:layout_constraintBottom_toTopOf="@+id/report_idle_text_machine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,7 +18,6 @@
         android:id="@+id/report_idle_machine"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:entries="a, b, c"
         app:layout_constraintBottom_toTopOf="@+id/report_idle_text_reason"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +27,6 @@
         android:id="@+id/report_idle_reason"
         android:layout_width="409dp"
         android:layout_height="0dp"
-        android:entries="a, b, c, other (please explain)"
         app:layout_constraintBottom_toTopOf="@+id/report_idle_text_further_information"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,9 +55,10 @@
         android:ems="10"
         android:inputType="text"
         android:text="Location"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/report_idle_field"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/report_idle_text_title" />
 
     <EditText
         android:id="@+id/report_idle_text_machine"
@@ -69,6 +67,7 @@
         android:ems="10"
         android:inputType="text"
         android:text="Machine"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/report_idle_machine"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/report_idle_field" />
@@ -80,6 +79,7 @@
         android:ems="10"
         android:inputType="text"
         android:text="Reason"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/report_idle_reason"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/report_idle_machine" />
@@ -90,7 +90,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
-        android:text="Name"
+        android:text="Further information"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/report_idle_reason" />
@@ -105,14 +106,14 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/report_idle_text_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
-        android:layout_marginEnd="134dp"
-        android:text="TextView"
+        android:text="Report Idle"
+        android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/report_idle_text_location"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/report_idle_text_location"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

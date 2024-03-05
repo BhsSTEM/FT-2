@@ -16,4 +16,15 @@
         <item>Field 2</item>
         <item>Field 3</item>
     </string-array>
+    <string-array name="machines_array">
+        <item>Machine 1</item>
+        <item>Machine 2</item>
+        <item>Machine 3</item>
+    </string-array>
+    <string-array name="reasons_array">
+        <item>Reason 1</item>
+        <item>Reason 2</item>
+        <item>Reason 3</item>
+        <item>Other (please explain)</item>
+    </string-array>
 </resources>
