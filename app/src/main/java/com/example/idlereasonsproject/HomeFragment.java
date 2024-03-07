@@ -11,7 +11,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.idlereasonsproject.databinding.FragmentSecondBinding;
 
-public class SecondFragment extends Fragment {
+public class HomeFragment extends Fragment {
 
     private FragmentSecondBinding binding;
 
@@ -28,7 +28,7 @@ public class SecondFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        /*
         binding.loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -36,15 +36,9 @@ public class SecondFragment extends Fragment {
                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
         });
-        /*
-        binding.registerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavHostFragment.findNavController(SecondFragment.this)
-                        .navigate(R.id.action_SecondFragment_to_HomeFragment);
-            }
-        });
-*/
+
+         */
+
     }
 
     @Override
