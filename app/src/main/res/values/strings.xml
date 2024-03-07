@@ -10,10 +10,12 @@
     <string name="lorem_ipsum">
         Lorem ipsum
     </string>
-    <!-- meant to be linked to the "spinner" in report_idle.xml but I could not get that to work. And then you'd have one for all the other "spinners" but I can't even figure out one-->
-    <string-array name="fields_array">
-        <item>Field 1</item>
-        <item>Field 2</item>
-        <item>Field 3</item>
-    </string-array>
+    <string name="email">Enter your Email</string>
+    <string name="password">Enter your Password</string>
+    <string name="first_name">Enter your First Name</string>
+    <string name="last_name">Enter Your Last Name</string>
+    <string name="confirm_password">Confirm your Password</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
