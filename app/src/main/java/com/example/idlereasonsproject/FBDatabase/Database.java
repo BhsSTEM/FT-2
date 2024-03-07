@@ -8,10 +8,12 @@ public class Database
 
     public Database(){}
 
-    public void AddUser(String email)
+    public void AddUser(String email, String firstName, String lastName, String pass)
     {
-        User user = new User(email);
+        User user = new User(email, firstName, lastName);
+        Password password = new Password(pass);
 
         database.child("users").setValue(email);
+        database.child("passwords").child(email).setValue(password);
     }
 }
