@@ -36,7 +36,7 @@ public class SecondFragment extends Fragment {
                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
         });
-        /*
+
         binding.registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,7 +44,7 @@ public class SecondFragment extends Fragment {
                         .navigate(R.id.action_SecondFragment_to_HomeFragment);
             }
         });
-*/
+
     }
 
     @Override
