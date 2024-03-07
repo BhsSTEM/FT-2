@@ -6,13 +6,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ReportIdle extends AppCompatActivity implements OnItemSelectedListener{
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.report_idle);
 // Spinner for fields
         Spinner fieldSpinner = (Spinner) findViewById(R.id.report_idle_field);
         // Create an ArrayAdapter using the string array and a default spinner layout.
@@ -49,16 +51,15 @@ public class ReportIdle extends AppCompatActivity implements OnItemSelectedListe
         reasonAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner.
         reasonSpinner.setAdapter(reasonAdapter);
-    }
-    public void onItemSelected(AdapterView<?> parent, View view,
-                               int pos, long id) {
-        // An item is selected. You can retrieve the selected item using
-        // parent.getItemAtPosition(pos).
-        String test = (String) parent.getItemAtPosition(pos);
-        System.out.println(test);
+}
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
     }
 
+    @Override
     public void onNothingSelected(AdapterView<?> parent) {
-        // Another interface callback.
+
     }
 }

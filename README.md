@@ -1,7 +1,7 @@
 # FT-2
 #
 # Needed:
-# Ability to actually get to the report idle screen
+# The text saying "fields" "machines" etc are editable which they shouldn't be
 # Way to take in information from the text box
 # Creation of like, a report object? That seems like a reasonable way to go about this
 # Ability to get all the information into said report object
