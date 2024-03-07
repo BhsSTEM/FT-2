@@ -41,8 +41,10 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference ref = db.getReference("test");
-        ref.setValue("hey hey :)");
+        DatabaseReference ref = db.getReference();
+        ref.child("cool").setValue("hey hey :)");
+        ref.child("cool").child("very cool").setValue("cooler test");
+
 
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
