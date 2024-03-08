@@ -38,15 +38,15 @@ public class FirstFragment extends Fragment {
             }
         });
         
-       /*
-        binding.register_btn.setOnClickListener(new View.OnClickListener() {
+
+        binding.loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(FirstFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                        .navigate(R.id.action_FirstFragment_to_HomeFragment);
             }
         });
-        */
+
     }
 
     @Override
