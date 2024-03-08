@@ -98,7 +98,12 @@ public class SecondFragment extends Fragment
                     acceptableInputs = false;
                 }
 
-                if(cfnPasswordInput.getText().toString().equals(passwordInput.getText().toString()))
+                if(cfnPasswordInput.getText().toString().equals(""))
+                {
+                    cfnPasswordInput.setError("PLEASE ENTER PASSWORD >:(");
+                    acceptableInputs = false;
+                }
+                else if(!cfnPasswordInput.getText().toString().equals(passwordInput.getText().toString()))
                 {
                     cfnPasswordInput.setError("PASSWORDS DON'T MATCH >:(");
                     acceptableInputs = false;
