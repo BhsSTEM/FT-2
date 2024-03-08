@@ -49,48 +49,44 @@
             android:textAlignment="viewStart" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
+    <TextView
         android:id="@+id/report_idle_text_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="text"
         android:text="Location"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/report_idle_field"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/report_idle_text_title" />
 
-    <EditText
+    <TextView
         android:id="@+id/report_idle_text_machine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="text"
         android:text="Machine"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/report_idle_machine"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/report_idle_field" />
 
-    <EditText
+    <TextView
         android:id="@+id/report_idle_text_reason"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="text"
         android:text="Reason"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/report_idle_reason"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/report_idle_machine" />
 
-    <EditText
+    <TextView
         android:id="@+id/report_idle_text_further_information"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="text"
         android:text="Further information"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
