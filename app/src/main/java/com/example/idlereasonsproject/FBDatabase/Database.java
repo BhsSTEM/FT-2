@@ -2,16 +2,21 @@ package com.example.idlereasonsproject.FBDatabase;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Database
 {
-    private static DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+    protected final static DatabaseReference database = FirebaseDatabase.getInstance().getReference();
 
     public Database(){}
 
-    public static void AddUser(String email, String firstName, String lastName, String pass)
+    public static void addUser(String email, String firstName, String lastName, String pass)
     {
-        User user = new User(email, firstName, lastName, pass);
+        DatabaseReference ref = database.child("users").child(email);
+        User user = new User(firstName, lastName, pass);
 
-        database.child("users").child(email).setValue(user);
+        ref.setValue(user);
     }
+
 }

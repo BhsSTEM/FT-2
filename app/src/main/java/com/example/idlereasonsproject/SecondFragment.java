@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.idlereasonsproject.FBDatabase.UserNode;
 import com.example.idlereasonsproject.databinding.FragmentSecondBinding;
 import com.example.idlereasonsproject.FBDatabase.Database;
 import com.google.android.material.textfield.TextInputLayout;
@@ -59,12 +60,30 @@ public class SecondFragment extends Fragment
         });
 
         binding.registerBtn.setOnClickListener(new View.OnClickListener(){
+            String email;
+            String firstName;
+            String lastName;
+            String password;
+            String cfnPassword;
+
             @Override
             public void onClick(View v)
             {
+                email = emailInput.getText().toString();
+                firstName = firstNameInput.getText().toString();
+                lastName = lastNameInput.getText().toString();
+                password = passwordInput.getText().toString();
+                cfnPassword = cfnPasswordInput.getText().toString();
+
                 if(checkUserInputs())
                 {
-                    //add new user
+                    UserNode.addUser(
+                        email,
+                        firstName,
+                        lastName,
+                        cfnPassword
+                    );
+
                     //switch to screen
                 }
             }
@@ -74,36 +93,36 @@ public class SecondFragment extends Fragment
             {
                 boolean acceptableInputs = true;
 
-                if(firstNameInput.getText().toString().equals(""))
+                if(firstName.equals(""))
                 {
                     firstNameInput.setError("PLEASE ENTER FIRST NAME >:(");
                     acceptableInputs = false;
                 }
 
-                if(lastNameInput.getText().toString().equals(""))
+                if(lastName.equals(""))
                 {
                     lastNameInput.setError("PLEASE ENTER LAST NAME >:(");
                     acceptableInputs = false;
                 }
 
-                if(emailInput.getText().toString().equals(""))
+                if(email.equals(""))
                 {
                     emailInput.setError("PLEASE ENTER EMAIL >:(");
                     acceptableInputs = false;
                 }
 
-                if(passwordInput.getText().toString().equals(""))
+                if(password.equals(""))
                 {
                     passwordInput.setError("PLEASE ENTER PASSWORD >:(");
                     acceptableInputs = false;
                 }
 
-                if(cfnPasswordInput.getText().toString().equals(""))
+                if(cfnPassword.equals(""))
                 {
                     cfnPasswordInput.setError("PLEASE ENTER PASSWORD >:(");
                     acceptableInputs = false;
                 }
-                else if(!cfnPasswordInput.getText().toString().equals(passwordInput.getText().toString()))
+                else if(!cfnPassword.equals(passwordInput.getText().toString()))
                 {
                     cfnPasswordInput.setError("PASSWORDS DON'T MATCH >:(");
                     acceptableInputs = false;
