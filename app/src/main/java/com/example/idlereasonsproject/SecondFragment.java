@@ -39,7 +39,7 @@ public class SecondFragment extends Fragment {
 
         binding.registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 NavHostFragment.findNavController(SecondFragment.this)
                         .navigate(R.id.action_SecondFragment_to_HomeFragment);
             }

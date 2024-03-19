@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             android:textSize="40sp"
-            android:text="Sign Up" />
+            android:text="Sign Up Now!" />
 
         <!--  name heading    -->
         <TextView

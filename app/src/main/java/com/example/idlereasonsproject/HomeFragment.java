@@ -9,11 +9,12 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.idlereasonsproject.databinding.FragmentHomeBinding;
 import com.example.idlereasonsproject.databinding.FragmentSecondBinding;
 
 public class HomeFragment extends Fragment {
 
-    private FragmentSecondBinding binding;
+    private FragmentHomeBinding binding;
 
     @Override
     public View onCreateView(
@@ -22,7 +23,7 @@ public class HomeFragment extends Fragment {
     ) {
 
 
-        binding = FragmentSecondBinding.inflate(inflater, container, false);
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }

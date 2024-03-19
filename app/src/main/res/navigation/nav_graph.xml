@@ -16,7 +16,7 @@
             app:destination="@id/SecondFragment" />
         <action
             android:id="@+id/action_FirstFragment_to_HomeFragment"
-            app:destination="@+id/HomeFragment" />
+            app:destination="@id/HomeFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -29,10 +29,9 @@
             app:destination="@id/FirstFragment" />
         <action
             android:id="@+id/action_SecondFragment_to_HomeFragment"
-            app:destination="@+id/HomeFragment" />
+            app:destination="@id/HomeFragment" />
 
     </fragment>
-
     <fragment
         android:id="@+id/HomeFragment"
         android:name="com.example.idlereasonsproject.HomeFragment"
