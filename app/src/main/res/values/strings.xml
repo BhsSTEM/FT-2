@@ -10,7 +10,7 @@
     <string name="lorem_ipsum">
         Lorem ipsum
     </string>
-    <!-- meant to be linked to the "spinner" in report_idle.xml but I could not get that to work. And then you'd have one for all the other "spinners" but I can't even figure out one-->
+
     <string-array name="fields_array">
         <item>Field 1</item>
         <item>Field 2</item>

@@ -11,7 +11,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class ReportIdle extends AppCompatActivity implements OnItemSelectedListener {
+    //Variable set up
+    String location = "Unknown";
+    String machine = "Unknown";
+    String reason = "Unknown";
+    String furtherInformation = "Blank";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,19 +69,59 @@ public class ReportIdle extends AppCompatActivity implements OnItemSelectedListe
         reasonSpinner.setOnItemSelectedListener(this);
         Log.i("My Tag", "Reason spinner up");
 
-//Variable set up
-        String location = "Unknown";
-        String machine = "Unknown";
-        String reason = "Unknown";
-        String furtherInformation = "Blank";
-        Log.i("My Tag", "Variables set up");
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String result = (String) parent.getItemAtPosition(position);
-        Log.i("My Tag", result);
-        //Best way to figure out which variables to change is probably a switch statment
+        String chosenSpinner = "placeholder";
+        Log.i("Result", result);
+        //Recreating adapters, not sure if there's a better way to do this
+        ArrayAdapter<CharSequence> fieldAdapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.fields_array,
+                android.R.layout.simple_spinner_item
+        );
+        ArrayAdapter<CharSequence> machineAdapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.machines_array,
+                android.R.layout.simple_spinner_item
+        );
+        ArrayAdapter<CharSequence> reasonAdapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.reasons_array,
+                android.R.layout.simple_spinner_item
+        );
+
+        //Finding spinner
+        int posPlusOne = position + 1;
+        if (fieldAdapter.getCount() >= posPlusOne && result == parent.getItemAtPosition(position)) {
+            chosenSpinner = "Field";
+            Log.i("Chosen Spinner", chosenSpinner);
+        } else if (machineAdapter.getCount() >= posPlusOne && result == parent.getItemAtPosition(position)) {
+            chosenSpinner = "Machine";
+            Log.i("Chosen Spinner", chosenSpinner);
+        }  else if (reasonAdapter.getCount() >= posPlusOne && result == parent.getItemAtPosition(position)) {
+            chosenSpinner = "Reason";
+            Log.i("Chosen Spinner", chosenSpinner);
+        } else {
+            Log.w("Chosen Spinner", "Cannot find chosen spinner");
+        }
+
+        //Changing correct variable
+        switch (chosenSpinner) {
+            case "Field":
+                location = result;
+                break;
+            case "Machine":
+                machine = result;
+                break;
+            case "Reason":
+                reason = result;
+                break;
+            default:
+                Log.w("Chosen Spinner", "Value of chosenSpinner does not match possible option" + chosenSpinner);
+        }
     }
 
     @Override
