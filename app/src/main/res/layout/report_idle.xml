@@ -34,7 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/report_idle_text_reason" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
+        android:id="@+id/report_idle_further_information"
         android:layout_width="409dp"
         android:layout_height="0dp"
         android:hint="enter text"
@@ -89,7 +89,7 @@
         android:ems="10"
         android:text="Further information"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
+        app:layout_constraintBottom_toTopOf="@+id/report_idle_further_information"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/report_idle_reason" />
 

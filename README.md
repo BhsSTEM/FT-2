@@ -1,7 +1,7 @@
 # FT-2
 #
 # Needed:
-# Way to take in information from the text box
-# Creation of like, a report object? That seems like a reasonable way to go about this
-# Ability to get all the information into said report object
+# Getting the report object into the database
+# Closing the page on submission
+# An "Are you sure" popup before submitting
 # And maybe way in the future a way to grab the options from a database instead of a set string array

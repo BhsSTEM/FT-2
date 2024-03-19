@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -69,16 +71,16 @@ public class ReportIdle extends AppCompatActivity implements OnItemSelectedListe
         reasonSpinner.setAdapter(reasonAdapter);
         reasonSpinner.setOnItemSelectedListener(this);
         Log.i("My Tag", "Reason spinner up");
-//Deal with the text box here
-
+//Text box
+        TextInputLayout furtherInfoTextBox = (TextInputLayout) findViewById(R.id.report_idle_further_information);
 //Submit button
         Button button = (Button) findViewById(R.id.report_idle_button_submit);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.i("Submission", "Location: " + location);
-                Log.i("Submission", "Machine: " + machine);
-                Log.i("Submission", "Reason: " + reason);
-                Log.i("Submission", "Further Information: " + furtherInformation);
+                furtherInformation = furtherInfoTextBox.getEditText().getText().toString();
+                ReportObject newReport = new ReportObject();
+                newReport.assignData(location, machine, reason, furtherInformation);
+                newReport.reportToLogCat();
             }
         });
     }
