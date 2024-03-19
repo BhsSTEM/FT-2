@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Toast;
@@ -68,7 +69,18 @@ public class ReportIdle extends AppCompatActivity implements OnItemSelectedListe
         reasonSpinner.setAdapter(reasonAdapter);
         reasonSpinner.setOnItemSelectedListener(this);
         Log.i("My Tag", "Reason spinner up");
+//Deal with the text box here
 
+//Submit button
+        Button button = (Button) findViewById(R.id.report_idle_button_submit);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.i("Submission", "Location: " + location);
+                Log.i("Submission", "Machine: " + machine);
+                Log.i("Submission", "Reason: " + reason);
+                Log.i("Submission", "Further Information: " + furtherInformation);
+            }
+        });
     }
 
     @Override
@@ -95,13 +107,13 @@ public class ReportIdle extends AppCompatActivity implements OnItemSelectedListe
 
         //Finding spinner
         int posPlusOne = position + 1;
-        if (fieldAdapter.getCount() >= posPlusOne && result == parent.getItemAtPosition(position)) {
+        if (fieldAdapter.getCount() >= posPlusOne && result == fieldAdapter.getItem(position)) {
             chosenSpinner = "Field";
             Log.i("Chosen Spinner", chosenSpinner);
-        } else if (machineAdapter.getCount() >= posPlusOne && result == parent.getItemAtPosition(position)) {
+        } else if (machineAdapter.getCount() >= posPlusOne && result == machineAdapter.getItem(position)) {
             chosenSpinner = "Machine";
             Log.i("Chosen Spinner", chosenSpinner);
-        }  else if (reasonAdapter.getCount() >= posPlusOne && result == parent.getItemAtPosition(position)) {
+        }  else if (reasonAdapter.getCount() >= posPlusOne && result == reasonAdapter.getItem(position)) {
             chosenSpinner = "Reason";
             Log.i("Chosen Spinner", chosenSpinner);
         } else {
