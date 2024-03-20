@@ -1,5 +1,9 @@
 package com.example.idlereasonsproject;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +15,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -23,6 +28,7 @@ public class ReportIdle extends AppCompatActivity implements OnItemSelectedListe
     String machine = "Unknown";
     String reason = "Unknown";
     String furtherInformation = "Blank";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +87,8 @@ public class ReportIdle extends AppCompatActivity implements OnItemSelectedListe
                 ReportObject newReport = new ReportObject();
                 newReport.assignData(location, machine, reason, furtherInformation);
                 newReport.reportToLogCat();
+                //Change to proper home page when everything is merged
+                startActivity(new Intent(ReportIdle.this, MainActivity.class));
             }
         });
     }
@@ -142,4 +150,5 @@ public class ReportIdle extends AppCompatActivity implements OnItemSelectedListe
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
 }
