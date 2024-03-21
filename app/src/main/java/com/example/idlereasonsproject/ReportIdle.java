@@ -79,16 +79,34 @@ public class ReportIdle extends AppCompatActivity implements OnItemSelectedListe
         Log.i("My Tag", "Reason spinner up");
 //Text box
         TextInputLayout furtherInfoTextBox = (TextInputLayout) findViewById(R.id.report_idle_further_information);
+//Are you sure? Pop up
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        //Yes button clicked
+                        furtherInformation = furtherInfoTextBox.getEditText().getText().toString();
+                        ReportObject newReport = new ReportObject();
+                        newReport.assignData(location, machine, reason, furtherInformation);
+                        newReport.reportToLogCat();
+                        //Change to proper home page when everything is merged
+                        startActivity(new Intent(ReportIdle.this, MainActivity.class));
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        //No button clicked
+                        break;
+                }
+            }
+        };
 //Submit button
         Button button = (Button) findViewById(R.id.report_idle_button_submit);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                furtherInformation = furtherInfoTextBox.getEditText().getText().toString();
-                ReportObject newReport = new ReportObject();
-                newReport.assignData(location, machine, reason, furtherInformation);
-                newReport.reportToLogCat();
-                //Change to proper home page when everything is merged
-                startActivity(new Intent(ReportIdle.this, MainActivity.class));
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
             }
         });
     }
