@@ -16,6 +16,9 @@
         android:id="@+id/action_tracker"
         android:orderInCategory="100"
         android:title="@string/action_tracker" />
-
+    <item
+        android:id="@+id/report_idle_button"
+        android:orderInCategory="101"
+        android:title="Report Idle" />
 
 </menu>

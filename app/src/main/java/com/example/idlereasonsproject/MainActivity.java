@@ -1,5 +1,6 @@
 package com.example.idlereasonsproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -70,7 +71,8 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.report_idle_button) {
+            startActivity(new Intent(MainActivity.this, ReportIdle.class));
             return true;
         }
 
