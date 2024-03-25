@@ -3,8 +3,6 @@ package com.example.idlereasonsproject;
 import android.util.Log;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ReportObject {
     String location = "Unknown";
