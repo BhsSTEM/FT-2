@@ -77,14 +77,22 @@ public class SecondFragment extends Fragment
 
                 if(checkUserInputs())
                 {
-                    UserNode.addUser(
+                    boolean userMade = UserNode.addUser(
                         email,
                         firstName,
                         lastName,
                         cfnPassword
                     );
 
-                    //switch to screen
+                    if(userMade)
+                    {
+                        //switch to home screen
+                    }
+                    else
+                    {
+                        emailInput.setError("EMAIL ALREADY IN USE");
+                    }
+
                 }
             }
 

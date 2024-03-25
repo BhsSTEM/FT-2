@@ -11,12 +11,13 @@ public class Database
 
     public Database(){}
 
+    /*
     public static void addUser(String email, String firstName, String lastName, String pass)
     {
         DatabaseReference ref = database.child("users").child(email);
         User user = new User(firstName, lastName, pass);
 
-        ref.setValue(user);
-    }
+        //ref.setValue(user);
+    }*/
 
 }
