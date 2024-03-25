@@ -42,6 +42,16 @@
            app:destination="@+id/TrackerFragment"/>
 
     </fragment>
+    <fragment
+        android:id="@+id/ReportIdleFragment"
+        android:name="com.example.idlereasonsproject.ReportIdle"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_HomeFragment_to_TrackerFragment"
+            app:destination="@+id/TrackerFragment"/>
+
+    </fragment>
 
 
     <fragment
