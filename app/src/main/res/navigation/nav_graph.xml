@@ -8,7 +8,6 @@
     <fragment
         android:id="@+id/FirstFragment"
         android:name="com.example.idlereasonsproject.FirstFragment"
-        android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
 
         <action
@@ -21,8 +20,9 @@
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.example.idlereasonsproject.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+
+        tools:layout="@layout/fragment_second"
+        >
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
@@ -35,10 +35,28 @@
     <fragment
         android:id="@+id/HomeFragment"
         android:name="com.example.idlereasonsproject.HomeFragment"
-        android:label="@string/home_fragment_label"
         tools:layout="@layout/fragment_home">
 
+        <action
+           android:id="@+id/action_HomeFragment_to_TrackerFragment"
+           app:destination="@+id/TrackerFragment"/>
+
     </fragment>
+
+
+    <fragment
+        android:id="@+id/TrackerFragment"
+        android:name="com.example.idlereasonsproject.TrackerFragment"
+        tools:layout="@layout/fragment_tracker">
+
+       <action
+          android:id="@+id/action_TrackerFragment_to_HomeFragment"
+          app:destination="@id/HomeFragment" />
+
+
+    </fragment>
+
+
 
 
 </navigation>

@@ -48,8 +48,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
+
+/*
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+      */
     }
 
     @Override
@@ -71,28 +75,58 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        // as you specify a parent activity in AndroidManifest.xml
+/*
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.home_direct) {
+           NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
+          navController.navigate(R.id.action_TrackerFragment_to_HomeFragment);
+           return true;
         }
 
         return super.onOptionsItemSelected(item);
-    }
+*/
 
-    @Override
-    public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
-
-
-
-
-
+        //return NavigationUI.onNavDestinationSelected(item, navController)
+        //     || super.onOptionsItemSelected(item);
+       /*
+        if(NavigationUI.onNavDestinationSelected(item, navController)){
+            return true;
+        }
+        else{
+            return super.onOptionsItemSelected(item);
+        }
+        */
+        if (item.getItemId() == R.id.action_tracker) {
+            navController.navigate(R.id.action_HomeFragment_to_TrackerFragment);
+            return true;
+        }
+        else if(item.getItemId() == R.id.home_redirect){
+            navController.navigate(R.id.action_TrackerFragment_to_HomeFragment);
+            return true;
+        }
+        else if(item.getItemId() == android.R.id.home){
+            navController.navigateUp();
+            return true;
+        }
+        else{
+            return super.onOptionsItemSelected(item);
+        }
     }
+
+
+
+        @Override
+        public boolean onSupportNavigateUp () {
+            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+            return NavigationUI.navigateUp(navController, appBarConfiguration)
+                    || super.onSupportNavigateUp();
+
+
+        }
 
 
 }

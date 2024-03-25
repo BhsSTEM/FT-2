@@ -3,7 +3,7 @@
     <style name="Base.Theme.IdleReasonsProject" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
 <!--         <item name="colorPrimary">@color/design_default_color_primary</item>-->
-        <item name="windowActionBar">false</item>
+        <item name="windowActionBar">true</item>
         <item name="windowNoTitle">true</item>
     </style>
 
@@ -17,7 +17,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.IdleReasonsProject.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"
+    <style name="Theme.IdleReasonsProject.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark"
 
         />
 

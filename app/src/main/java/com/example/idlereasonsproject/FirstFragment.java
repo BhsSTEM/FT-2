@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -23,6 +24,7 @@ public class FirstFragment extends Fragment {
     ) {
 
         binding = FragmentFirstBinding.inflate(inflater, container, false);
+        //((MainActivity) requireActivity()).getSupportActionBar().hide();
 
         return binding.getRoot();
 
@@ -48,6 +50,17 @@ public class FirstFragment extends Fragment {
         });
 
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+    }
+
 
     @Override
     public void onDestroyView() {

@@ -7,14 +7,14 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.idlereasonsproject.databinding.FragmentHomeBinding;
-import com.example.idlereasonsproject.databinding.FragmentSecondBinding;
 
-public class HomeFragment extends Fragment {
+import com.example.idlereasonsproject.databinding.FragmentTrackerBinding;
 
-    private FragmentHomeBinding binding;
+public class TrackerFragment extends Fragment {
+
+
+    private FragmentTrackerBinding binding;
 
     @Override
     public View onCreateView(
@@ -23,23 +23,23 @@ public class HomeFragment extends Fragment {
     ) {
 
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding = FragmentTrackerBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        binding.trackerBtn.setOnClickListener(new View.OnClickListener() {
+        /*
+        binding.loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(HomeFragment.this)
-                        .navigate(R.id.action_HomeFragment_to_TrackerFragment);
+                NavHostFragment.findNavController(SecondFragment.this)
+                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
         });
 
-
+         */
 
     }
 

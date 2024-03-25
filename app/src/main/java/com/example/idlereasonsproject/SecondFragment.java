@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -45,6 +46,16 @@ public class SecondFragment extends Fragment {
             }
         });
 
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
     }
 
     @Override
