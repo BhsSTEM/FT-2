@@ -3,6 +3,8 @@ package com.example.idlereasonsproject;
 import android.util.Log;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ReportObject {
     String location = "Unknown";
@@ -25,4 +27,18 @@ public class ReportObject {
         Log.i("Submission", "Further Information: " + furtherInformation);
         Log.i("Submission", "Time of submission: " + timeOfSubmission.toString());
     }
+    //For adding to database, should work when uncommented, maybe this file will need to be placed into FBDatabase I'm not sure
+    //import java.util.HashMap;
+    //import java.util.Map;
+    //Place those with the other imports
+    /*public ReportObject(){} // Default constructor required for calls to DataSnapshot.getValue(User.class)
+    public Map<String, Object> toMap()
+    {
+        HashMap<String, Object> map  = new HashMap<>();
+        map.put("location", location);
+        map.put("machine", machine);
+        map.put("reason", reason);
+
+        return map;
+    }*/
 }

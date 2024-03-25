@@ -20,17 +20,17 @@
         <!--  name heading    -->
 
         <!-- First Name input              -->
-        <com.google.android.material.textfield.TextInputLayout
+        <!--><com.google.android.material.textfield.TextInputLayout
             android:id="@+id/firstNameInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
-            android:hint="@string/first_name"
+            android:hint="first name"
             app:boxBackgroundColor="#F8E9FD"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="122dp" />
+            tools:layout_editor_absoluteY="122dp" /> -->
 
         <!-- Last Name input              -->
 
@@ -39,17 +39,19 @@
             android:id="@+id/emailHeading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="174dp"
             android:text="Email"
             android:textSize="20sp"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="158dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <!-- email input             -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/email"
+            android:hint="email"
             app:boxBackgroundColor="#F8E9FD"
             app:layout_constraintTop_toBottomOf="@+id/emailHeading"
             app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
-            android:hint="@string/password"
+            android:hint="password"
             app:boxBackgroundColor="#F8E9FD"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +93,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="40dp"
-            android:hint="@string/confirm_password"
+            android:hint="confirm password"
             app:boxBackgroundColor="#F8E9FD"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
