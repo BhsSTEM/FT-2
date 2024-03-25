@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">IdleReasonsProject</string>
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
     <string name="action_settings">Settings</string>
+    <string name="reportIdle">Report Idle</string>
+
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -10,6 +15,17 @@
     <string name="lorem_ipsum">
         Lorem ipsum
     </string>
+    <string name="email">Enter your Email</string>
+    <string name="password">Enter your Password</string>
+    <string name="first_name">Enter your First Name</string>
+    <string name="last_name">Enter Your Last Name</string>
+    <string name="confirm_password">Confirm your Password</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home_fragment_label">Home Fragment</string>
+    <string name="action_tracker">Tracker</string>
+
+
 
     <string-array name="fields_array">
         <item>Field 1</item>
