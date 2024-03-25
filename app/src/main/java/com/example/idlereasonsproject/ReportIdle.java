@@ -1,6 +1,7 @@
 package com.example.idlereasonsproject;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,9 +12,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+
 import com.google.android.material.textfield.TextInputLayout;
-import java.util.Objects;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ReportIdle extends AppCompatActivity implements OnItemSelectedListener {
     //Variable set up
@@ -71,32 +78,36 @@ public class ReportIdle extends AppCompatActivity implements OnItemSelectedListe
         reasonSpinner.setOnItemSelectedListener(this);
         Log.i("My Tag", "Reason spinner up");
 //Text box
-        TextInputLayout furtherInfoTextBox = findViewById(R.id.report_idle_further_information);
+        TextInputLayout furtherInfoTextBox = (TextInputLayout) findViewById(R.id.report_idle_further_information);
 //Are you sure? Pop up
-        DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
-            switch (which){
-                case DialogInterface.BUTTON_POSITIVE:
-                    //Yes button clicked
-                    furtherInformation = Objects.requireNonNull(furtherInfoTextBox.getEditText()).getText().toString();
-                    ReportObject newReport = new ReportObject();
-                    newReport.assignData(location, machine, reason, furtherInformation);
-                    newReport.reportToLogCat();
-                    //method to send to database
-                    //Change to proper home page when everything is merged
-                    startActivity(new Intent(ReportIdle.this, MainActivity.class));
-                    break;
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        //Yes button clicked
+                        furtherInformation = furtherInfoTextBox.getEditText().getText().toString();
+                        ReportObject newReport = new ReportObject();
+                        newReport.assignData(location, machine, reason, furtherInformation);
+                        newReport.reportToLogCat();
+                        //Change to proper home page when everything is merged
+                        startActivity(new Intent(ReportIdle.this, MainActivity.class));
+                        break;
 
-                case DialogInterface.BUTTON_NEGATIVE:
-                    //No button clicked
-                    break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        //No button clicked
+                        break;
+                }
             }
         };
 //Submit button
-        Button button = findViewById(R.id.report_idle_button_submit);
-        button.setOnClickListener(v -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-            builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
-                    .setNegativeButton("No", dialogClickListener).show();
+        Button button = (Button) findViewById(R.id.report_idle_button_submit);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+            }
         });
     }
 
