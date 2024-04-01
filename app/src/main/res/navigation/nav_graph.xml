@@ -40,18 +40,16 @@
         <action
            android:id="@+id/action_HomeFragment_to_TrackerFragment"
            app:destination="@+id/TrackerFragment"/>
-
-    </fragment>
-    <fragment
-        android:id="@+id/ReportIdleFragment"
-        android:name="com.example.idlereasonsproject.ReportIdle"
-        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_HomeFragment_to_MachineListFragment"
+            app:destination="@+id/MachineListFragment"/>
 
         <action
-            android:id="@+id/action_HomeFragment_to_TrackerFragment"
-            app:destination="@+id/TrackerFragment"/>
+            android:id="@+id/action_HomeFragment_to_ReportIdle"
+            app:destination="@+id/ReportIdle"/>
 
     </fragment>
+
 
 
     <fragment
@@ -62,6 +60,29 @@
        <action
           android:id="@+id/action_TrackerFragment_to_HomeFragment"
           app:destination="@id/HomeFragment" />
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/MachineListFragment"
+        android:name="com.example.idlereasonsproject.MachineListFragment"
+        tools:layout="@layout/fragment_machine_list">
+
+        <action
+            android:id="@+id/action_MachineListFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
+        <action
+            android:id="@+id/action_MachineListFragment_to_TrackerFragment"
+            app:destination="@id/TrackerFragment" />
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/ReportIdle"
+        android:name="com.example.idlereasonsproject.ReportIdle"
+        tools:layout="@layout/report_idle">
+
 
 
     </fragment>

@@ -20,5 +20,15 @@
         android:orderInCategory="100"
         android:title="@string/action_tracker" />
 
+    <item
+        android:id="@+id/action_machineList"
+        android:orderInCategory="100"
+        android:title="Machine List" />
+
+    <item
+        android:id="@+id/action_idleReport"
+        android:orderInCategory="100"
+        android:title="Report Idle" />
+
 
 </menu>

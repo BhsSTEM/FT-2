@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,11 +43,8 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(binding.toolbar);
 
 
-
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-
-
 
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -103,19 +101,21 @@ public class MainActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.action_tracker) {
             navController.navigate(R.id.action_HomeFragment_to_TrackerFragment);
             return true;
-        }
-        else if(item.getItemId() == R.id.home_redirect){
+        } else if (item.getItemId() == R.id.home_redirect) {
             navController.navigate(R.id.action_TrackerFragment_to_HomeFragment);
             return true;
-        }
-        else if(item.getItemId() == android.R.id.home){
+        } else if (item.getItemId() == R.id.action_machineList) {
+            navController.navigate(R.id.action_MachineListFragment_to_HomeFragment);
+            return true;
+        } else if (item.getItemId() == android.R.id.home) {
             navController.navigateUp();
             return true;
-        }
-        else{
+        } else {
             return super.onOptionsItemSelected(item);
         }
     }
+
+
 
 
 
