@@ -1,5 +1,8 @@
 package com.example.idlereasonsproject.FBDatabase;
 
+import android.provider.ContactsContract;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -14,6 +17,20 @@ import com.google.firebase.database.ValueEventListener;
 public class UserNode extends Database
 {
     private final static DatabaseReference userNode = database.child("users").getRef();
+    private static DataSnapshot snapshot;
+
+    private ValueEventListener userListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot)
+        {
+
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+            Log.w("DatabaseError", "loadUser:OnCancelled", error.toException());
+        }
+    };
 
     public UserNode(){ }
 
@@ -25,22 +42,19 @@ public class UserNode extends Database
 
         String key = String.valueOf(email.hashCode());
 
-        /*
-        try
+        getDataSnapshot();
+
+        if(snapshot == null)
         {
-            if (getDataSnapshot().hasChild(key)) {
-                return false;
-            }
-        }
-        catch(Exception e)
-        {
-            new Error(e).printStackTrace();
+            Log.d("firebase", "null value");
+            return false; //give an error
         }
 
-        if (getDataSnapshot().hasChild(key)) {
+        if(snapshot.hasChild(key))
+        {
+            Log.w("inputTesting", "\n\n\n\nemail in use");
             return false;
-        }*/
-
+        }
 
         DatabaseReference ref = userNode.child(key);
 
@@ -52,6 +66,7 @@ public class UserNode extends Database
                     @Override
                     public void onSuccess(Void unused)
                     {
+                        Log.d("firebase:setValue(user)", user.toMap().toString());
                     }
                 })
                 .addOnFailureListener(new OnFailureListener()
@@ -59,7 +74,7 @@ public class UserNode extends Database
                     @Override
                     public void onFailure(@NonNull Exception e)
                     {
-                        new Error(e).printStackTrace(); //error if there is a problem
+                        Log.e("firebase:setValue(user)", "onFailure:user", e);
                     }
                 }
         );
@@ -67,18 +82,30 @@ public class UserNode extends Database
         return true;
     }
 
-    public static DataSnapshot getDataSnapshot()
+    //method used to pass snapshot into methods
+    public static void setSnapshot(DataSnapshot snap)
     {
-        return userNode.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        snapshot = snap;
+    }
+
+    public static void getDataSnapshot()
+    {
+        userNode.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task)
             {
                 if (!task.isSuccessful())
                 {
-                    new Error(task.getException()).printStackTrace();
+                    Log.e("firebase", "Error getting user data", task.getException());
+                    UserNode.setSnapshot(null);
                 }
-
+                else
+                {
+                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
+                    UserNode.setSnapshot(task.getResult());
+                }
             }
-        }).getResult();
+        });
     }
+
 }

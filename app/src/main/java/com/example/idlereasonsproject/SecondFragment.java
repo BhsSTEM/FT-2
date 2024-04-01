@@ -86,11 +86,10 @@ public class SecondFragment extends Fragment
 
                     if(userMade)
                     {
-                        //switch to home screen
+                        emailInput.setError("EMAIL ALREADY IN USE");
                     }
                     else
                     {
-                        emailInput.setError("EMAIL ALREADY IN USE");
                     }
 
                 }
