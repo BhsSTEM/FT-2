@@ -12,26 +12,26 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
 import com.google.android.material.textfield.TextInputLayout;
 import java.util.Objects;
 
-public class ReportIdle extends AppCompatActivity implements OnItemSelectedListener {
+public class ReportIdle extends Fragment implements OnItemSelectedListener {
     //Variable set up
     String location = "Unknown";
     String machine = "Unknown";
     String reason = "Unknown";
     String furtherInformation = "Blank";
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreateView(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.report_idle);
 
 //Field Spinner
-        Spinner fieldSpinner = findViewById(R.id.report_idle_field);
+        Spinner fieldSpinner = getView().findViewById(R.id.report_idle_field);
         // Create an ArrayAdapter using the string array and a default spinner layout.
         ArrayAdapter<CharSequence> fieldAdapter = ArrayAdapter.createFromResource(
-                this,
+                getActivity(),
                 R.array.fields_array,
                 android.R.layout.simple_spinner_item
         );
@@ -43,10 +43,10 @@ public class ReportIdle extends AppCompatActivity implements OnItemSelectedListe
         Log.i("My Tag", "Field spinner up");
 
 //Machine Spinner
-        Spinner machineSpinner = findViewById(R.id.report_idle_machine);
+        Spinner machineSpinner = getView().findViewById(R.id.report_idle_machine);
         // Create an ArrayAdapter using the string array and a default spinner layout.
         ArrayAdapter<CharSequence> machineAdapter = ArrayAdapter.createFromResource(
-                this,
+                getActivity(),
                 R.array.machines_array,
                 android.R.layout.simple_spinner_item
         );
@@ -57,10 +57,10 @@ public class ReportIdle extends AppCompatActivity implements OnItemSelectedListe
         machineSpinner.setOnItemSelectedListener(this);
         Log.i("My Tag", "Machine spinner up");
 //Reason Spinner
-        Spinner reasonSpinner = findViewById(R.id.report_idle_reason);
+        Spinner reasonSpinner = getView().findViewById(R.id.report_idle_reason);
         // Create an ArrayAdapter using the string array and a default spinner layout.
         ArrayAdapter<CharSequence> reasonAdapter = ArrayAdapter.createFromResource(
-                this,
+                getActivity(),
                 R.array.reasons_array,
                 android.R.layout.simple_spinner_item
         );
@@ -71,7 +71,7 @@ public class ReportIdle extends AppCompatActivity implements OnItemSelectedListe
         reasonSpinner.setOnItemSelectedListener(this);
         Log.i("My Tag", "Reason spinner up");
 //Text box
-        TextInputLayout furtherInfoTextBox = findViewById(R.id.report_idle_further_information);
+        TextInputLayout furtherInfoTextBox = getView().findViewById(R.id.report_idle_further_information);
 //Are you sure? Pop up
         DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
             switch (which){
@@ -83,7 +83,6 @@ public class ReportIdle extends AppCompatActivity implements OnItemSelectedListe
                     newReport.reportToLogCat();
                     //method to send to database
                     //Change to proper home page when everything is merged
-                    startActivity(new Intent(ReportIdle.this, MainActivity.class));
                     break;
 
                 case DialogInterface.BUTTON_NEGATIVE:
@@ -92,7 +91,7 @@ public class ReportIdle extends AppCompatActivity implements OnItemSelectedListe
             }
         };
 //Submit button
-        Button button = findViewById(R.id.report_idle_button_submit);
+        Button button = getView().findViewById(R.id.report_idle_button_submit);
         button.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
             builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
@@ -107,17 +106,17 @@ public class ReportIdle extends AppCompatActivity implements OnItemSelectedListe
         Log.i("Result", result);
         //Recreating adapters, not sure if there's a better way to do this
         ArrayAdapter<CharSequence> fieldAdapter = ArrayAdapter.createFromResource(
-                this,
+                getActivity(),
                 R.array.fields_array,
                 android.R.layout.simple_spinner_item
         );
         ArrayAdapter<CharSequence> machineAdapter = ArrayAdapter.createFromResource(
-                this,
+                getActivity(),
                 R.array.machines_array,
                 android.R.layout.simple_spinner_item
         );
         ArrayAdapter<CharSequence> reasonAdapter = ArrayAdapter.createFromResource(
-                this,
+                getActivity(),
                 R.array.reasons_array,
                 android.R.layout.simple_spinner_item
         );
