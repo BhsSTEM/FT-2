@@ -62,6 +62,7 @@ public class ReportIdle extends Fragment implements OnItemSelectedListener {
 //Machine Spinner
         Spinner machineSpinner = getView().findViewById(R.id.report_idle_machine);
         //Creating an array to use for this specfic spinner, the goal is to have this in the future be pulled from somewhere else instead of just created here
+        //Idealy, in the future, if the user is marked as using a machine that one would pop up first, and if they're using multiple, those would pop up first
         String[] machineList = new String[]{"Machine 1", "Machine 2", "Machine 3"};
         // Create an ArrayAdapter using the string array and a default spinner layout.
         /* ArrayAdapter<CharSequence> machineAdapter = ArrayAdapter.createFromResource(
