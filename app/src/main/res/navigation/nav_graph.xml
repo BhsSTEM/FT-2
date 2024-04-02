@@ -11,9 +11,11 @@
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
 
+
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_FirstFragment_to_ReportIdle"
+            app:destination="@id/ReportIdle"
+            app:popUpTo="@id/ReportIdle" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -25,4 +27,19 @@
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/ReportIdle"
+        android:name="com.example.idlereasonsproject.ReportIdle"
+        android:label="Report Idle"
+        tools:layout="@layout/report_idle">
+
+        <action
+            android:id="@+id/action_ReportIdle_to_HomeFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.idlereasonsproject.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
 </navigation>
