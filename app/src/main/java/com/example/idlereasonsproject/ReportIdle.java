@@ -31,8 +31,7 @@ public class ReportIdle extends Fragment implements OnItemSelectedListener {
     String reason = "Unknown";
     String furtherInformation = "Blank";
     @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
 
@@ -44,28 +43,7 @@ public class ReportIdle extends Fragment implements OnItemSelectedListener {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        /*
-        binding.loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(SecondFragment.this)
-                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
-            }
-        });
-
-         */
-
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
-    protected void onCreateView(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-//Field Spinner
+        //Field Spinner
         Spinner fieldSpinner = getView().findViewById(R.id.report_idle_field);
         // Create an ArrayAdapter using the string array and a default spinner layout.
         ArrayAdapter<CharSequence> fieldAdapter = ArrayAdapter.createFromResource(
@@ -135,6 +113,23 @@ public class ReportIdle extends Fragment implements OnItemSelectedListener {
             builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
                     .setNegativeButton("No", dialogClickListener).show();
         });
+        /*
+        binding.loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(SecondFragment.this)
+                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
+            }
+        });
+
+         */
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
     @Override
