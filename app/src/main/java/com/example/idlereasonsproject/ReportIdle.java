@@ -61,12 +61,16 @@ public class ReportIdle extends Fragment implements OnItemSelectedListener {
 
 //Machine Spinner
         Spinner machineSpinner = getView().findViewById(R.id.report_idle_machine);
+        //Creating an array to use for this specfic spinner, the goal is to have this in the future be pulled from somewhere else instead of just created here
+        String[] machineList = new String[]{"Machine 1", "Machine 2", "Machine 3"};
         // Create an ArrayAdapter using the string array and a default spinner layout.
-        ArrayAdapter<CharSequence> machineAdapter = ArrayAdapter.createFromResource(
+        /* ArrayAdapter<CharSequence> machineAdapter = ArrayAdapter.createFromResource(
                 getActivity(),
                 R.array.machines_array,
                 android.R.layout.simple_spinner_item
-        );
+        ); */
+
+        ArrayAdapter<String> machineAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, machineList);
         // Specify the layout to use when the list of choices appears.
         machineAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner.
@@ -146,11 +150,8 @@ public class ReportIdle extends Fragment implements OnItemSelectedListener {
                 R.array.fields_array,
                 android.R.layout.simple_spinner_item
         );
-        ArrayAdapter<CharSequence> machineAdapter = ArrayAdapter.createFromResource(
-                getActivity(),
-                R.array.machines_array,
-                android.R.layout.simple_spinner_item
-        );
+        String[] machineList = new String[]{"Machine 1", "Machine 2", "Machine 3"};
+        ArrayAdapter<String> machineAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, machineList);
         ArrayAdapter<CharSequence> reasonAdapter = ArrayAdapter.createFromResource(
                 getActivity(),
                 R.array.reasons_array,
@@ -162,7 +163,7 @@ public class ReportIdle extends Fragment implements OnItemSelectedListener {
         if (fieldAdapter.getCount() >= posPlusOne && result == fieldAdapter.getItem(position)) {
             chosenSpinner = "Field";
             Log.i("Chosen Spinner", chosenSpinner);
-        } else if (machineAdapter.getCount() >= posPlusOne && result == machineAdapter.getItem(position)) {
+        } else if (machineAdapter.getCount() >= posPlusOne && result.equals(machineAdapter.getItem(position))) {
             chosenSpinner = "Machine";
             Log.i("Chosen Spinner", chosenSpinner);
         }  else if (reasonAdapter.getCount() >= posPlusOne && result == reasonAdapter.getItem(position)) {
