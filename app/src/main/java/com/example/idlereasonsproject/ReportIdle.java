@@ -17,6 +17,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.idlereasonsproject.databinding.FragmentMachineListBinding;
 import com.example.idlereasonsproject.databinding.ReportIdleBinding;
@@ -99,6 +100,8 @@ public class ReportIdle extends Fragment implements OnItemSelectedListener {
                     newReport.reportToLogCat();
                     //method to send to database
                     //Change to proper home page when everything is merged
+                    NavHostFragment.findNavController(ReportIdle.this)
+                            .navigate(R.id.action_ReportIdle_to_HomeFragment);
                     break;
 
                 case DialogInterface.BUTTON_NEGATIVE:
