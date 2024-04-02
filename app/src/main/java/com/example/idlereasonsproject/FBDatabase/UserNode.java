@@ -14,27 +14,53 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class UserNode extends Database
 {
     private final static DatabaseReference userNode = database.child("users").getRef();
-    private static DataSnapshot snapshot;
+    private static Map<String, User> usersHashMap = new HashMap<>();
 
     private ValueEventListener userListener = new ValueEventListener() {
-        @Override
-        public void onDataChange(@NonNull DataSnapshot snapshot)
-        {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot)
+            {
+                Map<String, User> userMap = new HashMap<>();
 
-        }
+                for (DataSnapshot child : snapshot.getChildren())
+                {
+                    userMap.put(child.getKey(), child.getValue(User.class));
+                }
 
-        @Override
-        public void onCancelled(@NonNull DatabaseError error) {
-            Log.w("DatabaseError", "loadUser:OnCancelled", error.toException());
-        }
+                Log.v("firebase", "the users are: " + userMap);
+                UserNode.setUsersHashMap(userMap);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error)
+            {
+                Log.w("DatabaseError", "loadUser:OnCancelled", error.toException());
+            }
     };
 
-    public UserNode(){ }
+    public UserNode()
+    {
+        userNode.addValueEventListener(userListener);
+    }
 
-    public static boolean addUser(String email, String firstName, String lastName, String pass)
+    public boolean loginUser(String email, String pass)
+    {
+        String key = String.valueOf(email.hashCode());
+
+        if(!usersHashMap.containsKey(key))
+        {
+            Log.i("userInputLogin", "email does not exits!!!");
+            return true;
+        }
+        return false;
+    }
+
+    public boolean addUser(String email, String firstName, String lastName, String pass)
     {
         email = email.toLowerCase();
         firstName = firstName.toLowerCase();
@@ -42,18 +68,10 @@ public class UserNode extends Database
 
         String key = String.valueOf(email.hashCode());
 
-        getDataSnapshot();
-
-        if(snapshot == null)
+        if(usersHashMap.containsKey(key))
         {
-            Log.d("firebase", "null value");
-            return false; //give an error
-        }
-
-        if(snapshot.hasChild(key))
-        {
-            Log.w("inputTesting", "\n\n\n\nemail in use");
-            return false;
+            Log.i("userInputRegister", "email exists!!!");
+            return true;
         }
 
         DatabaseReference ref = userNode.child(key);
@@ -66,7 +84,7 @@ public class UserNode extends Database
                     @Override
                     public void onSuccess(Void unused)
                     {
-                        Log.d("firebase:setValue(user)", user.toMap().toString());
+                        Log.v("setUser", user.toMap().toString());
                     }
                 })
                 .addOnFailureListener(new OnFailureListener()
@@ -79,13 +97,13 @@ public class UserNode extends Database
                 }
         );
 
-        return true;
+        return false;
     }
 
     //method used to pass snapshot into methods
-    public static void setSnapshot(DataSnapshot snap)
+    public static void setUsersHashMap(Map<String, User> map)
     {
-        snapshot = snap;
+        usersHashMap = map;
     }
 
     public static void getDataSnapshot()
@@ -97,12 +115,10 @@ public class UserNode extends Database
                 if (!task.isSuccessful())
                 {
                     Log.e("firebase", "Error getting user data", task.getException());
-                    UserNode.setSnapshot(null);
                 }
                 else
                 {
-                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
-                    UserNode.setSnapshot(task.getResult());
+                    Log.d("firebase", "read success " + String.valueOf(task.getResult().getValue()));
                 }
             }
         });

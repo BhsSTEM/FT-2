@@ -25,6 +25,7 @@ public class SecondFragment extends Fragment
     private EditText emailInput;
     private EditText passwordInput;
     private EditText cfnPasswordInput;
+    private UserNode userNode = new UserNode();
 
 
     @Override
@@ -77,7 +78,7 @@ public class SecondFragment extends Fragment
 
                 if(checkUserInputs())
                 {
-                    boolean userMade = UserNode.addUser(
+                    boolean userMade = userNode.addUser(
                         email,
                         firstName,
                         lastName,
@@ -90,6 +91,7 @@ public class SecondFragment extends Fragment
                     }
                     else
                     {
+                        //go to next screen
                     }
 
                 }
