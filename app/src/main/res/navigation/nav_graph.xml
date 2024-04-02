@@ -8,38 +8,86 @@
     <fragment
         android:id="@+id/FirstFragment"
         android:name="com.example.idlereasonsproject.FirstFragment"
-        android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
 
-
         <action
-            android:id="@+id/action_FirstFragment_to_ReportIdle"
-            app:destination="@id/ReportIdle"
-            app:popUpTo="@id/ReportIdle" />
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.example.idlereasonsproject.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+
+        tools:layout="@layout/fragment_second"
+        >
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_SecondFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/HomeFragment"
+        android:name="com.example.idlereasonsproject.HomeFragment"
+        tools:layout="@layout/fragment_home">
+
+        <action
+           android:id="@+id/action_HomeFragment_to_TrackerFragment"
+           app:destination="@+id/TrackerFragment"/>
+        <action
+            android:id="@+id/action_HomeFragment_to_MachineListFragment"
+            app:destination="@+id/MachineListFragment"/>
+
+        <action
+            android:id="@+id/action_HomeFragment_to_ReportIdle"
+            app:destination="@+id/ReportIdle"/>
+
+    </fragment>
+
+
+
+    <fragment
+        android:id="@+id/TrackerFragment"
+        android:name="com.example.idlereasonsproject.TrackerFragment"
+        tools:layout="@layout/fragment_tracker">
+
+       <action
+          android:id="@+id/action_TrackerFragment_to_HomeFragment"
+          app:destination="@id/HomeFragment" />
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/MachineListFragment"
+        android:name="com.example.idlereasonsproject.MachineListFragment"
+        tools:layout="@layout/fragment_machine_list">
+
+        <action
+            android:id="@+id/action_MachineListFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
+        <action
+            android:id="@+id/action_MachineListFragment_to_TrackerFragment"
+            app:destination="@id/TrackerFragment" />
+
+
     </fragment>
     <fragment
         android:id="@+id/ReportIdle"
         android:name="com.example.idlereasonsproject.ReportIdle"
-        android:label="Report Idle"
         tools:layout="@layout/report_idle">
 
-        <action
-            android:id="@+id/action_ReportIdle_to_HomeFragment"
-            app:destination="@id/FirstFragment" />
+
+
     </fragment>
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.example.idlereasonsproject.MainActivity"
-        android:label="activity_main"
-        tools:layout="@layout/activity_main" />
+
+
+
+
 </navigation>
