@@ -5,6 +5,11 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/FirstFragment">
 
+    <action
+        android:id="@+id/action_redirect_to_home"
+        app:popUpTo="@id/HomeFragment"
+        app:popUpToInclusive="true" />
+
     <fragment
         android:id="@+id/FirstFragment"
         android:name="com.example.idlereasonsproject.FirstFragment"

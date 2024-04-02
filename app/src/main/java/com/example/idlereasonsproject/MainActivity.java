@@ -97,12 +97,14 @@ public class MainActivity extends AppCompatActivity {
         else{
             return super.onOptionsItemSelected(item);
         }
+        action_redirect_to_home
         */
+
         if (item.getItemId() == R.id.action_tracker) {
             navController.navigate(R.id.action_HomeFragment_to_TrackerFragment);
             return true;
         } else if (item.getItemId() == R.id.home_redirect) {
-            navController.navigate(R.id.action_TrackerFragment_to_HomeFragment);
+            navController.navigate(R.id.action_redirect_to_home);
             return true;
         } else if (item.getItemId() == R.id.action_machineList) {
             navController.navigate(R.id.action_MachineListFragment_to_HomeFragment);
@@ -113,6 +115,8 @@ public class MainActivity extends AppCompatActivity {
         } else {
             return super.onOptionsItemSelected(item);
         }
+
+
     }
 
 
