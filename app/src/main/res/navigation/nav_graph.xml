@@ -24,5 +24,15 @@
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+
+        <action
+            android:id="@+id/action_SecondFragment_HomeFragment"
+            app:destination="@id/HomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/HomeFragment"
+        android:name="com.example.idlereasonsproject.HomeFragment"
+        android:label="Home Fragment"
+        tools:layout="@layout/fragment_home">
     </fragment>
 </navigation>

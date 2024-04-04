@@ -54,7 +54,7 @@ public class UserNode extends Database
 
         if(!usersHashMap.containsKey(key))
         {
-            Log.i("userInputLogin", "email does not exits!!!");
+            Log.i("userInputLogin", "email or password are incorrect");
             return true;
         }
         return false;

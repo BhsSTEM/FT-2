@@ -91,7 +91,8 @@ public class SecondFragment extends Fragment
                     }
                     else
                     {
-                        //go to next screen
+                        NavHostFragment.findNavController(SecondFragment.this)
+                                .navigate(R.id.action_SecondFragment_HomeFragment);
                     }
 
                 }

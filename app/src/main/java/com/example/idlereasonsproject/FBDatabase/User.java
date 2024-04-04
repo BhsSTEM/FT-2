@@ -16,7 +16,8 @@ public class User
         lastName = _lastName;
         password = _password;
     }
-
+    
+    //store object variables in a map
     public Map<String, Object> toMap()
     {
         HashMap<String, Object> map  = new HashMap<>();
@@ -32,7 +33,7 @@ public class User
         return firstName;
     }
 
-    public String getLastname()
+    public String getLastName()
     {
         return lastName;
     }
