@@ -5,16 +5,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.idlereasonsproject.FBDatabase.UserNode;
 import com.example.idlereasonsproject.databinding.FragmentFirstBinding;
 
 public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
+    private EditText emailInput;
+    private EditText passwordInput;
+
+    private UserNode userNode = new UserNode();
 
     @Override
     public View onCreateView(
@@ -23,6 +30,9 @@ public class FirstFragment extends Fragment {
     ) {
 
         binding = FragmentFirstBinding.inflate(inflater, container, false);
+
+        emailInput = binding.emailTextInputLayout.getEditText();
+        passwordInput = binding.passwordTextInputLayout.getEditText();
 
         return binding.getRoot();
 
@@ -39,10 +49,25 @@ public class FirstFragment extends Fragment {
         });
 
         binding.loginBtn.setOnClickListener(new View.OnClickListener(){
+            String email;
+            String password;
+
             @Override
             public void onClick(View v)
             {
+                email = emailInput.getText().toString();
+                password = passwordInput.getText().toString();
 
+                boolean loginStatus = userNode.loginUser(email, password);
+
+                if(loginStatus)
+                {
+                    //login :)
+                }
+                else
+                {
+                    emailInput.setError("email or password wrong");
+                }
             }
         });
 

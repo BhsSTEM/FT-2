@@ -16,6 +16,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class UserNode extends Database
 {
@@ -48,16 +49,25 @@ public class UserNode extends Database
         userNode.addValueEventListener(userListener);
     }
 
-    public boolean loginUser(String email, String pass)
+    public boolean loginUser(String email, String password)
     {
         String key = String.valueOf(email.hashCode());
 
         if(!usersHashMap.containsKey(key))
         {
             Log.i("userInputLogin", "email or password are incorrect");
-            return true;
+            return false;
         }
-        return false;
+
+        String pass = Objects.requireNonNull(usersHashMap.get(key)).getPassword();
+
+        if(!pass.equals(password))
+        {
+            Log.i("userInputLogin", "email or password are incorrect");
+            return false;
+        }
+
+        return true;
     }
 
     public boolean addUser(String email, String firstName, String lastName, String pass)
