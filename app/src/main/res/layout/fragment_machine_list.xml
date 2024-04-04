@@ -78,10 +78,10 @@
             android:layout_height="wrap_content"
             android:text="Display"
             app:layout_constraintTop_toBottomOf="@id/imageView"
-            app:layout_constraintStart_toStartOf="@id/bottomText"
+            app:layout_constraintStart_toEndOf="@id/bottomText"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp"
-            android:layout_marginLeft="50dp"
+
             />
 
         <TextView
@@ -94,10 +94,28 @@
             android:layout_height="wrap_content"
             android:text="Filter"
             app:layout_constraintTop_toBottomOf="@id/imageView"
-            app:layout_constraintStart_toStartOf="@id/displayBy"
+            app:layout_constraintStart_toEndOf="@id/displayBy"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp"
-            android:layout_marginLeft="100dp"
+
+            android:layout_marginLeft="10dp"
+            />
+
+        <TextView
+            android:id="@+id/machineInfo"
+            android:textSize="20dp"
+            android:paddingLeft="35dp"
+            android:paddingRight="35dp"
+            android:background="@color/cardview_light_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="All"
+            app:layout_constraintTop_toBottomOf="@id/bottomText"
+            app:layout_constraintStart_toStartOf="parent"
+
+            android:layout_marginTop="46dp"
+
+
             />
 
 
