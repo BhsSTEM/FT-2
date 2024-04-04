@@ -7,8 +7,24 @@
 
     <action
         android:id="@+id/action_redirect_to_home"
+        app:destination="@id/HomeFragment"
         app:popUpTo="@id/HomeFragment"
-        app:popUpToInclusive="true" />
+        app:popUpToInclusive="true"  />
+    <action
+        android:id="@+id/action_redirect_to_machine_list"
+        app:destination="@id/MachineListFragment"
+        app:popUpTo="@id/MachineListFragment"
+        app:popUpToInclusive="true"  />
+    <action
+        android:id="@+id/action_redirect_to_idle"
+        app:destination="@id/ReportIdle"
+        app:popUpTo="@id/ReportIdle"
+        app:popUpToInclusive="true"  />
+    <action
+        android:id="@+id/action_redirect_to_tracker"
+        app:destination="@id/TrackerFragment"
+        app:popUpTo="@id/TrackerFragment"
+        app:popUpToInclusive="true"  />
 
     <fragment
         android:id="@+id/FirstFragment"

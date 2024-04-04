@@ -101,15 +101,20 @@ public class MainActivity extends AppCompatActivity {
         */
 
         if (item.getItemId() == R.id.action_tracker) {
-            navController.navigate(R.id.action_HomeFragment_to_TrackerFragment);
+            navController.navigate(R.id.action_redirect_to_tracker);
             return true;
         } else if (item.getItemId() == R.id.home_redirect) {
             navController.navigate(R.id.action_redirect_to_home);
             return true;
         } else if (item.getItemId() == R.id.action_machineList) {
-            navController.navigate(R.id.action_MachineListFragment_to_HomeFragment);
+            navController.navigate(R.id.action_redirect_to_machine_list);
             return true;
-        } else if (item.getItemId() == android.R.id.home) {
+        }
+        else if(item.getItemId() == R.id.action_idleReport) {
+            navController.navigate(R.id.action_redirect_to_idle);
+            return true;
+        }
+        else if (item.getItemId() == android.R.id.home) {
             navController.navigateUp();
             return true;
         } else {
