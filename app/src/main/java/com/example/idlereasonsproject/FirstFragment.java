@@ -1,6 +1,7 @@
 package com.example.idlereasonsproject;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +63,9 @@ public class FirstFragment extends Fragment {
 
                 if(loginStatus)
                 {
-                    //login :)
+                    Log.i("login","complete");
+                    NavHostFragment.findNavController(FirstFragment.this)
+                            .navigate(R.id.action_FirstFragment_to_HomeFragment);
                 }
                 else
                 {
