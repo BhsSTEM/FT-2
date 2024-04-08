@@ -93,6 +93,7 @@ public class MachineObject {
             Log.i("Operator ArrayList duplicate removal", "search term not in arraylist");
         }
     }
+
     //Functions to return variables
     public String getName() {return name;}
     public String getType() {return type;}

@@ -1,6 +1,9 @@
 package com.example.idlereasonsproject;
 
 import android.util.Log;
+
+import androidx.core.app.NotificationCompat;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -25,6 +28,7 @@ public class ReportObject {
         Log.i("Submission", "Further Information: " + furtherInformation);
         Log.i("Submission", "Time of submission: " + timeOfSubmission.toString());
     }
+
     //these types of functions seem to be standard and it can't hurt
     public String getLocation() {return location;}
     public String getMachine(){return machine;}

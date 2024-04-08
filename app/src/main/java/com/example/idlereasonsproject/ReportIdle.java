@@ -1,6 +1,7 @@
 package com.example.idlereasonsproject;
 
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import android.widget.AdapterView.OnItemSelectedListener;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationCompat.Builder;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -103,6 +106,7 @@ public class ReportIdle extends Fragment implements OnItemSelectedListener {
                     ReportObject newReport = new ReportObject();
                     newReport.assignData(location, machine, reason, furtherInformation);
                     newReport.reportToLogCat();
+                    testNotification();
                     //method to send to database
                     //Change to proper home page when everything is merged
                     NavHostFragment.findNavController(ReportIdle.this)
@@ -194,5 +198,19 @@ public class ReportIdle extends Fragment implements OnItemSelectedListener {
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+    public void testNotification(){
+        //No clue whats going on here
+        Intent intent = new Intent();
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getContext().getApplicationContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext().getApplicationContext(),"test");
+        builder.setSmallIcon(R.drawable.ic_launcher_background);
+        builder.setContentTitle("textTitle");
+        builder.setContentText("textContent");
+        builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        builder.setContentIntent(pendingIntent);
+        builder.setAutoCancel(true);
+        //https://developer.android.com/develop/ui/views/notifications/build-notification#notify continue from here
+    }
 }
