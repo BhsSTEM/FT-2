@@ -52,8 +52,7 @@ public class SecondFragment extends Fragment
     {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.loginBtn.setOnClickListener(new View.OnClickListener()
-        {
+        binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
@@ -61,7 +60,6 @@ public class SecondFragment extends Fragment
                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
         });
-
     }
     @Override
     public void onResume() {

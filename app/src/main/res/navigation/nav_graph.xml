@@ -104,7 +104,9 @@
         tools:layout="@layout/report_idle">
 
 
-
+        <action
+            android:id="@+id/action_ReportIdle_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
     </fragment>
 
 
