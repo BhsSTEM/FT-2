@@ -9,14 +9,28 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:padding="32dp">
         <!--  text field      -->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="40sp"
+            android:text =""
+            />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             android:textSize="40sp"
             android:text="Log In"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+
             />
 
         <!-- email text field   -->
@@ -29,7 +43,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="150dp"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
             >
@@ -76,7 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Login"
-                android:layout_marginTop="230dp"
+                android:layout_marginTop="300dp"
                 android:layout_alignParentEnd ="true"
                 android:layout_marginEnd="150dp"
                 tools:ignore="MissingConstraints" />
@@ -85,7 +99,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Don't have an account?"
-                android:layout_marginTop="315dp"
+                android:layout_marginTop="370dp"
                 android:layout_toLeftOf="@id/registerBtn"
                 />
             <!--  register button          -->
@@ -95,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Register"
-                android:layout_marginTop="300dp"
+                android:layout_marginTop="355dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginEnd="40dp"
                 />

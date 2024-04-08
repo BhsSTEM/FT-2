@@ -10,35 +10,55 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.idlereasonsproject.databinding.FragmentHomeBinding;
 import com.example.idlereasonsproject.databinding.FragmentSecondBinding;
 
 public class HomeFragment extends Fragment {
 
-    private FragmentSecondBinding binding;
+    private FragmentHomeBinding binding;
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
+
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
         Log.i("loginStatus", "success :)");
-        binding = FragmentSecondBinding.inflate(inflater, container, false);
+
         return binding.getRoot();
 
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        /*
-        binding.loginBtn.setOnClickListener(new View.OnClickListener() {
+
+        binding.trackerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(SecondFragment.this)
-                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
+                NavHostFragment.findNavController(HomeFragment.this)
+                        .navigate(R.id.action_HomeFragment_to_TrackerFragment);
             }
         });
 
-         */
+        binding.machineListBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(HomeFragment.this)
+                        .navigate(R.id.action_HomeFragment_to_MachineListFragment);
+            }
+        });
+
+        binding.idleReportBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(HomeFragment.this)
+                        .navigate(R.id.action_HomeFragment_to_ReportIdle);
+            }
+        });
+
+
+
 
     }
 

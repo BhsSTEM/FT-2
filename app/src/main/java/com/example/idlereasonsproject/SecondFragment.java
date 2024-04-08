@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -61,7 +62,18 @@ public class SecondFragment extends Fragment
             }
         });
 
-        binding.registerBtn.setOnClickListener(new View.OnClickListener(){
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+
+    binding.registerBtn.setOnClickListener(new View.OnClickListener(){
             String email;
             String firstName;
             String lastName;
@@ -142,7 +154,6 @@ public class SecondFragment extends Fragment
                 return acceptableInputs;
             }
         });
-
     }
 
     @Override
