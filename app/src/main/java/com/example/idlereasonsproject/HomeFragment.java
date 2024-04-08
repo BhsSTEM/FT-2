@@ -1,6 +1,7 @@
 package com.example.idlereasonsproject;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +23,9 @@ public class HomeFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-
         binding = FragmentHomeBinding.inflate(inflater, container, false);
+        Log.i("loginStatus", "success :)");
+
         return binding.getRoot();
 
     }

@@ -34,6 +34,7 @@ public class ReportIdle extends Fragment implements OnItemSelectedListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
+
     ) {
 
 

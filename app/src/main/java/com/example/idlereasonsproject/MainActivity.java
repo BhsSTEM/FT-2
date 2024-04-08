@@ -17,6 +17,9 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import com.example.idlereasonsproject.databinding.ActivityMainBinding;
 
 import android.view.Menu;
@@ -50,16 +53,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
 
-/*
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAnchorView(R.id.fab)
-                        .setAction("Action", null).show();
-            }
-        });
-      */
+
     }
 
     @Override
@@ -97,22 +91,31 @@ public class MainActivity extends AppCompatActivity {
         else{
             return super.onOptionsItemSelected(item);
         }
+        action_redirect_to_home
         */
+
         if (item.getItemId() == R.id.action_tracker) {
-            navController.navigate(R.id.action_HomeFragment_to_TrackerFragment);
+            navController.navigate(R.id.action_redirect_to_tracker);
             return true;
         } else if (item.getItemId() == R.id.home_redirect) {
-            navController.navigate(R.id.action_TrackerFragment_to_HomeFragment);
+            navController.navigate(R.id.action_redirect_to_home);
             return true;
         } else if (item.getItemId() == R.id.action_machineList) {
-            navController.navigate(R.id.action_MachineListFragment_to_HomeFragment);
+            navController.navigate(R.id.action_redirect_to_machine_list);
             return true;
-        } else if (item.getItemId() == android.R.id.home) {
+        }
+        else if(item.getItemId() == R.id.action_idleReport) {
+            navController.navigate(R.id.action_redirect_to_idle);
+            return true;
+        }
+        else if (item.getItemId() == android.R.id.home) {
             navController.navigateUp();
             return true;
         } else {
             return super.onOptionsItemSelected(item);
         }
+
+
     }
 
 
