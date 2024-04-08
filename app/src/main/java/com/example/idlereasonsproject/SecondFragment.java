@@ -52,7 +52,8 @@ public class SecondFragment extends Fragment
     {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
+        //login button actoins
+        binding.loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
@@ -71,6 +72,7 @@ public class SecondFragment extends Fragment
         super.onStop();
         ((AppCompatActivity)getActivity()).getSupportActionBar().show();
 
+    //Register button actions
     binding.registerBtn.setOnClickListener(new View.OnClickListener(){
             String email;
             String firstName;
@@ -103,7 +105,7 @@ public class SecondFragment extends Fragment
                     else
                     {
                         NavHostFragment.findNavController(SecondFragment.this)
-                                .navigate(R.id.action_SecondFragment_HomeFragment);
+                                .navigate(R.id.action_SecondFragment_to_HomeFragment);
                     }
 
                 }

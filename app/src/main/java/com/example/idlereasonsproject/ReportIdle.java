@@ -2,7 +2,6 @@ package com.example.idlereasonsproject;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,11 +14,10 @@ import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.idlereasonsproject.databinding.FragmentMachineListBinding;
+import com.example.idlereasonsproject.FBDatabase.ReportObject;
 import com.example.idlereasonsproject.databinding.ReportIdleBinding;
 import com.google.android.material.textfield.TextInputLayout;
 import java.util.Objects;
