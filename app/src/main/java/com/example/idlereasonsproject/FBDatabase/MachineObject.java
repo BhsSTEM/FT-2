@@ -1,4 +1,4 @@
-package com.example.idlereasonsproject;
+package com.example.idlereasonsproject.FBDatabase;
 import android.util.Log;
 
 import java.util.ArrayList;

@@ -27,7 +27,6 @@ public class HomeFragment extends Fragment {
         Log.i("loginStatus", "success :)");
 
         return binding.getRoot();
-
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -56,10 +55,6 @@ public class HomeFragment extends Fragment {
                         .navigate(R.id.action_HomeFragment_to_ReportIdle);
             }
         });
-
-
-
-
     }
 
     @Override

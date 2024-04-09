@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
@@ -36,8 +37,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //getSupportActionBar().setTitle("My title");
+
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
 
@@ -45,15 +45,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
 
-
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
 
-
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
-
-
     }
 
     @Override
@@ -68,31 +63,8 @@ public class MainActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml
-/*
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.home_direct) {
-           NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
-          navController.navigate(R.id.action_TrackerFragment_to_HomeFragment);
-           return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-*/
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        //return NavigationUI.onNavDestinationSelected(item, navController)
-        //     || super.onOptionsItemSelected(item);
-       /*
-        if(NavigationUI.onNavDestinationSelected(item, navController)){
-            return true;
-        }
-        else{
-            return super.onOptionsItemSelected(item);
-        }
-        action_redirect_to_home
-        */
 
         if (item.getItemId() == R.id.action_tracker) {
             navController.navigate(R.id.action_redirect_to_tracker);
@@ -114,12 +86,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             return super.onOptionsItemSelected(item);
         }
-
-
     }
-
-
-
 
 
         @Override
@@ -127,9 +94,5 @@ public class MainActivity extends AppCompatActivity {
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
             return NavigationUI.navigateUp(navController, appBarConfiguration)
                     || super.onSupportNavigateUp();
-
-
         }
-
-
 }
