@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "160177589083",
+    "project_id": "team-ft2",
+    "storage_bucket": "team-ft2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:160177589083:android:db20e845d13cec829ce87e",
+        "android_client_info": {
+          "package_name": "com.example.idlereasonsproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAx6AvmMngak8iwx8nN37JJqIb1RfdMKCc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
