@@ -1,9 +1,14 @@
 package com.example.idlereasonsproject;
 
+import static android.Manifest.permission_group.NOTIFICATIONS;
+
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,18 +19,20 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationCompat.Builder;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
-
 import com.example.idlereasonsproject.databinding.FragmentMachineListBinding;
 import com.example.idlereasonsproject.databinding.ReportIdleBinding;
 import com.google.android.material.textfield.TextInputLayout;
 import java.util.Objects;
+import android.Manifest;
+
 
 public class ReportIdle extends Fragment implements OnItemSelectedListener {
     private ReportIdleBinding binding;
@@ -198,19 +205,35 @@ public class ReportIdle extends Fragment implements OnItemSelectedListener {
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+    @SuppressLint("MissingPermission")
     public void testNotification(){
         //No clue whats going on here
+        Context context = getContext().getApplicationContext();
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
         Intent intent = new Intent();
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(getContext().getApplicationContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext().getApplicationContext(),"test");
-        builder.setSmallIcon(R.drawable.ic_launcher_background);
-        builder.setContentTitle("textTitle");
-        builder.setContentText("textContent");
-        builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
-        builder.setContentIntent(pendingIntent);
-        builder.setAutoCancel(true);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context,"test");
+        builder.setSmallIcon(R.drawable.ic_launcher_background).setContentTitle("textTitle").setContentText("textContent").setPriority(NotificationCompat.PRIORITY_DEFAULT).setContentIntent(pendingIntent).setAutoCancel(true);
+        Log.i("Noti", "Builder varibale set");
         //https://developer.android.com/develop/ui/views/notifications/build-notification#notify continue from here
+        if (!notificationManagerCompat.areNotificationsEnabled())
+            {
+                // TODO: Consider calling
+                // ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                // public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                        int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                Log.w("Noti", "Permissions not given yet");
+                //ActivityCompat.requestPermissions(getActivity(),new String[]{NOTIFICATIONS},3 );
+                //This doesn't work but I have absolutly no clue what the request code is supposed to be or how it works or
+                return;
+            }
+            // notificationId is a unique int for each notification that you must define.
+            notificationManagerCompat.notify(3, builder.build());
+        Log.i("Noti", "Notification sent");
+        }
     }
-}
