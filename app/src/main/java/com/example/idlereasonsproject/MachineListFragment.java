@@ -1,5 +1,6 @@
 package com.example.idlereasonsproject;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,17 +31,21 @@ public class MachineListFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        /*
-        binding.loginBtn.setOnClickListener(new View.OnClickListener() {
+
+        binding.idleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(SecondFragment.this)
-                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
+                showIdleDialog();
             }
         });
 
-         */
 
+
+    }
+    public void showIdleDialog(){
+        Dialog dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.idle_instances_popup);
+        dialog.show();
     }
 
     @Override
