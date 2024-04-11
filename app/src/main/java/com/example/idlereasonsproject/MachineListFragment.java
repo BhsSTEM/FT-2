@@ -31,7 +31,7 @@ public class MachineListFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+/*
         binding.idleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,7 +39,7 @@ public class MachineListFragment extends Fragment {
             }
         });
 
-
+*/
 
     }
     public void showIdleDialog(){
