@@ -208,6 +208,7 @@ public class ReportIdle extends Fragment implements OnItemSelectedListener {
     @SuppressLint("MissingPermission")
     public void testNotification(){
         //No clue whats going on here
+        String reportText = machine + " at " + location + " is idle because " + reason + ". Further information: " + furtherInformation;
         Context context = getContext().getApplicationContext();
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
         Intent intent = new Intent();
@@ -215,7 +216,7 @@ public class ReportIdle extends Fragment implements OnItemSelectedListener {
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context,"test");
-        builder.setSmallIcon(R.drawable.ic_launcher_background).setContentTitle("textTitle").setContentText("textContent").setPriority(NotificationCompat.PRIORITY_DEFAULT).setContentIntent(pendingIntent).setAutoCancel(true);
+        builder.setSmallIcon(R.drawable.ic_launcher_background).setContentTitle("Idle Report").setContentText(reportText).setPriority(NotificationCompat.PRIORITY_DEFAULT).setContentIntent(pendingIntent).setAutoCancel(true);
         Log.i("Noti", "Builder varibale set");
         //https://developer.android.com/develop/ui/views/notifications/build-notification#notify continue from here
         if (!notificationManagerCompat.areNotificationsEnabled())
@@ -228,8 +229,8 @@ public class ReportIdle extends Fragment implements OnItemSelectedListener {
                 // to handle the case where the user grants the permission. See the documentation
                 // for ActivityCompat#requestPermissions for more details.
                 Log.w("Noti", "Permissions not given yet");
-                //ActivityCompat.requestPermissions(getActivity(),new String[]{NOTIFICATIONS},3 );
-                //This doesn't work but I have absolutly no clue what the request code is supposed to be or how it works or
+                requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS},3 );
+                //I don't know what the strike thru is about but it works
                 return;
             }
             // notificationId is a unique int for each notification that you must define.
