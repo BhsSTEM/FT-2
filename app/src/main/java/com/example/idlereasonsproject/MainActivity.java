@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 
 
@@ -25,6 +26,11 @@ import com.example.idlereasonsproject.databinding.ActivityMainBinding;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+import android.widget.ListView;
+import android.widget.SearchView;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 
 //some change :)
@@ -32,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
+    public static ArrayList<Object> machineList = new ArrayList<Object>();
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +52,16 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
-
+        setupData();
+       setUpList();
+        //setUpOnclickListener();
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
 
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+
 
         String[] mList = new String[] {
                 "1",  "2",  "3",  "4",  "5",  "6",  "7",  "8",
@@ -60,6 +71,67 @@ public class MainActivity extends AppCompatActivity {
         };
 
 
+
+    }
+
+
+    private void initSearch(){
+
+        SearchView searchView = (SearchView) findViewById(R.id.machine_object_SearchView);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                ArrayList<Object> filteredObjects = new ArrayList<Object>();
+
+                for(Object object: machineList){
+                    if(object.getName().toLowerCase().contains(s.toLowerCase())){
+                        filteredObjects.add(object);
+                    }
+                }
+
+                ObjectAdaptor adaptor = new ObjectAdaptor(getApplicationContext(), 0, filteredObjects);
+                listView.setAdapter(adaptor);
+
+
+
+                return false;
+            }
+        });
+    }
+
+
+
+    private void setupData(){
+        Object combine = new Object("0", "Combine");
+        machineList.add(combine);
+
+        Object tractor = new Object("1", "Tractor" );
+        machineList.add(tractor);
+
+        Object truck = new Object("2", "Truck");
+        machineList.add(truck);
+
+    }
+
+    private void setUpList(){
+        if(listView != null){
+            ObjectAdaptor adaptor = new ObjectAdaptor(getApplicationContext(), 0, machineList);
+            listView.setAdapter(adaptor);
+        }
+        else{
+            Log.e("MainActivity","List view is null. ");
+        }
+
+
+    }
+
+    private void setUpOnclickListener(){
 
     }
 

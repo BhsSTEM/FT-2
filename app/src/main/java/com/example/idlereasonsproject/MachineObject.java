@@ -2,8 +2,6 @@ package com.example.idlereasonsproject;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class MachineObject {
     String name = "unknown";
@@ -102,8 +100,9 @@ public class MachineObject {
     public boolean isMoreThanOneOperator() {return moreThanOneOperator;}
 
     //Map
-    public Map<String, Object> toMap()
+    public String toMap()
     {
+        /*
         HashMap<String, Object> map  = new HashMap<>();
         map.put("name", name);
         map.put("type", type);
@@ -112,5 +111,9 @@ public class MachineObject {
         map.put("numOfOperators", numOfOperators);
         map.put("moreThanOneOperator", moreThanOneOperator);
         return map;
+
+         */
+        String h = "g";
+        return h;
     }
 }

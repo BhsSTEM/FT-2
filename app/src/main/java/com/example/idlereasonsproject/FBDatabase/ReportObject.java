@@ -3,6 +3,8 @@ package com.example.idlereasonsproject.FBDatabase;
 import android.util.Log;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ReportObject {
     String location = "Unknown";
@@ -39,7 +41,7 @@ public class ReportObject {
     //Place those with the other imports
     /*public ReportObject(){} // Default constructor required for calls to DataSnapshot.getValue(User.class)*/
     // this might need to go over public class ReportObject {
-    /*
+
     public Map<String, Object> toMap()
     {
         HashMap<String, Object> map  = new HashMap<>();
@@ -50,5 +52,6 @@ public class ReportObject {
         map.put("timeOfSubmission", Calendar.getInstance().getTime());
 
         return map;
-    }*/
+    }
+
 }
