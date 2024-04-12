@@ -20,7 +20,7 @@ import java.util.Objects;
 
 public class UserNode extends Database
 {
-    private final static DatabaseReference userNode = database.child("users").getRef();
+    private final static DatabaseReference userNode = database.child("users").child(getDomain()).getRef();
     private static Map<String, User> usersHashMap = new HashMap<>();
 
     private ValueEventListener userListener = new ValueEventListener() {

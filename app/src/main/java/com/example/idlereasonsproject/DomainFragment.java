@@ -13,11 +13,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+
+import com.example.idlereasonsproject.FBDatabase.DomainNode;
 import com.example.idlereasonsproject.databinding.FragmentDomainBinding;
 
 public class DomainFragment extends Fragment
 {
     private FragmentDomainBinding binding;
+    private EditText domainInput;
+    private final DomainNode domainNode = new DomainNode();
 
     @Override
     public View onCreateView(
@@ -26,6 +30,8 @@ public class DomainFragment extends Fragment
     )
     {
         binding = FragmentDomainBinding.inflate(inflater, container, false);
+        domainInput = binding.domainTextEdit.getEditText();
+
         return binding.getRoot();
     }
 
@@ -35,9 +41,23 @@ public class DomainFragment extends Fragment
 
         //put binding check here
         binding.domainEnterBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            String domain;
 
+            @Override
+            public void onClick(View v)
+            {
+                domain = domainInput.getText().toString();
+                boolean domainExists = domainNode.findDomain(domain);
+
+                if(domainExists)
+                {
+                    NavHostFragment.findNavController(DomainFragment.this)
+                            .navigate(R.id.action_DomainFragment_to_FirstFragment);
+                }
+                else
+                {
+                    domainInput.setError("Domain doesn't exist");
+                }
             }
         });
     }

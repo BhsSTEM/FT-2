@@ -7,6 +7,16 @@ import java.util.Map;
 
 public class Database {
     protected final static DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+    private static String domain;
 
     public Database() { }
+
+    protected static String getDomain()
+    {
+        return domain;
+    }
+    protected static void setDomain(String _domain)
+    {
+        domain = _domain;
+    }
 }
