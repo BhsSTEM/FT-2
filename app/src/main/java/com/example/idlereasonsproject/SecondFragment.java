@@ -1,6 +1,7 @@
 package com.example.idlereasonsproject;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.idlereasonsproject.FBDatabase.UserNode;
 import com.example.idlereasonsproject.databinding.FragmentSecondBinding;
 
-public class SecondFragment extends Fragment
-{
+public class SecondFragment extends Fragment {
 
     private FragmentSecondBinding binding;
 
@@ -45,32 +45,23 @@ public class SecondFragment extends Fragment
 
     }
 
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState)
-    {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         //login button actoins
         binding.loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
+                Log.v("btnTest", "login click");
                 NavHostFragment.findNavController(SecondFragment.this)
                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
         });
-    }
-    @Override
-    public void onResume() {
-        super.onResume();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
-    }
-    @Override
-    public void onStop() {
-        super.onStop();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
 
-    //Register button actions
-    binding.registerBtn.setOnClickListener(new View.OnClickListener(){
+        binding.registerBtn.setOnClickListener(new View.OnClickListener()
+
+        {
+
             String email;
             String firstName;
             String lastName;
@@ -78,29 +69,26 @@ public class SecondFragment extends Fragment
             String cfnPassword;
 
             @Override
-            public void onClick(View v)
+            public void onClick (View v)
             {
+                Log.v("btnTest", "click");
                 email = emailInput.getText().toString();
                 firstName = firstNameInput.getText().toString();
                 lastName = lastNameInput.getText().toString();
                 password = passwordInput.getText().toString();
                 cfnPassword = cfnPasswordInput.getText().toString();
 
-                if(checkUserInputs())
-                {
+                if (checkUserInputs()) {
                     boolean userMade = userNode.addUser(
-                        email,
-                        firstName,
-                        lastName,
-                        cfnPassword
+                            email,
+                            firstName,
+                            lastName,
+                            cfnPassword
                     );
 
-                    if(userMade)
-                    {
+                    if (userMade) {
                         emailInput.setError("EMAIL ALREADY IN USE");
-                    }
-                    else
-                    {
+                    } else {
                         NavHostFragment.findNavController(SecondFragment.this)
                                 .navigate(R.id.action_SecondFragment_to_HomeFragment);
                     }
@@ -109,41 +97,34 @@ public class SecondFragment extends Fragment
             }
 
             //method to check if any user inputs are empty
-            private boolean checkUserInputs()
+            private boolean checkUserInputs ()
             {
                 boolean acceptableInputs = true;
 
-                if(firstName.equals(""))
-                {
+                if (firstName.equals("")) {
                     firstNameInput.setError("PLEASE ENTER FIRST NAME >:(");
                     acceptableInputs = false;
                 }
 
-                if(lastName.equals(""))
-                {
+                if (lastName.equals("")) {
                     lastNameInput.setError("PLEASE ENTER LAST NAME >:(");
                     acceptableInputs = false;
                 }
 
-                if(email.equals(""))
-                {
+                if (email.equals("")) {
                     emailInput.setError("PLEASE ENTER EMAIL >:(");
                     acceptableInputs = false;
                 }
 
-                if(password.equals(""))
-                {
+                if (password.equals("")) {
                     passwordInput.setError("PLEASE ENTER PASSWORD >:(");
                     acceptableInputs = false;
                 }
 
-                if(cfnPassword.equals(""))
-                {
+                if (cfnPassword.equals("")) {
                     cfnPasswordInput.setError("PLEASE ENTER PASSWORD >:(");
                     acceptableInputs = false;
-                }
-                else if(!cfnPassword.equals(passwordInput.getText().toString()))
-                {
+                } else if (!cfnPassword.equals(passwordInput.getText().toString())) {
                     cfnPasswordInput.setError("PASSWORDS DON'T MATCH >:(");
                     acceptableInputs = false;
                 }
@@ -152,6 +133,21 @@ public class SecondFragment extends Fragment
             }
         });
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+    }
+    //Register button actions
+
+
 
     @Override
     public void onDestroyView() {

@@ -46,6 +46,7 @@ public class UserNode extends Database
 
     public UserNode()
     {
+
         userNode.addValueEventListener(userListener);
     }
 
