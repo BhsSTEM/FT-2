@@ -12,6 +12,7 @@ public class ReportObject {
     String machine = "Unknown";
     String reason = "Unknown";
     String furtherInformation = "Blank";
+    String notificationText = "blank";
     Date timeOfSubmission;
     public void assignData(String newLocation, String newMachine, String newReason, String newFurtherInformation){
         location = newLocation;
@@ -19,6 +20,7 @@ public class ReportObject {
         reason = newReason;
         furtherInformation = newFurtherInformation;
         timeOfSubmission = Calendar.getInstance().getTime();
+        notificationText = machine + " at " + location + " is idle because " + reason + ". Further information: " + furtherInformation + " Time of Submission: " + timeOfSubmission.toString();
         Log.i("Report object", "Data assigned");
     }
     public void reportToLogCat() {
