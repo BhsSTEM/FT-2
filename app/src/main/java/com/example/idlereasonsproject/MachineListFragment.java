@@ -21,7 +21,7 @@ public class MachineListFragment extends Fragment {
 
     private FragmentMachineListBinding binding;
     private ListView listView;
-    private ArrayList<Object> machineList = new ArrayList<>();
+    private ArrayList<MachineObject> machineList = new ArrayList<>();
 
     @Override
     public View onCreateView(

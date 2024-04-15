@@ -4,6 +4,8 @@ import android.util.Log;
 import java.util.ArrayList;
 
 public class MachineObject {
+
+    String id = "unknown";
     String name = "unknown";
     String type = "unknown";
 
@@ -16,10 +18,15 @@ public class MachineObject {
     //empty constructor
     public MachineObject() {}
     //constructor with name and type
-    public MachineObject(String machineName, String machineType) {
+    public MachineObject(String machineId, String machineName, String machineType) {
+        id = machineId;
         name = machineName;
         type = machineType;
     }
+
+
+
+
 
     public void addOperator (String addedOperator) {
         //add a check incase the added operator is already in the array list
@@ -92,12 +99,34 @@ public class MachineObject {
         }
     }
     //Functions to return variables
+
+    public String getId(){return id;}
+
     public String getName() {return name;}
     public String getType() {return type;}
     public String getOperator() {return operator;}
     public ArrayList<String> getOperatorsArrayList() {return operatorsArrayList;}
     public int getNumOfOperators() {return numOfOperators;}
     public boolean isMoreThanOneOperator() {return moreThanOneOperator;}
+
+    //setters
+
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setOperator(String operator) {
+        this.operator = operator;
+    }
 
     //Map
     public String toMap()

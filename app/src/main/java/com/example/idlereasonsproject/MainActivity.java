@@ -1,19 +1,14 @@
 package com.example.idlereasonsproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
-import android.view.View;
 
 
 import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
@@ -25,11 +20,11 @@ import com.example.idlereasonsproject.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -38,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
-    public static ArrayList<Object> machineList = new ArrayList<Object>();
+    public static ArrayList<MachineObject> machineList = new ArrayList<MachineObject>();
     private ListView listView;
 
     @Override
@@ -53,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
         setupData();
-       setUpList();
-        //setUpOnclickListener();
+        setUpList();
+       setUpOnclickListener();
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
@@ -87,9 +82,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                ArrayList<Object> filteredObjects = new ArrayList<Object>();
+                ArrayList<MachineObject> filteredObjects = new ArrayList<>();
 
-                for(Object object: machineList){
+                for(MachineObject object: machineList){
                     if(object.getName().toLowerCase().contains(s.toLowerCase())){
                         filteredObjects.add(object);
                     }
@@ -108,13 +103,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void setupData(){
-        Object combine = new Object("0", "Combine");
+        MachineObject combine = new MachineObject("0","john", "Combine");
         machineList.add(combine);
 
-        Object tractor = new Object("1", "Tractor" );
+        MachineObject tractor = new MachineObject("1","bob", "Tractor" );
         machineList.add(tractor);
 
-        Object truck = new Object("2", "Truck");
+        MachineObject truck = new MachineObject("2","billy", "Truck");
         machineList.add(truck);
 
     }
@@ -131,9 +126,22 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void setUpOnclickListener(){
 
+    private void setUpOnclickListener(){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                MachineObject selectShape = (MachineObject) (listView.getItemAtPosition(position));
+                Intent showDetail = new Intent(getApplicationContext(), DetailActivity.class);
+                showDetail.putExtra("id",selectShape.getId());
+                startActivity(showDetail);
+            }
+        });
     }
+
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

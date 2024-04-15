@@ -11,19 +11,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import org.checkerframework.checker.units.qual.C;
+
 
 import java.util.List;
 
-public class ObjectAdaptor extends ArrayAdapter<Object>{
+public class ObjectAdaptor extends ArrayAdapter<MachineObject> {
 
-    public ObjectAdaptor(Context context, int resource, List<Object> objectList){
+    public ObjectAdaptor(Context context, int resource, List<MachineObject> objectList){
         super(context,resource,objectList);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Object object = getItem(position);
+        MachineObject object = getItem(position);
 
         if(convertView == null){
         convertView = LayoutInflater.from(getContext()).inflate(R.layout.machine_cell, parent, false);
