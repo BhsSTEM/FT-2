@@ -113,7 +113,7 @@ public class ReportIdle extends Fragment implements OnItemSelectedListener {
                     ReportObject newReport = new ReportObject();
                     newReport.assignData(location, machine, reason, furtherInformation);
                     newReport.reportToLogCat();
-                    testNotification();
+                    slothfulNotifications.idleReportNotifications(getContext(), getActivity(), newReport);
                     //method to send to database
                     //Change to proper home page when everything is merged
                     NavHostFragment.findNavController(ReportIdle.this)
@@ -205,7 +205,7 @@ public class ReportIdle extends Fragment implements OnItemSelectedListener {
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-    @SuppressLint("MissingPermission")
+    /*@SuppressLint("MissingPermission")
     public void testNotification(){
         //No clue whats going on here
         String reportText = machine + " at " + location + " is idle because " + reason + ". Further information: " + furtherInformation;
@@ -236,5 +236,5 @@ public class ReportIdle extends Fragment implements OnItemSelectedListener {
             // notificationId is a unique int for each notification that you must define.
             notificationManagerCompat.notify(3, builder.build());
         Log.i("Noti", "Notification sent");
-        }
+        }*/
     }

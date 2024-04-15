@@ -1,8 +1,14 @@
 package com.example.idlereasonsproject;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -29,6 +35,10 @@ public class ReportObject {
         Log.i("Submission", "Reason: " + reason);
         Log.i("Submission", "Further Information: " + furtherInformation);
         Log.i("Submission", "Time of submission: " + timeOfSubmission.toString());
+    }
+
+    public String reportText() {
+        return machine + " at " + location + " is idle because " + reason + ". Further information: " + furtherInformation;
     }
 
     //these types of functions seem to be standard and it can't hurt
