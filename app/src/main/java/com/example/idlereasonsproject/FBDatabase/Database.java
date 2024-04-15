@@ -8,8 +8,15 @@ import java.util.Map;
 public class Database {
     protected final static DatabaseReference database = FirebaseDatabase.getInstance().getReference();
     private static String domain;
+    private static User user;
 
     public Database() { }
+
+    //make a set node method protected void
+    protected void setUserLoggedIn(User _user)
+    {
+        user = _user;
+    }
 
     protected static String getDomain()
     {

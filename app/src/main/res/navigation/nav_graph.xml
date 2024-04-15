@@ -110,7 +110,7 @@
     </fragment>
     <fragment
         android:id="@+id/ReportIdle"
-        android:name="com.example.idlereasonsproject.ReportIdle"
+        android:name="com.example.idlereasonsproject.ReportIdleFragment"
         tools:layout="@layout/report_idle">
 
 
