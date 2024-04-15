@@ -6,9 +6,6 @@ import android.app.NotificationManager;
 import android.os.Build;
 import android.util.Log;
 
-import java.util.Calendar;
-import java.util.Date;
-
 public class AppStartUp extends Application {
     public void MyApp() {
         // this method fires only once per application start.

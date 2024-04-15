@@ -1,14 +1,7 @@
 package com.example.idlereasonsproject;
 
-import static android.Manifest.permission_group.NOTIFICATIONS;
-
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,18 +13,11 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationCompat.Builder;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
-import com.example.idlereasonsproject.databinding.FragmentMachineListBinding;
 import com.example.idlereasonsproject.databinding.ReportIdleBinding;
 import com.google.android.material.textfield.TextInputLayout;
 import java.util.Objects;
-import android.Manifest;
 
 
 public class ReportIdle extends Fragment implements OnItemSelectedListener {
@@ -81,7 +67,7 @@ public class ReportIdle extends Fragment implements OnItemSelectedListener {
                 android.R.layout.simple_spinner_item
         ); */
 
-        ArrayAdapter<String> machineAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, machineList);
+        ArrayAdapter<String> machineAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, machineList);
         // Specify the layout to use when the list of choices appears.
         machineAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner.
@@ -163,7 +149,7 @@ public class ReportIdle extends Fragment implements OnItemSelectedListener {
                 android.R.layout.simple_spinner_item
         );
         String[] machineList = new String[]{"Machine 1", "Machine 2", "Machine 3"};
-        ArrayAdapter<String> machineAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, machineList);
+        ArrayAdapter<String> machineAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, machineList);
         ArrayAdapter<CharSequence> reasonAdapter = ArrayAdapter.createFromResource(
                 getActivity(),
                 R.array.reasons_array,
@@ -205,36 +191,4 @@ public class ReportIdle extends Fragment implements OnItemSelectedListener {
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-    /*@SuppressLint("MissingPermission")
-    public void testNotification(){
-        //No clue whats going on here
-        String reportText = machine + " at " + location + " is idle because " + reason + ". Further information: " + furtherInformation;
-        Context context = getContext().getApplicationContext();
-        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
-        Intent intent = new Intent();
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context,"test");
-        builder.setSmallIcon(R.drawable.ic_launcher_background).setContentTitle("Idle Report").setContentText(reportText).setPriority(NotificationCompat.PRIORITY_DEFAULT).setContentIntent(pendingIntent).setAutoCancel(true);
-        Log.i("Noti", "Builder varibale set");
-        //https://developer.android.com/develop/ui/views/notifications/build-notification#notify continue from here
-        if (!notificationManagerCompat.areNotificationsEnabled())
-            {
-                // TODO: Consider calling
-                // ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                // public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                        int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                Log.w("Noti", "Permissions not given yet");
-                requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS},3 );
-                //I don't know what the strike thru is about but it works
-                return;
-            }
-            // notificationId is a unique int for each notification that you must define.
-            notificationManagerCompat.notify(3, builder.build());
-        Log.i("Noti", "Notification sent");
-        }*/
     }
