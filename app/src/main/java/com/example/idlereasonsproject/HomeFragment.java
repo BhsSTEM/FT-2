@@ -1,12 +1,16 @@
 package com.example.idlereasonsproject;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+
+import com.example.idlereasonsproject.FBDatabase.Database;
 import com.example.idlereasonsproject.databinding.FragmentHomeBinding;
 import com.example.idlereasonsproject.databinding.FragmentSecondBinding;
 
@@ -20,10 +24,10 @@ public class HomeFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-
         binding = FragmentHomeBinding.inflate(inflater, container, false);
+        Log.i("loginStatus", "success :)");
+        Database.setNodes();
         return binding.getRoot();
-
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -52,10 +56,6 @@ public class HomeFragment extends Fragment {
                         .navigate(R.id.action_HomeFragment_to_ReportIdle);
             }
         });
-
-
-
-
     }
 
     @Override

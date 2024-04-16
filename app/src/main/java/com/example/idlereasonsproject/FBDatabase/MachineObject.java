@@ -1,21 +1,22 @@
-package com.example.idlereasonsproject;
+package com.example.idlereasonsproject.FBDatabase;
 import android.util.Log;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class MachineObject {
-    String name = "unknown";
-    String type = "unknown";
+    String name = "";
+    String type = "";
 
     //variable for if there's only one operator
-    String operator = "n/a";
+    String operator = "";
     ArrayList<String> operatorsArrayList = new ArrayList<String>();
     int numOfOperators = 0;
     boolean moreThanOneOperator = false;
 
     //empty constructor
     public MachineObject() {}
+
     //constructor with name and type
     public MachineObject(String machineName, String machineType) {
         name = machineName;
@@ -23,7 +24,7 @@ public class MachineObject {
     }
 
     public void addOperator (String addedOperator) {
-        //add a check incase the added operator is already in the array list
+        //add a check encase the added operator is already in the array list
         operatorsArrayList.add(addedOperator);
         numOfOperators += 1;
         moreThanOneOperatorSwitch();
@@ -44,7 +45,7 @@ public class MachineObject {
                 break;
             case 0:
                 moreThanOneOperator = false;
-                operator = "n/a";
+                operator = "";
                 break;
             default:
                 if (numOfOperators > 1) {
