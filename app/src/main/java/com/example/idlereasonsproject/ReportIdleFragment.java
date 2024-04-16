@@ -99,7 +99,7 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
                     //Yes button clicked
                     furtherInformation = Objects.requireNonNull(furtherInfoTextBox.getEditText()).getText().toString();
                     ReportObject report = new ReportObject(location, machine, reason, furtherInformation);
-                    slothfulNotifications.idleReportNotifications(getContext(), getActivity(), newReport);
+                    slothfulNotifications.idleReportNotifications(getContext(), getActivity(), report);
                     //method to send to database
                     Database.reportNode.addReportToDB(report);
 
@@ -108,7 +108,8 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
                     break;
 
                 case DialogInterface.BUTTON_NEGATIVE:
-                    //No button clicked
+                    //No button clicked, logs the user for debugging purposes
+                    Log.i("Logged In User", Database.getUserLoggedIn().getFirstName() + Database.getUserLoggedIn().getLastName());
                     break;
             }
         };

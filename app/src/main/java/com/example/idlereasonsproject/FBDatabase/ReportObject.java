@@ -12,6 +12,7 @@ public class ReportObject {
     String reason = "";
     String furtherInformation = "";
     Date timeOfSubmission;
+    String reporter = "";
 
     public ReportObject(){ }
 
@@ -22,6 +23,7 @@ public class ReportObject {
         reason = newReason;
         furtherInformation = newFurtherInformation;
         timeOfSubmission = Calendar.getInstance().getTime();
+        reporter = Database.getUserLoggedIn().getFirstName() + " " + Database.getUserLoggedIn().getLastName();
         Log.i("Report object", "Data assigned " + timeOfSubmission.getTime());
     }
 
@@ -31,7 +33,9 @@ public class ReportObject {
     public String getReason(){return reason;}
     public String getFurtherInformation(){return furtherInformation;}
     public Date getTimeOfSubmission(){return timeOfSubmission;}
-
+    public String reportText() {
+        return machine + " at " + location + " is idle because " + reason + ". Further information: " + furtherInformation;
+    }
     public Map<String, Object> toMap()
     {
         HashMap<String, Object> map  = new HashMap<>();
@@ -39,8 +43,8 @@ public class ReportObject {
         map.put("machine", machine);
         map.put("reason", reason);
         map.put("furtherInformation", furtherInformation);
+        map.put("reporter", reporter);
         map.put("timeOfSubmission", timeOfSubmission);
-
         return map;
     }
 }

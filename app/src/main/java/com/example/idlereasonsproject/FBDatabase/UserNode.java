@@ -46,7 +46,8 @@ public class UserNode extends Database
             Log.i("userInputLogin", "email or password are incorrect");
             return false;
         }
-
+        User user = usersHashMap.get(key);
+        Database.setUserLoggedIn(user);
         return true;
     }
 

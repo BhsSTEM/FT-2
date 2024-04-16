@@ -15,11 +15,11 @@ public class Database {
     public Database() { }
 
     //make a set node method protected void
-    protected void setUserLoggedIn(User _user)
+    protected static void setUserLoggedIn(User _user)
     {
         user = _user;
     }
-
+    public static User getUserLoggedIn() { return user;}
     protected static String getDomain()
     {
         return domain;

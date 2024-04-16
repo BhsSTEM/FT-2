@@ -12,6 +12,8 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import android.Manifest;
 
+import com.example.idlereasonsproject.FBDatabase.ReportObject;
+
 public class slothfulNotifications {
     //id for notifications is "Slothful Notifications
     //creates a notification for a sent in report object
