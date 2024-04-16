@@ -10,6 +10,8 @@ public class Database {
     private static String domain;
     private static User user;
 
+    public static ReportNode reportNode;
+
     public Database() { }
 
     //make a set node method protected void
@@ -25,5 +27,10 @@ public class Database {
     protected static void setDomain(String _domain)
     {
         domain = _domain;
+    }
+
+    public static void setNodes()
+    {
+        reportNode = new ReportNode();
     }
 }

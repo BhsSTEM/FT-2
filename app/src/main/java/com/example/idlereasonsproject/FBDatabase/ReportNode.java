@@ -10,7 +10,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.core.Repo;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,6 +33,7 @@ public class ReportNode extends Database
                     reportMap.put(child.getKey(), child.getValue(ReportObject.class));
                 }
 
+                Log.i("ReportNode", "updated!");
                 setReportMap(map);
                 //notification
                 //ui changes

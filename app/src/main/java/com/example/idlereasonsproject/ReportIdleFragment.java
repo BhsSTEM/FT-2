@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.idlereasonsproject.FBDatabase.Database;
 import com.example.idlereasonsproject.FBDatabase.ReportObject;
 import com.example.idlereasonsproject.databinding.ReportIdleBinding;
 import com.google.android.material.textfield.TextInputLayout;
@@ -32,7 +33,6 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
-
     ) {
         binding = ReportIdleBinding.inflate(inflater, container,false);
         return binding.getRoot();
@@ -101,6 +101,7 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
                     ReportObject report = new ReportObject(location, machine, reason, furtherInformation);
 
                     //method to send to database
+                    Database.reportNode.addReportToDB(report);
 
                     NavHostFragment.findNavController(ReportIdleFragment.this)
                             .navigate(R.id.action_ReportIdle_to_HomeFragment);
