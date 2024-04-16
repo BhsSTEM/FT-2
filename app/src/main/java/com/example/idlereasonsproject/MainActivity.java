@@ -115,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpList(){
+        listView = findViewById(R.id.machine_object_ListView);
         if(listView != null){
             ObjectAdaptor adaptor = new ObjectAdaptor(getApplicationContext(), 0, machineList);
             listView.setAdapter(adaptor);
@@ -128,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void setUpOnclickListener(){
+        Log.d("MainActivity", "ListView value: " + listView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
