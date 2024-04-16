@@ -7,11 +7,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ReportObject {
-    String location = "";
-    String machine = "";
-    String reason = "";
-    String furtherInformation = "";
-    Date timeOfSubmission;
+    private String location = "";
+    private String machine = "";
+    private String reason = "";
+    private String furtherInformation = "";
+    private Date timeOfSubmission;
 
     public ReportObject(){ }
 

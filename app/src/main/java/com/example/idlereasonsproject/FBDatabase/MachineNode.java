@@ -14,64 +14,53 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ReportNode extends Database
+public class MachineNode extends Database
 {
-    private final DatabaseReference reportNode = database.child("reports").child(getDomain()).getRef();
-    private static Map<String, ReportObject> reportMap = new HashMap<>();
+    private final DatabaseReference machineNode = database.child("machines").child(getDomain()).getRef();
+    private static Map<String, MachineObject> machineMap = new HashMap<>();
 
-    public ReportNode()
+    public MachineNode()
     {
         //add value event listener to node
-        reportNode.addValueEventListener(new ValueEventListener() {
+        machineNode.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot)
             {
                 //update map
-                Map<String, ReportObject> map = new HashMap<>();
+                Map<String, MachineObject> map = new HashMap<>();
                 for(DataSnapshot child : snapshot.getChildren())
                 {
-                    reportMap.put(child.getKey(), child.getValue(ReportObject.class));
+                    machineMap.put(child.getKey(), child.getValue(MachineObject.class));
                 }
+                setMachineMap(map);
 
-                Log.i("ReportNode", "updated!");
-                setReportMap(map);
-                //notification
                 //ui changes
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error)
             {
-                Log.e("ReportNode", "failed to get reports\n" + error);
+                Log.e("MachineNode", "failed to get reports\n" + error);
             }
         });
     }
 
-    public void addReportToDB(ReportObject report)
+    public void addMachine(MachineObject machine)
     {
-        reportNode.child(String.valueOf(report.getTimeOfSubmission().getTime())).setValue(report)
+        machineNode.child(machine.getName()).setValue(machine)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Log.v("ReportNode", "added report");
+                        Log.v("MachineNode", "added machine");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.e("ReportNode", "can't add report\n"+e);
+                        Log.e("MachineNode", "can't add machine\n"+e);
                     }
                 });
     }
 
-    public void setReportMap(Map<String, ReportObject> map)
-    {
-        reportMap = map;
-    }
-
-    public Map getReportMap()
-    {
-        return reportMap;
-    }
-
+    public void setMachineMap(Map<String, MachineObject> map){ machineMap = map; }
 }

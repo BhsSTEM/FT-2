@@ -10,9 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.idlereasonsproject.FBDatabase.Database;
 import com.example.idlereasonsproject.databinding.FragmentHomeBinding;
-import com.example.idlereasonsproject.databinding.FragmentSecondBinding;
 
 public class HomeFragment extends Fragment {
 
@@ -26,7 +24,6 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         Log.i("loginStatus", "success :)");
-        Database.setNodes();
         return binding.getRoot();
     }
 
