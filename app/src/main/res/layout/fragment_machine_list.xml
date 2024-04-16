@@ -8,13 +8,7 @@
     android:orientation="vertical"
     tools:context=".MachineListFragment">
 
-    <android.widget.SearchView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/machine_object_SearchView"
-        android:iconifiedByDefault="false"
-        android:queryHint="Shape Name">
-    </android.widget.SearchView>
+
 
 
 

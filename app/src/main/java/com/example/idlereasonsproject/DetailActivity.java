@@ -21,11 +21,11 @@ public class DetailActivity extends AppCompatActivity {
     private void getSelectedShape(){
         Intent previousIntent = getIntent();
         String parsedStringId = previousIntent.getStringExtra("id");
-        selectedShape = MainActivity.machineList.get(Integer.valueOf(parsedStringId));
+        selectedShape = MachineListFragment.machineList.get(Integer.valueOf(parsedStringId));
     }
 
     private void setValues(){
-        TextView tv = (TextView) findViewById(R.id.machine_name);
+        TextView tv = (TextView) findViewById(R.id.machineName);
 
         tv.setText(selectedShape.getName());
     }

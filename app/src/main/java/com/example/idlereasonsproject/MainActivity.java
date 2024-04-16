@@ -47,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
-        setupData();
-        setUpList();
-       setUpOnclickListener();
+       // setupData();
+       // setUpList();
+      // setUpOnclickListener();
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
@@ -70,6 +70,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+
+/*
     private void initSearch(){
 
         SearchView searchView = (SearchView) findViewById(R.id.machine_object_SearchView);
@@ -100,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
+*/
 
     private void setupData(){
         MachineObject combine = new MachineObject("0","john", "Combine");
@@ -116,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpList(){
         listView = findViewById(R.id.machine_object_ListView);
-        if(listView != null){
+        if(listView == null){
             ObjectAdaptor adaptor = new ObjectAdaptor(getApplicationContext(), 0, machineList);
             listView.setAdapter(adaptor);
         }

@@ -29,7 +29,7 @@ public class ObjectAdaptor extends ArrayAdapter<MachineObject> {
         convertView = LayoutInflater.from(getContext()).inflate(R.layout.machine_cell, parent, false);
         }
 
-        TextView tv = (TextView) convertView.findViewById(R.id.machine_name);
+        TextView tv = (TextView) convertView.findViewById(R.id.machineName);
 
         tv.setText(object.getName());
 
