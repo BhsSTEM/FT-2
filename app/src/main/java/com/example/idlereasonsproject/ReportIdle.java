@@ -191,4 +191,4 @@ public class ReportIdle extends Fragment implements OnItemSelectedListener {
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-    }
+}
