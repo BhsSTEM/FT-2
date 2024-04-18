@@ -43,9 +43,11 @@ public class MachineListFragment extends Fragment {
 
 
         binding = FragmentMachineListBinding.inflate(inflater, container, false);
+        listView = binding.machineObjectListView;
 
-        setupData();
+
         setUpList1();
+        setupData();
         setUpOnclickListener();
 
 
@@ -103,11 +105,41 @@ Database.MachineNode.addMachine()
             machineList.add(entry.getValue().getName());
         }
     setUpList1();
-*/
+
 
         Map<String, MachineObject> machineMap = Database.machineNode.getMachineMap();
         Log.e("MachineListFragment", machineMap.toString());
 
+        machineList.clear();
+
+        // Add values from machineMap to machineList
+        for (Map.Entry<String, MachineObject> entry : machineMap.entrySet()) {
+            machineList.add(entry.getValue());
+        }
+
+        // Notify the adapter that the data set has changed
+        ((ObjectAdaptor) listView.getAdapter()).notifyDataSetChanged();
+*/
+        Map<String, MachineObject> machineMap = Database.machineNode.getMachineMap();
+        Log.e("MachineListFragment", "machineMap size: " + machineMap.size()); // Log the size of machineMap
+
+        machineList.clear();
+
+        // Add values from machineMap to machineList
+        for (Map.Entry<String, MachineObject> entry : machineMap.entrySet()) {
+            MachineObject machineObject = entry.getValue();
+            Log.e("MachineListFragment", "Adding machine: " + machineObject.getName()); // Log each machine being added
+            machineList.add(machineObject);
+        }
+
+        Log.e("MachineListFragment", "machineList size: " + machineList.size()); // Log the size of machineList
+
+        // Notify the adapter that the data set has changed
+        if (listView.getAdapter() != null) {
+            ((ObjectAdaptor) listView.getAdapter()).notifyDataSetChanged();
+        } else {
+            Log.e("MachineListFragment", "Adapter is null");
+        }
     }
 
     private void setUpList1(){
