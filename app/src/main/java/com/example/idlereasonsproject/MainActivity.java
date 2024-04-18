@@ -115,6 +115,9 @@ public class MainActivity extends AppCompatActivity {
         MachineObject truck = new MachineObject("2","billy", "Truck");
         machineList.add(truck);
 
+
+
+
     }
 
     private void setUpList(){

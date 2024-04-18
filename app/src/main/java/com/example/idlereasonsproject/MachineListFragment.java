@@ -8,12 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.idlereasonsproject.databinding.FragmentMachineListBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -24,6 +28,8 @@ public class MachineListFragment extends Fragment {
 
     private FragmentMachineListBinding binding;
     private ListView listView;
+
+
     public static ArrayList<MachineObject> machineList = new ArrayList<>();
 
     @Override
@@ -38,6 +44,13 @@ public class MachineListFragment extends Fragment {
         setupData();
         setUpList1();
         setUpOnclickListener();
+
+
+
+
+
+
+
         return binding.getRoot();
 
 
@@ -53,7 +66,13 @@ public class MachineListFragment extends Fragment {
         // Retrieve machineList data from MainActivity and update the adapter
         //machineList = MainActivity.machineList;
         setUpList();
-
+        FloatingActionButton addMachineButton = view.findViewById(R.id.addMachineButton);
+        addMachineButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAddMachineDialog(v);
+            }
+        });
 /*
         binding.idleButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +94,31 @@ public class MachineListFragment extends Fragment {
         MachineObject truck = new MachineObject("2","billy", "Truck");
         machineList.add(truck);
 
+        MachineObject truck2 = new MachineObject("3","billy", "Truck");
+        machineList.add(truck2);
+
+        MachineObject truck3 = new MachineObject("4","billy", "Truck");
+        machineList.add(truck3);
+
+        MachineObject truck4 = new MachineObject("5","billy", "Truck");
+        machineList.add(truck4);
+
+
+        MachineObject truck5 = new MachineObject("6","billy", "Truck");
+        machineList.add(truck5);
+
+        MachineObject truck6 = new MachineObject("7","billy", "Truck");
+        machineList.add(truck6);
+
+        MachineObject truck7 = new MachineObject("8","billy", "Truck");
+        machineList.add(truck7);
+
+        MachineObject truck8 = new MachineObject("9","billy", "Truck");
+        machineList.add(truck8);
+
+        MachineObject truck9 = new MachineObject("10","billy", "Truck");
+        machineList.add(truck9);
+
     }
 
     private void setUpList1(){
@@ -83,6 +127,8 @@ public class MachineListFragment extends Fragment {
             if(listView != null){
                 ObjectAdaptor adaptor = new ObjectAdaptor(requireContext(), 0, machineList);
                 listView.setAdapter(adaptor);
+
+                Log.d("MachineListFragment", "Current machineList: " + machineList.toString());
             }
             else{
                 Log.e("MachineListFragment", "list view is null");
@@ -115,7 +161,50 @@ public class MachineListFragment extends Fragment {
             listView.setAdapter(adapter);
         }
     }
-   // public void showIdleDialog(){
+
+    public void showAddMachineDialog(View view) {
+        Dialog dialog = new Dialog(requireContext());
+        dialog.setContentView(R.layout.add_machine_dialog);
+
+        EditText editTextName = dialog.findViewById(R.id.editTextName);
+        EditText editTextType = dialog.findViewById(R.id.editTextType);
+
+        Button addButton = dialog.findViewById(R.id.addButton); // Use existing addButton reference
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = editTextName.getText().toString().trim();
+                String type = editTextType.getText().toString().trim();
+
+                if (!name.isEmpty() && !type.isEmpty()) {
+                    // Create a new MachineObject and add it to the list
+                    MachineObject newMachine = new MachineObject(name, type);
+                    machineList.add(newMachine);
+
+                    // Update the ListView adapter
+                    ((ObjectAdaptor) listView.getAdapter()).notifyDataSetChanged();
+
+                    // Dismiss the dialog
+                    dialog.dismiss();
+                } else {
+                    // Show a message if either name or type is empty
+                    Toast.makeText(requireContext(), "Please enter both name and type", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        dialog.show();
+    }
+
+
+
+
+
+
+
+
+
+    // public void showIdleDialog(){
   //      Dialog dialog = new Dialog(requireContext());
     //    dialog.setContentView(R.layout.idle_instances_popup);
      //   dialog.show();

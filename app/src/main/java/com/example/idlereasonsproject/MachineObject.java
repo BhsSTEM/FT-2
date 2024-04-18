@@ -16,7 +16,10 @@ public class MachineObject {
     boolean moreThanOneOperator = false;
 
     //empty constructor
-    public MachineObject() {}
+    public MachineObject(String machineName, String machineType) {
+        name = machineName;
+        type = machineType;
+    }
     //constructor with name and type
     public MachineObject(String machineId, String machineName, String machineType) {
         id = machineId;
