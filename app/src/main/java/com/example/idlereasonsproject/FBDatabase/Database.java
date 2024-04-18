@@ -7,6 +7,30 @@ import java.util.Map;
 
 public class Database {
     protected final static DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+    private static String domain;
+    private static User user;
+
+    public static ReportNode reportNode;
 
     public Database() { }
+
+    //make a set node method protected void
+    protected void setUserLoggedIn(User _user)
+    {
+        user = _user;
+    }
+
+    protected static String getDomain()
+    {
+        return domain;
+    }
+    protected static void setDomain(String _domain)
+    {
+        domain = _domain;
+    }
+
+    public static void setNodes()
+    {
+        reportNode = new ReportNode();
+    }
 }

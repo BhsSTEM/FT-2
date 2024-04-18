@@ -20,33 +20,13 @@ import java.util.Objects;
 
 public class UserNode extends Database
 {
-    private final static DatabaseReference userNode = database.child("users").getRef();
+    private final static DatabaseReference userNode = database.child("users").child(getDomain()).getRef();
     private static Map<String, User> usersHashMap = new HashMap<>();
 
-    private ValueEventListener userListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot)
-            {
-                Map<String, User> userMap = new HashMap<>();
-
-                for (DataSnapshot child : snapshot.getChildren())
-                {
-                    userMap.put(child.getKey(), child.getValue(User.class));
-                }
-
-                Log.v("firebase", "the users are: " + userMap);
-                UserNode.setUsersHashMap(userMap);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error)
-            {
-                Log.w("DatabaseError", "loadUser:OnCancelled", error.toException());
-            }
-    };
 
     public UserNode()
     {
-        userNode.addValueEventListener(userListener);
+        getDataSnapshot();
     }
 
     public boolean loginUser(String email, String password)
@@ -106,14 +86,9 @@ public class UserNode extends Database
                     }
                 }
         );
+        setUserLoggedIn(user);
 
         return false;
-    }
-
-    //method used to pass snapshot into methods
-    public static void setUsersHashMap(Map<String, User> map)
-    {
-        usersHashMap = map;
     }
 
     public static void getDataSnapshot()
@@ -125,13 +100,31 @@ public class UserNode extends Database
                 if (!task.isSuccessful())
                 {
                     Log.e("firebase", "Error getting user data", task.getException());
+                    //put some kind of error here
                 }
                 else
                 {
                     Log.d("firebase", "read success " + String.valueOf(task.getResult().getValue()));
+
+                    Map<String, User> userMap = new HashMap<>();
+
+                    for (DataSnapshot child : task.getResult().getChildren())
+                    {
+                        userMap.put(child.getKey(), child.getValue(User.class));
+                    }
+
+                    Log.v("firebase", "the users are: " + userMap);
+                    UserNode.setUsersHashMap(userMap);
                 }
             }
         });
     }
+
+    //method used to pass snapshot into methods
+    public static void setUsersHashMap(Map<String, User> map)
+    {
+        usersHashMap = map;
+    }
+
 
 }
