@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.idlereasonsproject.FBDatabase.Database;
 import com.example.idlereasonsproject.FBDatabase.UserNode;
 import com.example.idlereasonsproject.databinding.FragmentFirstBinding;
 
@@ -65,6 +66,7 @@ public class FirstFragment extends Fragment {
                 if(loginStatus)
                 {
                     Log.i("login","complete");
+                    Database.setNodes();
                     NavHostFragment.findNavController(FirstFragment.this)
                             .navigate(R.id.action_FirstFragment_to_HomeFragment);
                 }
