@@ -12,6 +12,8 @@ public class Database {
 
     public static ReportNode reportNode;
 
+    public static MachineNode machineNode;
+
     public Database() { }
 
     //make a set node method protected void
@@ -32,5 +34,6 @@ public class Database {
     public static void setNodes()
     {
         reportNode = new ReportNode();
+        machineNode = new MachineNode();
     }
 }

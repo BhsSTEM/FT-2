@@ -33,7 +33,6 @@ public class MachineNode extends Database
                     machineMap.put(child.getKey(), child.getValue(MachineObject.class));
                 }
                 setMachineMap(map);
-
                 //ui changes
             }
 
