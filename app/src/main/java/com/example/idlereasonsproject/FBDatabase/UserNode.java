@@ -23,7 +23,6 @@ public class UserNode extends Database
     private final static DatabaseReference userNode = database.child("users").child(getDomain()).getRef();
     private static Map<String, User> usersHashMap = new HashMap<>();
 
-
     public UserNode()
     {
         getDataSnapshot();
@@ -126,6 +125,4 @@ public class UserNode extends Database
     {
         usersHashMap = map;
     }
-
-
 }

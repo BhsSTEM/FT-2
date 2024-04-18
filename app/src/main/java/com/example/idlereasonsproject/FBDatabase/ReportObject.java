@@ -33,6 +33,8 @@ public class ReportObject {
     public String getReason(){return reason;}
     public String getFurtherInformation(){return furtherInformation;}
     public Date getTimeOfSubmission(){return timeOfSubmission;}
+    public String getReporter() {return reporter;}
+
     public String reportText() {
         return machine + " at " + location + " is idle because " + reason + ". Further information: " + furtherInformation;
     }
