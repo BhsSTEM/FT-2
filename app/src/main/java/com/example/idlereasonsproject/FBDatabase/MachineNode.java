@@ -63,4 +63,11 @@ public class MachineNode extends Database
     }
 
     public void setMachineMap(Map<String, MachineObject> map){ machineMap = map; }
+
+
+
+    public Map<String, MachineObject> getMachineMap(){
+        return machineMap;
+    }
 }
+

@@ -12,14 +12,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+import com.example.idlereasonsproject.FBDatabase.Database;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.idlereasonsproject.FBDatabase.MachineObject;
 import com.example.idlereasonsproject.databinding.FragmentMachineListBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Objects;
 
 
@@ -74,6 +77,7 @@ public class MachineListFragment extends Fragment {
             }
         });
 /*
+Database.MachineNode.addMachine()
         binding.idleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,16 +89,24 @@ public class MachineListFragment extends Fragment {
 
     }
     private void setupData(){
-        MachineObject combine = new MachineObject("0","john", "Combine");
-        machineList.add(combine);
+        //MachineObject combine = new MachineObject("0","john", "Combine");
+      //  machineList.add(combine);
 
-        MachineObject tractor = new MachineObject("1","bob", "Tractor" );
-        machineList.add(tractor);
+       // MachineObject tractor = new MachineObject("1","bob", "Tractor" );
+       // machineList.add(tractor);
+        /*
+        Map<String, MachineObject> machineMap = Database.machineNode.getMachineMap();
 
-        MachineObject truck = new MachineObject("2","billy", "Truck");
-        machineList.add(truck);
 
+        for(Map.Entry<String, MachineObject> entry : machineMap.entrySet()){
 
+            machineList.add(entry.getValue().getName());
+        }
+    setUpList1();
+*/
+
+        Map<String, MachineObject> machineMap = Database.machineNode.getMachineMap();
+        Log.e("MachineListFragment", machineMap.toString());
 
     }
 
@@ -152,11 +164,16 @@ public class MachineListFragment extends Fragment {
             public void onClick(View v) {
                 String name = editTextName.getText().toString().trim();
                 String type = editTextType.getText().toString().trim();
+                String blah = "";
+                ArrayList<String>  blue = new ArrayList<>();
 
                 if (!name.isEmpty() && !type.isEmpty()) {
                     // Create a new MachineObject and add it to the list
-                    MachineObject newMachine = new MachineObject(name, type);
+                      MachineObject newMachine = new MachineObject(blah, name, type, blue);
+
                     machineList.add(newMachine);
+
+                    Database.machineNode.addMachine(newMachine);
 
                     // Update the ListView adapter
                     ((ObjectAdaptor) listView.getAdapter()).notifyDataSetChanged();

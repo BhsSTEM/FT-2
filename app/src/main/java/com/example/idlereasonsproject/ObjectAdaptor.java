@@ -5,19 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
+import com.example.idlereasonsproject.FBDatabase.MachineObject;
 
-
-import java.util.List;
+import java.util.ArrayList;
 
 public class ObjectAdaptor extends ArrayAdapter<MachineObject> {
 
-    public ObjectAdaptor(Context context, int resource, List<MachineObject> objectList){
+    public ObjectAdaptor(Context context, int resource, ArrayList<MachineObject> objectList){
         super(context,resource,objectList);
     }
 

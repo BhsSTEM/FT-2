@@ -12,6 +12,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.idlereasonsproject.FBDatabase.MachineObject;
+
 public class DetailActivity extends AppCompatActivity {
 
     MachineObject selectedShape;
