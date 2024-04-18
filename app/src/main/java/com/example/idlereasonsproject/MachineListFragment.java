@@ -94,30 +94,7 @@ public class MachineListFragment extends Fragment {
         MachineObject truck = new MachineObject("2","billy", "Truck");
         machineList.add(truck);
 
-        MachineObject truck2 = new MachineObject("3","billy", "Truck");
-        machineList.add(truck2);
 
-        MachineObject truck3 = new MachineObject("4","billy", "Truck");
-        machineList.add(truck3);
-
-        MachineObject truck4 = new MachineObject("5","billy", "Truck");
-        machineList.add(truck4);
-
-
-        MachineObject truck5 = new MachineObject("6","billy", "Truck");
-        machineList.add(truck5);
-
-        MachineObject truck6 = new MachineObject("7","billy", "Truck");
-        machineList.add(truck6);
-
-        MachineObject truck7 = new MachineObject("8","billy", "Truck");
-        machineList.add(truck7);
-
-        MachineObject truck8 = new MachineObject("9","billy", "Truck");
-        machineList.add(truck8);
-
-        MachineObject truck9 = new MachineObject("10","billy", "Truck");
-        machineList.add(truck9);
 
     }
 
