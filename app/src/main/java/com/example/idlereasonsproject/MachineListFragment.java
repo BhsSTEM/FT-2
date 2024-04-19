@@ -31,6 +31,7 @@ public class MachineListFragment extends Fragment {
 
     private FragmentMachineListBinding binding;
     private ListView listView;
+    private int blahCounter = 0;
 
 
     public static ArrayList<MachineObject> machineList = new ArrayList<>();
@@ -196,7 +197,7 @@ Database.MachineNode.addMachine()
             public void onClick(View v) {
                 String name = editTextName.getText().toString().trim();
                 String type = editTextType.getText().toString().trim();
-                String blah = "";
+                String blah = String.valueOf(blahCounter++);
                 ArrayList<String>  blue = new ArrayList<>();
 
                 if (!name.isEmpty() && !type.isEmpty()) {
