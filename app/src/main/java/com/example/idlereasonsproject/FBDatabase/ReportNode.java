@@ -31,7 +31,7 @@ public class ReportNode extends Database
                 Map<String, ReportObject> map = new HashMap<>();
                 for(DataSnapshot child : snapshot.getChildren())
                 {
-                    reportMap.put(child.getKey(), child.getValue(ReportObject.class));
+                    map.put(child.getKey(), child.getValue(ReportObject.class));
                     Log.i("ReportNode.java", child.getKey() + " | " + child.getValue(ReportObject.class));
                 }
 
@@ -71,7 +71,7 @@ public class ReportNode extends Database
         reportMap = map;
     }
 
-    public Map getReportMap()
+    public static Map<String, ReportObject> getReportMap()
     {
         return reportMap;
     }
