@@ -17,9 +17,12 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.idlereasonsproject.FBDatabase.Database;
+import com.example.idlereasonsproject.FBDatabase.ReportNode;
 import com.example.idlereasonsproject.FBDatabase.ReportObject;
 import com.example.idlereasonsproject.databinding.ReportIdleBinding;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.Map;
 import java.util.Objects;
 
 public class ReportIdleFragment extends Fragment implements OnItemSelectedListener {
@@ -108,8 +111,16 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
                     break;
 
                 case DialogInterface.BUTTON_NEGATIVE:
-                    //No button clicked, logs the user for debugging purposes
+                    //No button clicked, used for debugging purposes
                     Log.i("Logged In User", Database.getUserLoggedIn().getFirstName() + Database.getUserLoggedIn().getLastName());
+                    Map<String, ReportObject> reportMapDebug = ReportNode.getReportMap();
+                    int reportMapDebugSize = reportMapDebug.size();
+                    Log.i("reportMapDebugSize", String.valueOf(reportMapDebugSize));
+                    for (Map.Entry<String, ReportObject> entry : reportMapDebug.entrySet()) {
+                        String key = entry.getKey();
+                        String value = entry.getValue().reportText();
+                        System.out.println("Key=" + key + ", Value=" + value);
+                    }
                     break;
             }
         };
