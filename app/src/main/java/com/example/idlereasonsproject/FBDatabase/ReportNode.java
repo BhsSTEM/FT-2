@@ -66,14 +66,6 @@ public class ReportNode extends Database
                 });
     }
 
-    public void setReportMap(Map<String, ReportObject> map)
-    {
-        reportMap = map;
-    }
-
-    public static Map<String, ReportObject> getReportMap()
-    {
-        return reportMap;
-    }
-
+    public void setReportMap(Map<String, ReportObject> map) {reportMap = map;}
+    public static Map<String, ReportObject> getReportMap() {return reportMap;}
 }

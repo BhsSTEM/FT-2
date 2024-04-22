@@ -24,11 +24,10 @@ public class slothfulNotifications {
         Intent intent = new Intent();
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
-
+        requestNotificationPerms(context, activity);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context,"Slothful Notifications");
         builder.setSmallIcon(R.drawable.ic_launcher_background).setContentTitle("Idle Report").setContentText(report.reportText()).setPriority(NotificationCompat.PRIORITY_DEFAULT).setContentIntent(pendingIntent).setAutoCancel(true);
         Log.i("Noti", "Builder varibale set");
-        requestNotificationPerms(context, activity);
         // notificationId is a unique int for each notification that you must define.
         notificationManagerCompat.notify(3, builder.build());
         Log.i("Noti", "Notification sent");
