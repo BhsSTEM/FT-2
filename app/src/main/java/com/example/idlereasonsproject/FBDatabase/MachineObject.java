@@ -10,6 +10,9 @@ public class MachineObject {
     String type = "";
     ArrayList<String> operators = new ArrayList<String>();
 
+    //object to hold keys of reports
+    ArrayList<String> reports = new ArrayList<>();
+
 
     //empty constructor
     public MachineObject() {}
@@ -53,6 +56,10 @@ public class MachineObject {
     public String getType() {return type;}
     public ArrayList<String> getOperatorsArrayList() {return operators; }
 
+    public ArrayList<String> getReports() { return reports; }
+
+    public void addReport(String reportObjKey) { reports.add(reportObjKey); }
+
     //Map
     public Map<String, Object> toMap()
     {
@@ -60,6 +67,7 @@ public class MachineObject {
         map.put("name", name);
         map.put("type", type);
         map.put("operatorsArrayList", operators);
+        map.put("reports", reports);
         return map;
     }
 }

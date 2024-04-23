@@ -62,6 +62,17 @@ public class MachineNode extends Database
                 });
     }
 
+    public void addMachineReports(ReportObject report, String key)
+    {
+        Map<String, Object> childUpdates = new HashMap<>();
+        MachineObject machine = machineMap.get(report.getMachine());
+        machine.addReport(key);
+
+        childUpdates.put(machine.getName(), machine);
+        Log.v("machineNodeUpdates", childUpdates.toString());
+
+        machineNode.updateChildren(childUpdates);
+    }
 
     public void setMachineMap(Map<String, MachineObject> map){ machineMap = map; }
 

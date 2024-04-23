@@ -34,6 +34,10 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
     String machine = "";
     String reason = "";
     String furtherInformation = "";
+
+    Map<String, MachineObject> machineMap = Database.machineNode.getMachineMap();
+    ArrayList<String> machineList = new ArrayList<>();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
@@ -46,14 +50,17 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
         super.onViewCreated(view, savedInstanceState);
         //Field Spinner
         Spinner fieldSpinner = getView().findViewById(R.id.report_idle_field);
+
         // Create an ArrayAdapter using the string array and a default spinner layout.
         ArrayAdapter<CharSequence> fieldAdapter = ArrayAdapter.createFromResource(
                 getActivity(),
                 R.array.fields_array,
                 android.R.layout.simple_spinner_item
         );
+
         // Specify the layout to use when the list of choices appears.
         fieldAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         // Apply the adapter to the spinner.
         fieldSpinner.setAdapter(fieldAdapter);
         fieldSpinner.setOnItemSelectedListener(this);
@@ -64,8 +71,6 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
 
         //Creating an array to use for this specfic spinner, the goal is to have this in the future be pulled from somewhere else instead of just created here
         //Idealy, in the future, if the user is marked as using a machine that one would pop up first, and if they're using multiple, those would pop up first
-        ArrayList<String> machineList = new ArrayList<>();
-        Map<String, MachineObject> machineMap = Database.machineNode.getMachineMap();
 
         for(MachineObject machine: machineMap.values())
         {
@@ -73,7 +78,7 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
         }
 
         // Create an ArrayAdapter using the string array and a default spinner layout.
-        ArrayAdapter<String> machineAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, machineList);
+        ArrayAdapter<String> machineAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, machineList.toArray());
 
         // Specify the layout to use when the list of choices appears.
         machineAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -153,7 +158,7 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
                 R.array.fields_array,
                 android.R.layout.simple_spinner_item
         );
-        String[] machineList = new String[]{"Machine 1", "Machine 2", "Machine 3"};
+
         ArrayAdapter<String> machineAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, machineList);
         ArrayAdapter<CharSequence> reasonAdapter = ArrayAdapter.createFromResource(
                 getActivity(),
@@ -168,12 +173,12 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
             Log.i("Chosen Spinner", chosenSpinner);
         } else if (machineAdapter.getCount() >= posPlusOne && result.equals(machineAdapter.getItem(position))) {
             chosenSpinner = "Machine";
-            Log.i("Chosen Spinner", chosenSpinner);
+            Log.v("Chosen Spinner", chosenSpinner+"\n" + machineAdapter+ " " + machineAdapter.getCount());
         }  else if (reasonAdapter.getCount() >= posPlusOne && result == reasonAdapter.getItem(position)) {
             chosenSpinner = "Reason";
             Log.i("Chosen Spinner", chosenSpinner);
         } else {
-            Log.w("Chosen Spinner", "Cannot find chosen spinner");
+            Log.w("Chosen Spinner", "Cannot find chosen spinner"+"\n" + machineAdapter+ " " + machineAdapter.getCount());
         }
 
         //Changing correct variable

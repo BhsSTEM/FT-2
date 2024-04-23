@@ -49,10 +49,12 @@ public class ReportNode extends Database
 
     public void addReportToDB(ReportObject report)
     {
-        reportNode.child(String.valueOf(report.getTimeOfSubmission().getTime())).setValue(report)
+        String key = String.valueOf(report.getTimeOfSubmission().getTime());
+        reportNode.child(key).setValue(report)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(Void unused) {
+                    public void onSuccess(Void unused)
+                    {
                         Log.v("ReportNode", "added report");
                     }
                 })
@@ -62,6 +64,8 @@ public class ReportNode extends Database
                         Log.e("ReportNode", "can't add report\n"+e);
                     }
                 });
+
+        Database.machineNode.addMachineReports(report, key);
     }
 
     public void setReportMap(Map<String, ReportObject> map)
