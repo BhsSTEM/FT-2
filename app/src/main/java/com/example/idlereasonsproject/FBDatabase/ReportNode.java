@@ -12,6 +12,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,6 +67,10 @@ public class ReportNode extends Database
                 });
     }
 
+    public static void resolveReport(ReportObject report) {
+        database.child("reports").child(getDomain()).child(String.valueOf(report.getKey())).child("resolved").setValue(true);
+        database.child("reports").child(getDomain()).child(String.valueOf(report.getKey())).child("timeOfResolution").setValue(Calendar.getInstance().getTime());
+    }
     public void setReportMap(Map<String, ReportObject> map) {reportMap = map;}
     public static Map<String, ReportObject> getReportMap() {return reportMap;}
 }

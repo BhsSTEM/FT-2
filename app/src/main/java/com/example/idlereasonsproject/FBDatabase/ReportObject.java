@@ -41,6 +41,9 @@ public class ReportObject {
     public boolean isResolved() {return resolved;}
     public Date getTimeOfResolution() {return timeOfResolution;}
 
+    //The key in the hashmap is the time of submission
+    public long getKey() {return timeOfSubmission.getTime();}
+
     public String reportText() {
         return machine + " at " + location + " is idle because " + reason + ". Further information: " + furtherInformation;
     }

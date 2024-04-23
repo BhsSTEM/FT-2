@@ -1,5 +1,8 @@
 package com.example.idlereasonsproject;
 
+import static com.example.idlereasonsproject.FBDatabase.Database.getCurrentReport;
+import static com.example.idlereasonsproject.FBDatabase.ReportNode.resolveReport;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -115,6 +118,7 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
                 case DialogInterface.BUTTON_NEGATIVE:
                     //No button clicked, used for debugging purposes
                     String loggedInUser = Database.getUserLoggedIn().getFirstName() + " " + Database.getUserLoggedIn().getLastName();
+                    ReportNode.resolveReport(getCurrentReport());
                     break;
             }
         };
