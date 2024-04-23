@@ -96,6 +96,7 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
         TextInputLayout furtherInfoTextBox = getView().findViewById(R.id.report_idle_further_information);
 
         //Are you sure? Pop up
+        //This is where report object is sent to the database and create and everything
         DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
             switch (which){
                 case DialogInterface.BUTTON_POSITIVE:
@@ -105,6 +106,7 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
                     slothfulNotifications.idleReportNotifications(getContext(), getActivity(), report);
                     //method to send to database
                     Database.reportNode.addReportToDB(report);
+                    Database.setCurrentReport(report);
 
                     NavHostFragment.findNavController(ReportIdleFragment.this)
                             .navigate(R.id.action_ReportIdle_to_HomeFragment);
