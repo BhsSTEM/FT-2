@@ -198,13 +198,16 @@ Database.MachineNode.addMachine()
                 String name = editTextName.getText().toString().trim();
                 String type = editTextType.getText().toString().trim();
                 String blah = String.valueOf(blahCounter++);
+
                 ArrayList<String>  blue = new ArrayList<>();
 
                 if (!name.isEmpty() && !type.isEmpty()) {
                     // Create a new MachineObject and add it to the list
-                      MachineObject newMachine = new MachineObject(blah, name, type, blue);
+                    MachineObject newMachine = new MachineObject(blah, name, type, blue);
 
                     machineList.add(newMachine);
+
+                    Log.d("MachineListFragment", "Current machineList: " + machineList.toString());
 
                     Database.machineNode.addMachine(newMachine);
 
