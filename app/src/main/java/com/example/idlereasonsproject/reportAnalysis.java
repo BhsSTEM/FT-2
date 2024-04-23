@@ -40,4 +40,25 @@ public class reportAnalysis {
         }
         return returnedMap;
     }
+    public static int numOfReportsFromMachine(String machine) {
+        int numOfReports = 0;
+        for (Map.Entry<String, ReportObject> entry : ReportNode.getReportMap().entrySet()) {
+            String valueOfMachine = entry.getValue().getMachine();
+            if (machine.equals(valueOfMachine)){
+                numOfReports++;
+            }
+        }
+        return numOfReports;
+    }
+    public static Map<String, ReportObject> reportsFromMachine(String machine) {
+        Map<String, ReportObject> returnedMap = new HashMap<>();
+        for (Map.Entry<String, ReportObject> entry : ReportNode.getReportMap().entrySet()) {
+            String key = entry.getKey();
+            ReportObject value = entry.getValue();
+            if (machine.equals(value.getMachine())){
+                returnedMap.put(key, value);
+            }
+        }
+        return returnedMap;
+    }
 }
