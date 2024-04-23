@@ -61,4 +61,24 @@ public class reportAnalysis {
         }
         return returnedMap;
     }
+    public static int numOfUnresolvedReports(Map<String, ReportObject> map) {
+        int numOfReports = 0;
+        for (Map.Entry<String, ReportObject> entry : map.entrySet()) {
+            if (!entry.getValue().isResolved()) {
+                numOfReports++;
+            }
+        }
+        return numOfReports;
+    }
+    public static Map<String, ReportObject> unresolvedReports(Map<String, ReportObject> map) {
+        Map<String, ReportObject> returnedMap = new HashMap<>();
+        for (Map.Entry<String, ReportObject> entry : map.entrySet()) {
+            String key = entry.getKey();
+            ReportObject value = entry.getValue();
+            if (!entry.getValue().isResolved()){
+                returnedMap.put(key, value);
+            }
+        }
+        return returnedMap;
+    }
 }
