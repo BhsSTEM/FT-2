@@ -13,6 +13,9 @@ public class ReportObject {
     String furtherInformation = "";
     Date timeOfSubmission;
     String reporter = "";
+    boolean resolved = false;
+    Date timeOfResolution;
+
 
     public ReportObject(){ }
 
@@ -23,6 +26,7 @@ public class ReportObject {
         reason = newReason;
         furtherInformation = newFurtherInformation;
         timeOfSubmission = Calendar.getInstance().getTime();
+        timeOfResolution = new Date(1); //set to 1 which with how dates work will never be a possible value for timeOfSubmission unless someone time travels to the 70s
         reporter = Database.getUserLoggedIn().getFirstName() + " " + Database.getUserLoggedIn().getLastName();
         Log.i("Report object", "Data assigned " + timeOfSubmission.getTime());
     }
@@ -34,6 +38,8 @@ public class ReportObject {
     public String getFurtherInformation(){return furtherInformation;}
     public Date getTimeOfSubmission(){return timeOfSubmission;}
     public String getReporter() {return reporter;}
+    public boolean isResolved() {return resolved;}
+    public Date getTimeOfResolution() {return timeOfResolution;}
 
     public String reportText() {
         return machine + " at " + location + " is idle because " + reason + ". Further information: " + furtherInformation;
@@ -47,6 +53,8 @@ public class ReportObject {
         map.put("furtherInformation", furtherInformation);
         map.put("reporter", reporter);
         map.put("timeOfSubmission", timeOfSubmission);
+        map.put("timeOfResolution", timeOfResolution);
+        map.put("resolved", resolved);
         return map;
     }
 }

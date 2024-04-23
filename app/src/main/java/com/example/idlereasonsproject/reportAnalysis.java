@@ -19,9 +19,9 @@ public class reportAnalysis {
     public static void reportMapReportTextToLogCat() {
         reportObjectHashmapToLogCat(ReportNode.getReportMap());
     }
-    public static int numOfReportsFromReporter(String reporter) {
+    public static int numOfReportsFromReporter(String reporter, Map<String, ReportObject> map) {
         int numOfReports = 0;
-        for (Map.Entry<String, ReportObject> entry : ReportNode.getReportMap().entrySet()) {
+        for (Map.Entry<String, ReportObject> entry : map.entrySet()) {
             String valueOfReporter = entry.getValue().getReporter();
             if (reporter.equals(valueOfReporter)){
                 numOfReports++;
@@ -29,9 +29,9 @@ public class reportAnalysis {
         }
         return numOfReports;
     }
-    public static Map<String, ReportObject> reportsFromReporter(String reporter) {
+    public static Map<String, ReportObject> reportsFromReporter(String reporter, Map<String, ReportObject> map) {
         Map<String, ReportObject> returnedMap = new HashMap<>();
-        for (Map.Entry<String, ReportObject> entry : ReportNode.getReportMap().entrySet()) {
+        for (Map.Entry<String, ReportObject> entry : map.entrySet()) {
             String key = entry.getKey();
             ReportObject value = entry.getValue();
             if (reporter.equals(value.getReporter())){
@@ -40,9 +40,9 @@ public class reportAnalysis {
         }
         return returnedMap;
     }
-    public static int numOfReportsFromMachine(String machine) {
+    public static int numOfReportsFromMachine(String machine, Map<String, ReportObject> map) {
         int numOfReports = 0;
-        for (Map.Entry<String, ReportObject> entry : ReportNode.getReportMap().entrySet()) {
+        for (Map.Entry<String, ReportObject> entry : map.entrySet()) {
             String valueOfMachine = entry.getValue().getMachine();
             if (machine.equals(valueOfMachine)){
                 numOfReports++;
@@ -50,9 +50,9 @@ public class reportAnalysis {
         }
         return numOfReports;
     }
-    public static Map<String, ReportObject> reportsFromMachine(String machine) {
+    public static Map<String, ReportObject> reportsFromMachine(String machine, Map<String, ReportObject> map) {
         Map<String, ReportObject> returnedMap = new HashMap<>();
-        for (Map.Entry<String, ReportObject> entry : ReportNode.getReportMap().entrySet()) {
+        for (Map.Entry<String, ReportObject> entry : map.entrySet()) {
             String key = entry.getKey();
             ReportObject value = entry.getValue();
             if (machine.equals(value.getMachine())){

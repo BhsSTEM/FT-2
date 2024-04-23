@@ -113,9 +113,6 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
                 case DialogInterface.BUTTON_NEGATIVE:
                     //No button clicked, used for debugging purposes
                     String loggedInUser = Database.getUserLoggedIn().getFirstName() + " " + Database.getUserLoggedIn().getLastName();
-                    Log.i("Logged In User", loggedInUser);
-                    Log.i("Number of reports from logged in user", String.valueOf(reportAnalysis.numOfReportsFromReporter(loggedInUser)));
-                    reportAnalysis.reportObjectHashmapToLogCat(reportAnalysis.reportsFromReporter(loggedInUser));
                     break;
             }
         };
