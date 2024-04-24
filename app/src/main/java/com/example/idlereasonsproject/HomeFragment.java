@@ -10,6 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.idlereasonsproject.FBDatabase.Database;
+import com.example.idlereasonsproject.FBDatabase.ReportNode;
+import com.example.idlereasonsproject.FBDatabase.ReportObject;
 import com.example.idlereasonsproject.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
@@ -51,6 +54,25 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 NavHostFragment.findNavController(HomeFragment.this)
                         .navigate(R.id.action_HomeFragment_to_ReportIdle);
+            }
+        });
+
+        binding.resolveReportBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ReportObject resolvedReport = Database.getCurrentReport();
+                if (resolvedReport != null) {
+                    //two seperate if statements to prevent the chance of a null pointer function
+                    if (!resolvedReport.isResolved()) {
+                        ReportNode.resolveReport(resolvedReport);
+                    }
+                    else {
+                        Log.i("Report Resolution", "Report already resolved");
+                    }
+                }
+                else {
+                    Log.i("Report Resolution", "No report currently");
+                }
             }
         });
     }

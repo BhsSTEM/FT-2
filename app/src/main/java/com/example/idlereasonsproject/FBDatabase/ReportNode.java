@@ -33,7 +33,7 @@ public class ReportNode extends Database
                 for(DataSnapshot child : snapshot.getChildren())
                 {
                     map.put(child.getKey(), child.getValue(ReportObject.class));
-                    Log.i("ReportNode.java", child.getKey() + " | " + child.getValue(ReportObject.class));
+                    //Log.i("ReportNode.java", child.getKey() + " | " + child.getValue(ReportObject.class));
                 }
 
                 Log.i("ReportNode", "updated!");
