@@ -31,6 +31,9 @@ public class ReportObject {
         Log.i("Report object", "Data assigned " + timeOfSubmission.getTime());
     }
 
+    //Just a function to set resolved to true, so the current report the database stores can change if it's updated or not
+    public void resolutionHelp(Date resolutionTime) {resolved = true; timeOfResolution = resolutionTime;}
+
     //these types of functions seem to be standard and it can't hurt
     public String getLocation() {return location;}
     public String getMachine(){return machine;}

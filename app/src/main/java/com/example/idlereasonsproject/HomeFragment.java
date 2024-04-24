@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
                 if (resolvedReport != null) {
                     //two seperate if statements to prevent the chance of a null pointer function
                     if (!resolvedReport.isResolved()) {
-                        ReportNode.resolveReport(resolvedReport);
+                        Database.setCurrentReport(ReportNode.resolveReport(resolvedReport));
                     }
                     else {
                         Log.i("Report Resolution", "Report already resolved");

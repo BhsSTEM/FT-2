@@ -13,6 +13,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,9 +68,13 @@ public class ReportNode extends Database
                 });
     }
 
-    public static void resolveReport(ReportObject report) {
+    //Returns a report object so you can have a copy of the resolved report locally if you want
+    public static ReportObject resolveReport(ReportObject report) {
         database.child("reports").child(getDomain()).child(String.valueOf(report.getKey())).child("resolved").setValue(true);
-        database.child("reports").child(getDomain()).child(String.valueOf(report.getKey())).child("timeOfResolution").setValue(Calendar.getInstance().getTime());
+        Date resolutionTime = Calendar.getInstance().getTime();
+        database.child("reports").child(getDomain()).child(String.valueOf(report.getKey())).child("timeOfResolution").setValue(resolutionTime);
+        report.resolutionHelp(resolutionTime);
+        return report;
     }
     public void setReportMap(Map<String, ReportObject> map) {reportMap = map;}
     public static Map<String, ReportObject> getReportMap() {return reportMap;}
