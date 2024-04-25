@@ -12,6 +12,7 @@ import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.idlereasonsproject.FBDatabase.MachineObject;
@@ -26,21 +27,26 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // setContentView(R.layout.activity_detail);
-        //binding = ActivityDetailBinding.inflate(getLayoutInflater());
-       // setContentView(binding.getRoot());
-        //setSupportActionBar(binding.toolbar);
-    setContentView(R.layout.activity_detail);
-        //NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main_detail);
 
-       // appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+        binding = ActivityDetailBinding.inflate(getLayoutInflater());
 
+        setContentView(binding.getRoot());
+        Log.d("DetailActivity", "sets view");
+        setSupportActionBar(binding.toolbar);
+        Log.d("DetailActivity", "sets toolbar");
 
-      //  NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
         getSelectedShape();
         setValues();
+        Log.d("DetailActivity", "sets vals");
+
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main_detail);
+        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+
+
     }
+
 
 
     private void getSelectedShape(){
