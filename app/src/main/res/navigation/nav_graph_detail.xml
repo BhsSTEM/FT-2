@@ -3,14 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_detail"
-    app:startDestination="@id/detail_fragment"
-   >
-
+    app:startDestination="@id/detail_fragment">
+    <action
+        android:id="@+id/action_redirect_to_home"
+        app:destination="@id/HomeFragment"
+        app:popUpTo="@id/HomeFragment"
+        app:popUpToInclusive="true"  />
+    <action
+        android:id="@+id/action_redirect_to_machine_list"
+        app:destination="@id/MachineListFragment"
+        app:popUpTo="@id/MachineListFragment"
+        app:popUpToInclusive="true"  />
+    <action
+        android:id="@+id/action_redirect_to_idle"
+        app:destination="@id/ReportIdle"
+        app:popUpTo="@id/ReportIdle"
+        app:popUpToInclusive="true"  />
+    <action
+        android:id="@+id/action_redirect_to_tracker"
+        app:destination="@id/TrackerFragment"
+        app:popUpTo="@id/TrackerFragment"
+        app:popUpToInclusive="true"  />
 
     <fragment
         android:id="@+id/detail_fragment"
         android:name="com.example.idlereasonsproject.DetailFragment"
-        tools:layout="@layout/detail">
+        tools:layout="@layout/activity_detail">
 
 
     </fragment>

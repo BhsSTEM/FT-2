@@ -51,17 +51,7 @@ public class MachineListFragment extends Fragment {
         setupData();
         setUpOnclickListener();
 
-
-
-
-
-
-
         return binding.getRoot();
-
-
-
-
 
     }
 
@@ -79,48 +69,11 @@ public class MachineListFragment extends Fragment {
                 showAddMachineDialog(v);
             }
         });
-/*
-Database.MachineNode.addMachine()
-        binding.idleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showIdleDialog();
-            }
-        });
 
-*/
 
     }
     private void setupData(){
-        //MachineObject combine = new MachineObject("0","john", "Combine");
-      //  machineList.add(combine);
 
-       // MachineObject tractor = new MachineObject("1","bob", "Tractor" );
-       // machineList.add(tractor);
-        /*
-        Map<String, MachineObject> machineMap = Database.machineNode.getMachineMap();
-
-
-        for(Map.Entry<String, MachineObject> entry : machineMap.entrySet()){
-
-            machineList.add(entry.getValue().getName());
-        }
-    setUpList1();
-
-
-        Map<String, MachineObject> machineMap = Database.machineNode.getMachineMap();
-        Log.e("MachineListFragment", machineMap.toString());
-
-        machineList.clear();
-
-        // Add values from machineMap to machineList
-        for (Map.Entry<String, MachineObject> entry : machineMap.entrySet()) {
-            machineList.add(entry.getValue());
-        }
-
-        // Notify the adapter that the data set has changed
-        ((ObjectAdaptor) listView.getAdapter()).notifyDataSetChanged();
-*/
         Map<String, MachineObject> machineMap = Database.machineNode.getMachineMap();
         Log.e("MachineListFragment", "machineMap size: " + machineMap.size()); // Log the size of machineMap
 
@@ -226,19 +179,6 @@ Database.MachineNode.addMachine()
         dialog.show();
     }
 
-
-
-
-
-
-
-
-
-    // public void showIdleDialog(){
-  //      Dialog dialog = new Dialog(requireContext());
-    //    dialog.setContentView(R.layout.idle_instances_popup);
-     //   dialog.show();
-   // }
 
     @Override
     public void onDestroyView() {

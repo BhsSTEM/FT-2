@@ -8,38 +8,40 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.idlereasonsproject.FBDatabase.MachineObject;
+import com.example.idlereasonsproject.databinding.ActivityDetailBinding;
 
 public class DetailActivity extends AppCompatActivity {
 
     MachineObject selectedShape;
     private AppBarConfiguration appBarConfiguration;
+
+    private ActivityDetailBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+       // setContentView(R.layout.activity_detail);
+        //binding = ActivityDetailBinding.inflate(getLayoutInflater());
+       // setContentView(binding.getRoot());
+        //setSupportActionBar(binding.toolbar);
+    setContentView(R.layout.activity_detail);
+        //NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main_detail);
+
+       // appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+
+
+      //  NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+
         getSelectedShape();
         setValues();
-       // val navHostFragment =
-              //  supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main_detail)
-
-       /// mNavController = navHostFragment.navController
-
-
-
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main_detail);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-
-
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
-
     }
+
 
     private void getSelectedShape(){
         Intent previousIntent = getIntent();
@@ -62,6 +64,8 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void setValues(){
+      //  TextView tv = (TextView) findViewById(R.id.machineName);
+       // TextView tv = binding.machineName;
         TextView tv = (TextView) findViewById(R.id.machineName);
 
         tv.setText(selectedShape.getName());
