@@ -2,12 +2,15 @@ package com.example.idlereasonsproject;
 
 import android.os.Bundle;
 
+import com.example.idlereasonsproject.FBDatabase.Database;
+import com.example.idlereasonsproject.FBDatabase.ReportNode;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 
 
@@ -15,6 +18,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
@@ -25,6 +29,7 @@ import com.example.idlereasonsproject.databinding.ActivityMainBinding;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+import android.widget.Toast;
 
 
 //some change :)
@@ -76,8 +81,22 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         else if(item.getItemId() == R.id.action_idleReport) {
-            navController.navigate(R.id.action_redirect_to_idle);
-            return true;
+            switch (reportAnalysis.numOfUnresolvedReports(reportAnalysis.reportsFromReporter(Database.getUserLoggedIn().fullName(), ReportNode.getReportMap()))) {
+                case 0:
+                    Log.i("Report page block", "case 0");
+                    navController.navigate(R.id.action_redirect_to_idle);
+                    return true;
+                case 1:
+                    Log.i("Report page block", "case 1");
+                    Toast.makeText(this,"You already have a report active, please resolve that before making another report",Toast.LENGTH_LONG).show();
+                    return true;
+                default:
+                    Log.i("Report page block", "default");
+                    Log.e("Reports in database", "More than 1 unresolved report (or maybe less than 0 somehow) from user " + Database.getUserLoggedIn().fullName());
+                    Toast.makeText(this,"You have more than one report active, this is likely the result of some error",Toast.LENGTH_LONG).show();
+                    return true;
+
+            }
         }
         else if (item.getItemId() == android.R.id.home) {
             navController.navigateUp();
