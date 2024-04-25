@@ -4,8 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.idlereasonsproject.MainActivity"
-    tools:content="com.example.idlereasonsproject.DetailActivity"
+    tools:ignore="HardcodedText"
     >
 
     <item
