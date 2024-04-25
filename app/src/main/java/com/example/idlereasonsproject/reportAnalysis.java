@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.idlereasonsproject.FBDatabase.ReportNode;
 import com.example.idlereasonsproject.FBDatabase.ReportObject;
+import com.google.firebase.database.core.Repo;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -82,4 +83,5 @@ public class reportAnalysis {
         }
         return returnedMap;
     }
+    public long timeBetweenReportAndResolution(ReportObject report) {return report.getTimeOfResolution().getTime() - report.getTimeOfSubmission().getTime();}
 }
