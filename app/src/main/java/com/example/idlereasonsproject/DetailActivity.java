@@ -35,8 +35,12 @@ public class DetailActivity extends AppCompatActivity implements NavigationView.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        //getSelectedShape();
-        //setValues();
+        getSelectedShape();
+
+        Log.d("DetailActivity", "selected shape");
+       // setValues();
+
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
 

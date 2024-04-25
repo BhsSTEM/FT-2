@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
     NavHostFragment navHostFragment;
+    NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,17 +58,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
+
         //create a navigation fragment
         navHostFragment = NavHostFragment.create(R.navigation.nav_graph);
 
-        if(!goingToFrag())
-        {
-            //replace fragment container in navigation_drawer.xml with nav fragment
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, navHostFragment)
-                    .setPrimaryNavigationFragment(navHostFragment)
-                    .commit();
-        }
+        //replace fragment container in navigation_drawer.xml with nav fragment
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, navHostFragment)
+                .setPrimaryNavigationFragment(navHostFragment)
+                .commit();
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
 
@@ -84,11 +85,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
+    public void onStart()
+    {
+        super.onStart();
+        navController = navHostFragment.getNavController();
+        goingToFrag();
+    }
+
+
+    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item)
     {
-        NavController navController = navHostFragment.getNavController();
-        Log.v("navDrawer", String.valueOf(item.getItemId()) + " clicked!");
-
+        //check what option was clicked
         if (item.getItemId() == R.id.action_tracker)
         {
             navController.navigate(R.id.action_redirect_to_tracker);
@@ -123,45 +131,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     //method to check if we are going to a specific fragment when the activity is created
-    private boolean goingToFrag()
+    private void goingToFrag()
     {
+
+        //statement to check if its going back to the default fragment(domain fragment)
         if(getIntent().getExtras() == null)
         {
-            //false means we are going to the default fragment
-            return false;
+            return;
         }
 
         int intentFragId = getIntent().getExtras().getInt("frgToLoad");
-        Fragment intentFragment;
 
+        //check what option was clicked
         if (intentFragId == R.id.action_tracker)
         {
-            intentFragment = new TrackerFragment();
+            navController.navigate(R.id.action_redirect_to_tracker);
         }
         else if (intentFragId == R.id.home_redirect)
         {
-            intentFragment = new HomeFragment();
+            navController.navigate(R.id.action_redirect_to_home);
         }
         else if (intentFragId == R.id.action_machineList)
         {
-            intentFragment = new MachineListFragment();
+            navController.navigate(R.id.action_redirect_to_machine_list);
         }
         else if(intentFragId == R.id.action_idleReport)
         {
-            intentFragment = new ReportIdleFragment();
+            navController.navigate(R.id.action_redirect_to_idle);
         }
         else
         {
-            intentFragment = new HomeFragment();
+            navController.navigate(R.id.action_redirect_to_home);
         }
-
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, intentFragment)
-                .setPrimaryNavigationFragment(navHostFragment)
-                .commit();
-
-        return true; //true means we are going to a specific fragment
-
     }
 
 
