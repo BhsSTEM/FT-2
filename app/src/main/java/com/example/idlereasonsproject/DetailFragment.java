@@ -13,19 +13,19 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.idlereasonsproject.databinding.DetailBinding;
+import com.example.idlereasonsproject.databinding.FragmentDetailBinding;
 
 
 public class DetailFragment extends Fragment{
 
-    private DetailBinding binding;
+    private FragmentDetailBinding binding;
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-        binding = DetailBinding.inflate(inflater, container, false);
+        binding = FragmentDetailBinding.inflate(inflater, container, false);
 
         return binding.getRoot();
     }

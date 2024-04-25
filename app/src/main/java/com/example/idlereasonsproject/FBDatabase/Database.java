@@ -13,6 +13,7 @@ public class Database {
     public static ReportNode reportNode;
 
     public static MachineNode machineNode;
+
     public Database() { }
 
     //make a set node method protected void
@@ -21,7 +22,7 @@ public class Database {
         user = _user;
     }
 
-    protected static String getDomain()
+    public static String getDomain()
     {
         return domain;
     }
