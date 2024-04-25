@@ -2,9 +2,13 @@ package com.example.idlereasonsproject;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -60,10 +64,12 @@ public class HomeFragment extends Fragment {
                        break;
                    case 1:
                        Log.i("Report page block", "case 1");
+                       Toast.makeText(getActivity(),"You already have a report active, please resolve that before making another report",Toast.LENGTH_LONG).show();
                        break;
                    default:
                        Log.i("Report page block", "default");
                        Log.e("Reports in database", "More than 1 unresolved report (or maybe less than 0 somehow) from user " + Database.getUserLoggedIn().fullName());
+                       Toast.makeText(getActivity(),"You have more than one report active, this is likely the result of some error",Toast.LENGTH_LONG).show();
                        break;
 
                }
