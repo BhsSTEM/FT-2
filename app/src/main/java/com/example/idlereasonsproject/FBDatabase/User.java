@@ -32,6 +32,7 @@ public class User
 
     public String getFirstName() {return firstName;}
     public String getLastName() {return lastName;}
+    public String fullName() {return firstName + " " + lastName;}
     public String getPassword() {return password;}
     public boolean isOperator() {return isOperator;}
 }

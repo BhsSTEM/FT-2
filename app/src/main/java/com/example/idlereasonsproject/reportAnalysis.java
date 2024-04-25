@@ -67,6 +67,7 @@ public class reportAnalysis {
             if (!entry.getValue().isResolved()) {
                 numOfReports++;
             }
+            Log.i("numOfUnresolvedReports", String.valueOf(numOfReports));
         }
         return numOfReports;
     }
