@@ -122,11 +122,16 @@ public class SecondFragment extends Fragment {
                     passwordInput.setError("PLEASE ENTER PASSWORD >:(");
                     acceptableInputs = false;
                 }
+                else if (!meetsPasswordRequirements(password).equals("Meets requirements")) {
+                    passwordInput.setError(meetsPasswordRequirements(password));
+                    acceptableInputs = false;
+                }
 
                 if (cfnPassword.equals("")) {
                     cfnPasswordInput.setError("PLEASE ENTER PASSWORD >:(");
                     acceptableInputs = false;
-                } else if (!cfnPassword.equals(passwordInput.getText().toString())) {
+                }
+                else if (!cfnPassword.equals(passwordInput.getText().toString())) {
                     cfnPasswordInput.setError("PASSWORDS DON'T MATCH >:(");
                     acceptableInputs = false;
                 }
@@ -167,10 +172,7 @@ public class SecondFragment extends Fragment {
             if (Character.isUpperCase(character)) {hasCapital = true;}
             if (Character.isLowerCase(character)) {hasLowercase = true;}
             if (!Character.isAlphabetic(character)) {hasNumberOrSpecialCharacter = true;}
-            if (hasCapital && hasLowercase && hasNumberOrSpecialCharacter) {
-                returnedString = "Meets requirements";
-                return returnedString;
-            }
+            if (hasCapital && hasLowercase && hasNumberOrSpecialCharacter) {return "Meets requirements";}
         }
         returnedString = "Missing requirement(s): ";
         if (!hasCapital) { returnedString = returnedString + "Needs capital letter ";}
