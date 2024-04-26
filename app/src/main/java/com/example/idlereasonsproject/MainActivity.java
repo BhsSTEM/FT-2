@@ -1,23 +1,28 @@
 package com.example.idlereasonsproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.View;
+import android.util.Log;
 
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.idlereasonsproject.FBDatabase.Database;
+import com.example.idlereasonsproject.FBDatabase.MachineObject;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -25,72 +30,139 @@ import com.example.idlereasonsproject.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.SearchView;
+
+import java.util.ArrayList;
 
 
 //some change :)
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
+{
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
 
+    public DrawerLayout drawerLayout;
+    public ActionBarDrawerToggle actionBarDrawerToggle;
+    NavHostFragment navHostFragment;
+    NavController navController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.v("mainActivity", "fb domain: " + Database.getDomain());
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
-
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbar);
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+        //create a navigation fragment
+        navHostFragment = NavHostFragment.create(R.navigation.nav_graph);
 
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        //replace fragment container in navigation_drawer.xml with nav fragment
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, navHostFragment)
+                .setPrimaryNavigationFragment(navHostFragment)
+                .commit();
+
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+
+        drawerLayout = findViewById(R.id.navigation_drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
+
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+    public void onStart()
+    {
+        super.onStart();
+        navController = navHostFragment.getNavController();
+        goingToFrag();
+    }
+
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item)
+    {
+        //check what option was clicked
+        if (item.getItemId() == R.id.action_tracker)
+        {
+            navController.navigate(R.id.action_redirect_to_tracker);
+        }
+        else if (item.getItemId() == R.id.home_redirect)
+        {
+            navController.navigate(R.id.action_redirect_to_home);
+        }
+        else if (item.getItemId() == R.id.action_machineList)
+        {
+            navController.navigate(R.id.action_redirect_to_machine_list);
+        }
+        else if(item.getItemId() == R.id.action_idleReport)
+        {
+            navController.navigate(R.id.action_redirect_to_idle);
+        }
+        else if (item.getItemId() == android.R.id.home)
+        {
+            navController.navigateUp();
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml
-
+    public boolean onSupportNavigateUp ()
+    {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        return NavigationUI.navigateUp(navController, appBarConfiguration)
+                || super.onSupportNavigateUp();
+    }
 
-        if (item.getItemId() == R.id.action_tracker) {
+    //method to check if we are going to a specific fragment when the activity is created
+    private void goingToFrag()
+    {
+
+        //statement to check if its going back to the default fragment(domain fragment)
+        if(getIntent().getExtras() == null)
+        {
+            return;
+        }
+
+        int intentFragId = getIntent().getExtras().getInt("frgToLoad");
+
+        //check what option was clicked
+        if (intentFragId == R.id.action_tracker)
+        {
             navController.navigate(R.id.action_redirect_to_tracker);
-            return true;
-        } else if (item.getItemId() == R.id.home_redirect) {
+        }
+        else if (intentFragId == R.id.home_redirect)
+        {
             navController.navigate(R.id.action_redirect_to_home);
-            return true;
-        } else if (item.getItemId() == R.id.action_machineList) {
+        }
+        else if (intentFragId == R.id.action_machineList)
+        {
             navController.navigate(R.id.action_redirect_to_machine_list);
-            return true;
         }
-        else if(item.getItemId() == R.id.action_idleReport) {
+        else if(intentFragId == R.id.action_idleReport)
+        {
             navController.navigate(R.id.action_redirect_to_idle);
-            return true;
         }
-        else if (item.getItemId() == android.R.id.home) {
-            navController.navigateUp();
-            return true;
-        } else {
-            return super.onOptionsItemSelected(item);
+        else
+        {
+            navController.navigate(R.id.action_redirect_to_home);
         }
     }
 
 
-        @Override
-        public boolean onSupportNavigateUp () {
-            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-            return NavigationUI.navigateUp(navController, appBarConfiguration)
-                    || super.onSupportNavigateUp();
-        }
+
 }

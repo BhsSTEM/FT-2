@@ -26,12 +26,17 @@ public class MachineNode extends Database
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot)
             {
+
+                //clear existing machineMap
+                machineMap.clear();
+
                 //update map
-                Map<String, MachineObject> map = new HashMap<>();
+               // Map<String, MachineObject> map = new HashMap<>();
                 for(DataSnapshot child : snapshot.getChildren())
                 {
                     map.put(child.getKey(), child.getValue(MachineObject.class));
                 }
+
                 Log.v("MachineNode", map.toString());
                 setMachineMap(map);
                 //ui changes
@@ -78,3 +83,4 @@ public class MachineNode extends Database
 
     public Map<String, MachineObject> getMachineMap(){ return machineMap; }
 }
+
