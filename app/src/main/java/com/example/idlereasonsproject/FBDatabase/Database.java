@@ -22,7 +22,7 @@ public class Database {
         user = _user;
     }
 
-    protected static String getDomain()
+    public static String getDomain()
     {
         return domain;
     }
@@ -36,4 +36,7 @@ public class Database {
         reportNode = new ReportNode();
         machineNode = new MachineNode();
     }
+
+
+
 }
