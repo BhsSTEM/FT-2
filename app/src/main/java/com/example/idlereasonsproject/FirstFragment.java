@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
-
 import com.example.idlereasonsproject.FBDatabase.Database;
 import com.example.idlereasonsproject.FBDatabase.UserNode;
 import com.example.idlereasonsproject.databinding.FragmentFirstBinding;
@@ -22,7 +21,6 @@ public class FirstFragment extends Fragment {
     private FragmentFirstBinding binding;
     private EditText emailInput;
     private EditText passwordInput;
-
     private UserNode userNode = new UserNode();
 
     @Override
@@ -89,7 +87,6 @@ public class FirstFragment extends Fragment {
         super.onStop();
         ((AppCompatActivity)getActivity()).getSupportActionBar().show();
     }
-
 
     @Override
     public void onDestroyView() {

@@ -6,12 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
-
 import com.example.idlereasonsproject.FBDatabase.Database;
 import com.example.idlereasonsproject.FBDatabase.UserNode;
 import com.example.idlereasonsproject.databinding.FragmentSecondBinding;
@@ -19,14 +17,12 @@ import com.example.idlereasonsproject.databinding.FragmentSecondBinding;
 public class SecondFragment extends Fragment {
 
     private FragmentSecondBinding binding;
-
     private EditText firstNameInput;
     private EditText lastNameInput;
     private EditText emailInput;
     private EditText passwordInput;
     private EditText cfnPasswordInput;
     private UserNode userNode = new UserNode();
-
 
     @Override
     public View onCreateView(
@@ -43,13 +39,12 @@ public class SecondFragment extends Fragment {
         cfnPasswordInput = binding.confirmPwdInput.getEditText();
 
         return binding.getRoot();
-
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //login button actoins
+        //login button actions
         binding.loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,10 +54,7 @@ public class SecondFragment extends Fragment {
             }
         });
 
-        binding.registerBtn.setOnClickListener(new View.OnClickListener()
-
-        {
-
+        binding.registerBtn.setOnClickListener(new View.OnClickListener() {
             String email;
             String firstName;
             String lastName;
@@ -94,7 +86,6 @@ public class SecondFragment extends Fragment {
                         NavHostFragment.findNavController(SecondFragment.this)
                                 .navigate(R.id.action_SecondFragment_to_HomeFragment);
                     }
-
                 }
             }
 
