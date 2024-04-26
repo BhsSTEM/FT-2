@@ -58,11 +58,6 @@ public class MachineListFragment extends Fragment {
 
 
         return binding.getRoot();
-
-
-
-
-
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -89,7 +84,6 @@ Database.MachineNode.addMachine()
         });
 
 */
-
     }
     private void setupData(){
         //MachineObject combine = new MachineObject("0","john", "Combine");

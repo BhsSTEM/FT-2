@@ -58,8 +58,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
-
         //create a navigation fragment
         navHostFragment = NavHostFragment.create(R.navigation.nav_graph);
 

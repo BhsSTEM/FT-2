@@ -34,10 +34,11 @@ public class MachineNode extends Database
                // Map<String, MachineObject> map = new HashMap<>();
                 for(DataSnapshot child : snapshot.getChildren())
                 {
-                    machineMap.put(child.getKey(), child.getValue(MachineObject.class));
+                    map.put(child.getKey(), child.getValue(MachineObject.class));
                 }
-               // setMachineMap(map);
 
+                Log.v("MachineNode", map.toString());
+                setMachineMap(map);
                 //ui changes
             }
 
@@ -66,12 +67,9 @@ public class MachineNode extends Database
                 });
     }
 
+
     public void setMachineMap(Map<String, MachineObject> map){ machineMap = map; }
 
-
-
-    public Map<String, MachineObject> getMachineMap(){
-        return machineMap;
-    }
+    public Map<String, MachineObject> getMachineMap(){ return machineMap; }
 }
 

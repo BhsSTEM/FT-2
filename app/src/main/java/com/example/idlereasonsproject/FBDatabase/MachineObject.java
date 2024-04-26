@@ -60,7 +60,6 @@ public class MachineObject {
     public void changeType(String newType) {type = newType;}
     //private functions
 
-
     private int findInOperatorsArrayList(String searchTerm) {
         int result = -1;
         int numOfResults = 0;
