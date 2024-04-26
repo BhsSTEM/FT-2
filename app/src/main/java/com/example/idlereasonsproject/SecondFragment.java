@@ -157,4 +157,26 @@ public class SecondFragment extends Fragment {
         binding = null;
     }
 
+    public String meetsPasswordRequirements(String password) {
+        String returnedString ="";
+        boolean hasCapital = false;
+        boolean hasLowercase = false;
+        boolean hasNumberOrSpecialCharacter = false;
+        for (int i = 0; i < password.length(); i++) {
+            char character = password.charAt(i);
+            if (Character.isUpperCase(character)) {hasCapital = true;}
+            if (Character.isLowerCase(character)) {hasLowercase = true;}
+            if (!Character.isAlphabetic(character)) {hasNumberOrSpecialCharacter = true;}
+            if (hasCapital && hasLowercase && hasNumberOrSpecialCharacter) {
+                returnedString = "Meets requirements";
+                return returnedString;
+            }
+        }
+        returnedString = "Missing requirement(s): ";
+        if (!hasCapital) { returnedString = returnedString + "Needs capital letter ";}
+        if (!hasLowercase) { returnedString = returnedString + "Needs lowercase letter ";}
+        if (!hasNumberOrSpecialCharacter) { returnedString = returnedString + "Needs number/special character ";}
+        return returnedString;
+    }
+
 }
