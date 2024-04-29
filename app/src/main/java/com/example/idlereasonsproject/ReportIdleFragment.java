@@ -18,9 +18,13 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.idlereasonsproject.FBDatabase.Database;
+import com.example.idlereasonsproject.FBDatabase.MachineObject;
 import com.example.idlereasonsproject.FBDatabase.ReportObject;
 import com.example.idlereasonsproject.databinding.ReportIdleBinding;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Objects;
 
 public class ReportIdleFragment extends Fragment implements OnItemSelectedListener {
@@ -57,18 +61,23 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
 
         //Machine Spinner
         Spinner machineSpinner = getView().findViewById(R.id.report_idle_machine);
+
         //Creating an array to use for this specfic spinner, the goal is to have this in the future be pulled from somewhere else instead of just created here
         //Idealy, in the future, if the user is marked as using a machine that one would pop up first, and if they're using multiple, those would pop up first
-        String[] machineList = new String[]{"Machine 1", "Machine 2", "Machine 3"};
+        ArrayList<String> machineList = new ArrayList<>();
+        Map<String, MachineObject> machineMap = Database.machineNode.getMachineMap();
+
+        for(MachineObject machine: machineMap.values())
+        {
+            machineList.add(machine.getName());
+        }
+
         // Create an ArrayAdapter using the string array and a default spinner layout.
-        /* ArrayAdapter<CharSequence> machineAdapter = ArrayAdapter.createFromResource(
-                getActivity(),
-                R.array.machines_array,
-                android.R.layout.simple_spinner_item
-        ); */
         ArrayAdapter<String> machineAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, machineList);
+
         // Specify the layout to use when the list of choices appears.
         machineAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         // Apply the adapter to the spinner.
         machineSpinner.setAdapter(machineAdapter);
         machineSpinner.setOnItemSelectedListener(this);
@@ -76,14 +85,17 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
 
         //Reason Spinner
         Spinner reasonSpinner = getView().findViewById(R.id.report_idle_reason);
+
         // Create an ArrayAdapter using the string array and a default spinner layout.
         ArrayAdapter<CharSequence> reasonAdapter = ArrayAdapter.createFromResource(
                 getActivity(),
                 R.array.reasons_array,
                 android.R.layout.simple_spinner_item
         );
+
         // Specify the layout to use when the list of choices appears.
         reasonAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         // Apply the adapter to the spinner.
         reasonSpinner.setAdapter(reasonAdapter);
         reasonSpinner.setOnItemSelectedListener(this);
