@@ -1,6 +1,7 @@
 package com.example.idlereasonsproject;
 
 import android.util.Log;
+import android.widget.Switch;
 
 import com.example.idlereasonsproject.FBDatabase.MachineObject;
 import com.example.idlereasonsproject.FBDatabase.ReportNode;
@@ -85,9 +86,46 @@ public class reportAnalysis {
         }
         return returnedMap;
     }
-    public long timeBetweenReportAndResolution(ReportObject report) {return report.getTimeOfResolution().getTime() - report.getTimeOfSubmission().getTime();}
+    public static long timeBetweenReportAndResolution(ReportObject report) {return report.getTimeOfResolution().getTime() - report.getTimeOfSubmission().getTime();}
+    public static String idleLength (long lengthValue, boolean resolvedOrNot, String machine) {
+        lengthValue = lengthValue - (lengthValue % 1000);
+        long numOfSeconds = lengthValue/1000;
+        long numOfMinutes = (numOfSeconds - (numOfSeconds%60))/60;
+        numOfSeconds = numOfSeconds%60;
+        long numOfHours = (numOfMinutes - (numOfMinutes%60))/60;
+        numOfMinutes = numOfMinutes%60;
+        String returnedString ="";
+        if (resolvedOrNot) {returnedString = machine + " was idle for ";}
+        else {returnedString = machine + "has been idle for ";}
+        if (numOfHours != 0) {
+            if (numOfHours == 1) {
+                returnedString = returnedString + "1 hour, ";
+            }
+            else {
+                returnedString = returnedString + numOfHours + " hours, ";
+            }
+        }
+        if (numOfMinutes != 0) {
+            if (numOfSeconds == 0) {returnedString = returnedString + "and ";}
+            if (numOfMinutes == 1) {
+                returnedString = returnedString + "1 minute, ";
+            }
+            else {
+                returnedString = returnedString + numOfMinutes + " minutes, ";
+            }
+        }
+        if (numOfSeconds != 0) {
+            if (numOfSeconds == 1) {
+                returnedString = returnedString + "and 1 second.";
+            }
+            else {
+                returnedString = returnedString + "and " + numOfSeconds + " seconds.";
+            }
+        }
+        return returnedString;
+    }
     //isMachineIdle and isMachineIdleUsingString only search the full report list, and also rely on getMachine returning a string and not a machine object
-    public boolean isMachineIdle (MachineObject machine) {
+    public static boolean isMachineIdle (MachineObject machine) {
         Map<String, ReportObject> unresolvedReports = getUnresolvedReports(ReportNode.getReportMap());
         for (Map.Entry<String, ReportObject> entry : unresolvedReports.entrySet()) {
             String key = entry.getKey();
@@ -98,7 +136,7 @@ public class reportAnalysis {
         }
         return false;
     }
-    public boolean isMachineIdleUsingString (String machine) {
+    public static boolean isMachineIdleUsingString (String machine) {
         Map<String, ReportObject> unresolvedReports = getUnresolvedReports(ReportNode.getReportMap());
         for (Map.Entry<String, ReportObject> entry : unresolvedReports.entrySet()) {
             ReportObject value = entry.getValue();

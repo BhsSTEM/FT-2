@@ -88,6 +88,8 @@ public class HomeFragment extends Fragment {
                     else {
                         Log.i("Report Resolution", "Report already resolved");
                     }
+                    String timeString = reportAnalysis.idleLength(reportAnalysis.timeBetweenReportAndResolution(resolvedReport), true, resolvedReport.getMachine());
+                    Log.i("idle time",timeString);
                 }
                 else {
                     Log.i("Report Resolution", "No report currently");
