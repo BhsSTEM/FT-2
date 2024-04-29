@@ -50,8 +50,10 @@ public class MachineListFragment extends Fragment {
         listView = binding.machineObjectListView;
 
 
-        setUpList1();
+
         setupData();
+        setUpList();
+
         setUpOnclickListener();
 
 
@@ -63,9 +65,7 @@ public class MachineListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         listView = binding.machineObjectListView;
 
-        // Retrieve machineList data from MainActivity and update the adapter
-        //machineList = MainActivity.machineList;
-        setUpList();
+        //setUpList();
         FloatingActionButton addMachineButton = view.findViewById(R.id.addMachineButton);
         addMachineButton.setOnClickListener(new View.OnClickListener() {
             @Override
