@@ -199,8 +199,5 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
 
     @Override
     public void onNothingSelected(AdapterView<?> parent)
-    {
-
-    }
-
+    {}
 }
