@@ -77,10 +77,16 @@ public class DetailActivity extends AppCompatActivity implements NavigationView.
 
         Log.d("DetailActivity", "Parsed ID: " + id);
         Log.d("DetailActivity", "Machine List Size: " + MachineListFragment.machineList.size());
+        Log.e("MachineListFragment", "machineList size: " + MachineListFragment.machineList.size()); // Log the size of machineList
+        for (MachineObject machine : MachineListFragment.machineList) {
+            Integer val = machine.getVal();
+            Log.d("MachineListFragment", "Machine ID: " + val);
+        }
         // Ensure parsedStringId is not null and is a valid integer before converting
 
             if (id >= 0 && id < MachineListFragment.machineList.size()) {
                 selectedShape = MachineListFragment.machineList.get(id);
+                Log.d("DetailActivity", "selected shape: " + selectedShape.getVal() );
 
             } else {
                 Log.e("DetailActivity", "Invalid ID: " + id);
