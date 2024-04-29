@@ -2,12 +2,14 @@ package com.example.idlereasonsproject;
 
 import android.util.Log;
 
+import com.example.idlereasonsproject.FBDatabase.MachineObject;
 import com.example.idlereasonsproject.FBDatabase.ReportNode;
 import com.example.idlereasonsproject.FBDatabase.ReportObject;
 import com.google.firebase.database.core.Repo;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class reportAnalysis {
     public static void reportObjectHashmapToLogCat(Map<String, ReportObject> map) {
@@ -72,7 +74,7 @@ public class reportAnalysis {
         }
         return numOfReports;
     }
-    public static Map<String, ReportObject> unresolvedReports(Map<String, ReportObject> map) {
+    public static Map<String, ReportObject> getUnresolvedReports(Map<String, ReportObject> map) {
         Map<String, ReportObject> returnedMap = new HashMap<>();
         for (Map.Entry<String, ReportObject> entry : map.entrySet()) {
             String key = entry.getKey();
@@ -84,4 +86,26 @@ public class reportAnalysis {
         return returnedMap;
     }
     public long timeBetweenReportAndResolution(ReportObject report) {return report.getTimeOfResolution().getTime() - report.getTimeOfSubmission().getTime();}
+    //isMachineIdle and isMachineIdleUsingString only search the full report list, and also rely on getMachine returning a string and not a machine object
+    public boolean isMachineIdle (MachineObject machine) {
+        Map<String, ReportObject> unresolvedReports = getUnresolvedReports(ReportNode.getReportMap());
+        for (Map.Entry<String, ReportObject> entry : unresolvedReports.entrySet()) {
+            String key = entry.getKey();
+            ReportObject value = entry.getValue();
+            if (Objects.equals(value.getMachine(), machine.getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean isMachineIdleUsingString (String machine) {
+        Map<String, ReportObject> unresolvedReports = getUnresolvedReports(ReportNode.getReportMap());
+        for (Map.Entry<String, ReportObject> entry : unresolvedReports.entrySet()) {
+            ReportObject value = entry.getValue();
+            if (Objects.equals(value.getMachine(), machine)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
