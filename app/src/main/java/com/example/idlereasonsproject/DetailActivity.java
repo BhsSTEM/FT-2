@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -16,6 +17,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.idlereasonsproject.FBDatabase.MachineObject;
@@ -37,10 +40,12 @@ public class DetailActivity extends AppCompatActivity implements NavigationView.
         setContentView(R.layout.activity_detail);
         getSelectedShape();
 
-        Log.d("DetailActivity", "selected shape");
        // setValues();
+        TextView tv = (TextView) findViewById(R.id.machineName);
 
 
+        Log.d("DetailActivity", "selected shape:" + selectedShape.getName());
+        tv.setText(selectedShape.getName());
 
         Toolbar toolbar = findViewById(R.id.toolbar);
 
@@ -54,27 +59,34 @@ public class DetailActivity extends AppCompatActivity implements NavigationView.
 
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+        Button backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Perform the action you want when the Button is clicked
+                finish(); // Close the current activity and go back to the previous one
+            }
+        });
+
     }
 
     private void getSelectedShape(){
         Intent previousIntent = getIntent();
-        String parsedStringId = previousIntent.getStringExtra("id");
+        int id = previousIntent.getIntExtra("id", -1);
 
-        Log.d("DetailActivity", "Parsed ID: " + parsedStringId);
+        Log.d("DetailActivity", "Parsed ID: " + id);
         Log.d("DetailActivity", "Machine List Size: " + MachineListFragment.machineList.size());
         // Ensure parsedStringId is not null and is a valid integer before converting
-        if (parsedStringId != null && !parsedStringId.isEmpty()) {
-            int id = Integer.parseInt(parsedStringId);
-            // Check if the ID is within the bounds of the list
+
             if (id >= 0 && id < MachineListFragment.machineList.size()) {
                 selectedShape = MachineListFragment.machineList.get(id);
+
             } else {
                 Log.e("DetailActivity", "Invalid ID: " + id);
             }
-        } else {
-            Log.e("DetailActivity", "Parsed ID is null or empty");
         }
-    }
+
 
     private void setValues(){
         TextView tv = (TextView) findViewById(R.id.machineName);

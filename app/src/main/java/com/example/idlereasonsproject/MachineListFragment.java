@@ -1,7 +1,9 @@
 package com.example.idlereasonsproject;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +18,7 @@ import com.example.idlereasonsproject.FBDatabase.Database;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.idlereasonsproject.FBDatabase.MachineObject;
 import com.example.idlereasonsproject.databinding.FragmentMachineListBinding;
@@ -31,7 +34,7 @@ public class MachineListFragment extends Fragment {
 
     private FragmentMachineListBinding binding;
     private ListView listView;
-    private int blahCounter = 0;
+
 
 
     public static ArrayList<MachineObject> machineList = new ArrayList<>();
@@ -50,6 +53,7 @@ public class MachineListFragment extends Fragment {
         setUpList1();
         setupData();
         setUpOnclickListener();
+
 
         return binding.getRoot();
 
@@ -70,7 +74,6 @@ public class MachineListFragment extends Fragment {
             }
         });
 
-
     }
     private void setupData(){
 
@@ -87,6 +90,10 @@ public class MachineListFragment extends Fragment {
         }
 
         Log.e("MachineListFragment", "machineList size: " + machineList.size()); // Log the size of machineList
+        for (MachineObject machine : machineList) {
+            Integer id = machine.getVal();
+            Log.d("MachineListFragment", "Machine ID: " + id);
+        }
 
         // Notify the adapter that the data set has changed
         if (listView.getAdapter() != null) {
@@ -122,9 +129,11 @@ public class MachineListFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MachineObject selectShape = (MachineObject) (listView.getItemAtPosition(position));
+                MachineObject selectedMachine = (MachineObject) listView.getItemAtPosition(position);
+                Integer selectedId = selectedMachine.getVal();
+                Log.d("MachineListFragment", "Selected Machine ID: " + selectedId); // Print the selected ID
                 Intent showDetail = new Intent(requireContext(), DetailActivity.class);
-                showDetail.putExtra("id",selectShape.getId());
+                showDetail.putExtra("id", selectedId);
                 startActivity(showDetail);
             }
         });
@@ -150,19 +159,24 @@ public class MachineListFragment extends Fragment {
             public void onClick(View v) {
                 String name = editTextName.getText().toString().trim();
                 String type = editTextType.getText().toString().trim();
-                String blah = String.valueOf(blahCounter++);
+
+                Map<String, MachineObject> machineMap = Database.machineNode.getMachineMap();
+                Log.e("MachineListFragment", "machineMap size: " + machineMap.size());
+                Integer newId = machineMap.size();
 
                 ArrayList<String>  blue = new ArrayList<>();
 
                 if (!name.isEmpty() && !type.isEmpty()) {
                     // Create a new MachineObject and add it to the list
-                    MachineObject newMachine = new MachineObject(blah, name, type, blue);
 
+                    Log.d("MachineListFragment", "Assigning new ID: " + newId + " to machine: " + name);
+                    MachineObject newMachine = new MachineObject(newId, name, type, blue);
                     machineList.add(newMachine);
-
                     Log.d("MachineListFragment", "Current machineList: " + machineList.toString());
 
                     Database.machineNode.addMachine(newMachine);
+
+
 
                     // Update the ListView adapter
                     ((ObjectAdaptor) listView.getAdapter()).notifyDataSetChanged();
