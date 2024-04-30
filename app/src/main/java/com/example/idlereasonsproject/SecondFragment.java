@@ -6,12 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
-
 import com.example.idlereasonsproject.FBDatabase.Database;
 import com.example.idlereasonsproject.FBDatabase.UserNode;
 import com.example.idlereasonsproject.databinding.FragmentSecondBinding;
@@ -19,14 +17,12 @@ import com.example.idlereasonsproject.databinding.FragmentSecondBinding;
 public class SecondFragment extends Fragment {
 
     private FragmentSecondBinding binding;
-
     private EditText firstNameInput;
     private EditText lastNameInput;
     private EditText emailInput;
     private EditText passwordInput;
     private EditText cfnPasswordInput;
     private UserNode userNode = new UserNode();
-
 
     @Override
     public View onCreateView(
@@ -43,13 +39,12 @@ public class SecondFragment extends Fragment {
         cfnPasswordInput = binding.confirmPwdInput.getEditText();
 
         return binding.getRoot();
-
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //login button actoins
+        //login button actions
         binding.loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,10 +54,7 @@ public class SecondFragment extends Fragment {
             }
         });
 
-        binding.registerBtn.setOnClickListener(new View.OnClickListener()
-
-        {
-
+        binding.registerBtn.setOnClickListener(new View.OnClickListener() {
             String email;
             String firstName;
             String lastName;
@@ -94,7 +86,6 @@ public class SecondFragment extends Fragment {
                         NavHostFragment.findNavController(SecondFragment.this)
                                 .navigate(R.id.action_SecondFragment_to_HomeFragment);
                     }
-
                 }
             }
 
@@ -122,11 +113,16 @@ public class SecondFragment extends Fragment {
                     passwordInput.setError("PLEASE ENTER PASSWORD >:(");
                     acceptableInputs = false;
                 }
+                else if (!meetsPasswordRequirements(password).equals("Meets requirements")) {
+                    passwordInput.setError(meetsPasswordRequirements(password));
+                    acceptableInputs = false;
+                }
 
                 if (cfnPassword.equals("")) {
                     cfnPasswordInput.setError("PLEASE ENTER PASSWORD >:(");
                     acceptableInputs = false;
-                } else if (!cfnPassword.equals(passwordInput.getText().toString())) {
+                }
+                else if (!cfnPassword.equals(passwordInput.getText().toString())) {
                     cfnPasswordInput.setError("PASSWORDS DON'T MATCH >:(");
                     acceptableInputs = false;
                 }
@@ -155,6 +151,25 @@ public class SecondFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    public String meetsPasswordRequirements(String password) {
+        String returnedString ="";
+        boolean hasCapital = false;
+        boolean hasLowercase = false;
+        boolean hasNumberOrSpecialCharacter = false;
+        for (int i = 0; i < password.length(); i++) {
+            char character = password.charAt(i);
+            if (Character.isUpperCase(character)) {hasCapital = true;}
+            if (Character.isLowerCase(character)) {hasLowercase = true;}
+            if (!Character.isAlphabetic(character)) {hasNumberOrSpecialCharacter = true;}
+            if (hasCapital && hasLowercase && hasNumberOrSpecialCharacter) {return "Meets requirements";}
+        }
+        returnedString = "Missing requirement(s): ";
+        if (!hasCapital) { returnedString = returnedString + "Needs capital letter ";}
+        if (!hasLowercase) { returnedString = returnedString + "Needs lowercase letter ";}
+        if (!hasNumberOrSpecialCharacter) { returnedString = returnedString + "Needs number/special character ";}
+        return returnedString;
     }
 
 }

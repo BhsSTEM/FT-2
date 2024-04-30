@@ -13,26 +13,22 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.example.idlereasonsproject.FBDatabase.Database;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
 import com.example.idlereasonsproject.FBDatabase.MachineObject;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import com.example.idlereasonsproject.databinding.FragmentMachineListBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Objects;
 
-
 public class MachineListFragment extends Fragment {
-
 
     private FragmentMachineListBinding binding;
     private ListView listView;
     private int blahCounter = 0;
-
 
     public static ArrayList<MachineObject> machineList = new ArrayList<>();
 

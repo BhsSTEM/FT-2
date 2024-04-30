@@ -2,14 +2,14 @@ package com.example.idlereasonsproject;
 
 import android.content.Intent;
 import android.os.Bundle;
-
+import com.example.idlereasonsproject.FBDatabase.Database;
+import com.example.idlereasonsproject.FBDatabase.ReportNode;
+import com.google.android.material.snackbar.Snackbar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.util.Log;
-
-
+import android.view.View;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -19,24 +19,21 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
 import com.example.idlereasonsproject.FBDatabase.Database;
 import com.example.idlereasonsproject.FBDatabase.MachineObject;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import com.example.idlereasonsproject.databinding.ActivityMainBinding;
-
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
-
 import java.util.ArrayList;
-
+import android.view.Window;
+import android.widget.Toast;
 
 //some change :)
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
@@ -155,7 +152,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else if(intentFragId == R.id.action_idleReport)
         {
-            navController.navigate(R.id.action_redirect_to_idle);
+            switch (reportAnalysis.numOfUnresolvedReports(reportAnalysis.reportsFromReporter(Database.getUserLoggedIn().fullName(), ReportNode.getReportMap()))) {
+                case 0:
+                    Log.i("Report page block", "case 0");
+                    navController.navigate(R.id.action_redirect_to_idle);
+                    return true;
+                case 1:
+                    Log.i("Report page block", "case 1");
+                    Toast.makeText(this,"You already have a report active, please resolve that before making another report",Toast.LENGTH_LONG).show();
+                    return true;
+                default:
+                    Log.i("Report page block", "default");
+                    Log.e("Reports in database", "More than 1 unresolved report (or maybe less than 0 somehow) from user " + Database.getUserLoggedIn().fullName());
+                    Toast.makeText(this,"You have more than one report active, this is likely the result of some error",Toast.LENGTH_LONG).show();
+                    return true;
+
+            }
         }
         else
         {

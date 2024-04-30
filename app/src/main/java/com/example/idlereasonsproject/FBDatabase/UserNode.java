@@ -2,9 +2,7 @@ package com.example.idlereasonsproject.FBDatabase;
 
 import android.provider.ContactsContract;
 import android.util.Log;
-
 import androidx.annotation.NonNull;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -13,7 +11,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -22,7 +19,6 @@ public class UserNode extends Database
 {
     private final static DatabaseReference userNode = database.child("users").child(getDomain()).getRef();
     private static Map<String, User> usersHashMap = new HashMap<>();
-
 
     public UserNode()
     {
@@ -46,7 +42,8 @@ public class UserNode extends Database
             Log.i("userInputLogin", "email or password are incorrect");
             return false;
         }
-
+        User user = usersHashMap.get(key);
+        Database.setUserLoggedIn(user);
         return true;
     }
 
@@ -125,6 +122,4 @@ public class UserNode extends Database
     {
         usersHashMap = map;
     }
-
-
 }

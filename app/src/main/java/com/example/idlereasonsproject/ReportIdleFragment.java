@@ -1,5 +1,8 @@
 package com.example.idlereasonsproject;
 
+import static com.example.idlereasonsproject.FBDatabase.Database.getCurrentReport;
+import static com.example.idlereasonsproject.FBDatabase.ReportNode.resolveReport;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -12,17 +15,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.idlereasonsproject.FBDatabase.Database;
 import com.example.idlereasonsproject.FBDatabase.MachineObject;
+import com.example.idlereasonsproject.FBDatabase.ReportNode;
 import com.example.idlereasonsproject.FBDatabase.ReportObject;
 import com.example.idlereasonsproject.databinding.ReportIdleBinding;
 import com.google.android.material.textfield.TextInputLayout;
-
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Objects;
@@ -74,7 +76,6 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
 
         // Create an ArrayAdapter using the string array and a default spinner layout.
         ArrayAdapter<String> machineAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, machineList);
-
         // Specify the layout to use when the list of choices appears.
         machineAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -105,22 +106,25 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
         TextInputLayout furtherInfoTextBox = getView().findViewById(R.id.report_idle_further_information);
 
         //Are you sure? Pop up
+        //This is where report object is sent to the database and create and everything
         DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
             switch (which){
                 case DialogInterface.BUTTON_POSITIVE:
                     //Yes button clicked
                     furtherInformation = Objects.requireNonNull(furtherInfoTextBox.getEditText()).getText().toString();
                     ReportObject report = new ReportObject(location, machine, reason, furtherInformation);
-
+                    slothfulNotifications.idleReportNotifications(getContext(), getActivity(), report);
                     //method to send to database
                     Database.reportNode.addReportToDB(report);
+                    Database.setCurrentReport(report);
 
                     NavHostFragment.findNavController(ReportIdleFragment.this)
                             .navigate(R.id.action_ReportIdle_to_HomeFragment);
                     break;
 
                 case DialogInterface.BUTTON_NEGATIVE:
-                    //No button clicked
+                    //No button clicked, used for debugging purposes
+                    String loggedInUser = Database.getUserLoggedIn().getFirstName() + " " + Database.getUserLoggedIn().getLastName();
                     break;
             }
         };
@@ -154,7 +158,7 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
                 android.R.layout.simple_spinner_item
         );
         String[] machineList = new String[]{"Machine 1", "Machine 2", "Machine 3"};
-        ArrayAdapter<String> machineAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, machineList);
+        ArrayAdapter<String> machineAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, machineList);
         ArrayAdapter<CharSequence> reasonAdapter = ArrayAdapter.createFromResource(
                 getActivity(),
                 R.array.reasons_array,
@@ -197,5 +201,4 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
     {
 
     }
-
 }
