@@ -23,7 +23,6 @@ public class UserNode extends Database
     private final static DatabaseReference userNode = database.child("users").child(getDomain()).getRef();
     private static Map<String, User> usersHashMap = new HashMap<>();
 
-
     public UserNode()
     {
         getDataSnapshot();
@@ -46,7 +45,8 @@ public class UserNode extends Database
             Log.i("userInputLogin", "email or password are incorrect");
             return false;
         }
-
+        User user = usersHashMap.get(key);
+        Database.setUserLoggedIn(user);
         return true;
     }
 
@@ -125,6 +125,4 @@ public class UserNode extends Database
     {
         usersHashMap = map;
     }
-
-
 }
