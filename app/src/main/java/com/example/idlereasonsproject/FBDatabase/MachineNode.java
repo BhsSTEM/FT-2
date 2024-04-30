@@ -31,7 +31,7 @@ public class MachineNode extends Database
                 machineMap.clear();
 
                 //update map
-               // Map<String, MachineObject> map = new HashMap<>();
+                Map<String, MachineObject> map = new HashMap<>();
                 for(DataSnapshot child : snapshot.getChildren())
                 {
                     map.put(child.getKey(), child.getValue(MachineObject.class));

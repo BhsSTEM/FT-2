@@ -106,7 +106,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else if(item.getItemId() == R.id.action_idleReport)
         {
-            navController.navigate(R.id.action_redirect_to_idle);
+            switch (reportAnalysis.numOfUnresolvedReports(reportAnalysis.reportsFromReporter(Database.getUserLoggedIn().fullName(), ReportNode.getReportMap()))) {
+                case 0:
+                    Log.i("Report page block", "case 0");
+                    navController.navigate(R.id.action_redirect_to_idle);
+                    break;
+                case 1:
+                    Log.i("Report page block", "case 1");
+                    Toast.makeText(this,"You already have a report active, please resolve that before making another report",Toast.LENGTH_LONG).show();
+                    break;
+                default:
+                    Log.i("Report page block", "default");
+                    Log.e("Reports in database", "More than 1 unresolved report (or maybe less than 0 somehow) from user " + Database.getUserLoggedIn().fullName());
+                    Toast.makeText(this,"You have more than one report active, this is likely the result of some error",Toast.LENGTH_LONG).show();
+                    break;
+
+            }
         }
         else if (item.getItemId() == android.R.id.home)
         {
@@ -156,16 +171,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 case 0:
                     Log.i("Report page block", "case 0");
                     navController.navigate(R.id.action_redirect_to_idle);
-                    return true;
+                    break;
                 case 1:
                     Log.i("Report page block", "case 1");
                     Toast.makeText(this,"You already have a report active, please resolve that before making another report",Toast.LENGTH_LONG).show();
-                    return true;
+                    break;
                 default:
                     Log.i("Report page block", "default");
                     Log.e("Reports in database", "More than 1 unresolved report (or maybe less than 0 somehow) from user " + Database.getUserLoggedIn().fullName());
                     Toast.makeText(this,"You have more than one report active, this is likely the result of some error",Toast.LENGTH_LONG).show();
-                    return true;
+                    break;
 
             }
         }

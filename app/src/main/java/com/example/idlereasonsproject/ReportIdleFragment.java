@@ -157,7 +157,13 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
                 R.array.fields_array,
                 android.R.layout.simple_spinner_item
         );
-        String[] machineList = new String[]{"Machine 1", "Machine 2", "Machine 3"};
+        ArrayList<String> machineList = new ArrayList<>();
+        Map<String, MachineObject> machineMap = Database.machineNode.getMachineMap();
+
+        for(MachineObject machine: machineMap.values())
+        {
+            machineList.add(machine.getName());
+        }
         ArrayAdapter<String> machineAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, machineList);
         ArrayAdapter<CharSequence> reasonAdapter = ArrayAdapter.createFromResource(
                 getActivity(),
