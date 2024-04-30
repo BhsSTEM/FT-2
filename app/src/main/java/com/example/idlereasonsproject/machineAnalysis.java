@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class machineAnalysis {
+//For Filtering
     //No checks for inconsistent capitalization
     public static Map<String, MachineObject> getMapOfMachinesOfType(String type, Map<String, MachineObject> map) {
         Map<String, MachineObject> returnedMap = new HashMap<>();
@@ -43,4 +44,16 @@ public class machineAnalysis {
         }
         return returnedMap;
     }
+    public static Map<String, MachineObject> getMapOfNotIdleMachines(Map<String, MachineObject> map) {
+        Map<String, MachineObject> returnedMap = new HashMap<>();
+        for (Map.Entry<String, MachineObject> entry : map.entrySet()) {
+            String key = entry.getKey();
+            MachineObject value = entry.getValue();
+            if (!isMachineIdle(value)){
+                returnedMap.put(key, value);
+            }
+        }
+        return returnedMap;
+    }
+//For sorting (if i can think of anything)
 }
