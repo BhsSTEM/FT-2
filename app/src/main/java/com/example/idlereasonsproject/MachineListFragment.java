@@ -38,20 +38,12 @@ public class MachineListFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-
         binding = FragmentMachineListBinding.inflate(inflater, container, false);
         listView = binding.machineObjectListView;
-
 
         setUpList1();
         setupData();
         setUpOnclickListener();
-
-
-
-
-
-
 
         return binding.getRoot();
     }
@@ -149,10 +141,7 @@ Database.MachineNode.addMachine()
         else{
             Log.e("MachineListFragment", "binding is null");
         }
-
-
     }
-
 
     private void setUpOnclickListener(){
         Log.d("MainActivity", "ListView value: " + listView);
@@ -215,14 +204,6 @@ Database.MachineNode.addMachine()
 
         dialog.show();
     }
-
-
-
-
-
-
-
-
 
     // public void showIdleDialog(){
   //      Dialog dialog = new Dialog(requireContext());

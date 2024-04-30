@@ -124,26 +124,4 @@ public class reportAnalysis {
         }
         return returnedString;
     }
-    //isMachineIdle and isMachineIdleUsingString only search the full report list, and also rely on getMachine returning a string and not a machine object
-    public static boolean isMachineIdle (MachineObject machine) {
-        Map<String, ReportObject> unresolvedReports = getUnresolvedReports(ReportNode.getReportMap());
-        for (Map.Entry<String, ReportObject> entry : unresolvedReports.entrySet()) {
-            String key = entry.getKey();
-            ReportObject value = entry.getValue();
-            if (Objects.equals(value.getMachine(), machine.getName())) {
-                return true;
-            }
-        }
-        return false;
-    }
-    public static boolean isMachineIdleUsingString (String machine) {
-        Map<String, ReportObject> unresolvedReports = getUnresolvedReports(ReportNode.getReportMap());
-        for (Map.Entry<String, ReportObject> entry : unresolvedReports.entrySet()) {
-            ReportObject value = entry.getValue();
-            if (Objects.equals(value.getMachine(), machine)) {
-                return true;
-            }
-        }
-        return false;
-    }
 }
