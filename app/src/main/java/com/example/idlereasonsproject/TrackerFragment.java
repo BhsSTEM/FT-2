@@ -37,7 +37,6 @@ public class TrackerFragment extends Fragment {
         });
 
          */
-
     }
 
     @Override

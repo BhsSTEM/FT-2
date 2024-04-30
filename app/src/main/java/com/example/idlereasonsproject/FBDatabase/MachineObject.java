@@ -8,15 +8,42 @@ import java.util.Map;
 public class MachineObject {
     String name = "";
     String type = "";
+
+    String id ="";
     ArrayList<String> operators = new ArrayList<String>();
 
 
     //empty constructor
     public MachineObject() {}
 
+
+    public MachineObject(String machineId, String machineName, String machineType)
+    {
+        id = machineId;
+        name = machineName;
+        type = machineType;
+    }
+
     //constructor with name and type
+    public MachineObject(String machineName, String machineType)
+    {
+        name = machineName;
+        type = machineType;
+    }
+
+
+
     public MachineObject(String machineName, String machineType, ArrayList<String> operatorsList)
     {
+        name = machineName;
+        type = machineType;
+        operators = operatorsList;
+    }
+
+
+    public MachineObject(String machineId, String machineName, String machineType, ArrayList<String> operatorsList)
+    {
+        id = machineId;
         name = machineName;
         type = machineType;
         operators = operatorsList;
@@ -32,7 +59,6 @@ public class MachineObject {
     }
     public void changeType(String newType) {type = newType;}
     //private functions
-
 
     private int findInOperatorsArrayList(String searchTerm) {
         int result = -1;
@@ -62,5 +88,9 @@ public class MachineObject {
         map.put("type", type);
         map.put("operatorsArrayList", operators);
         return map;
+    }
+
+    public String getId() {
+        return id;
     }
 }

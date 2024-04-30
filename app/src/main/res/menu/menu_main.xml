@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.idlereasonsproject.MainActivity">
+    tools:ignore="HardcodedText"
+    >
 
     <item
         android:id="@+id/home_redirect"
