@@ -27,6 +27,11 @@
         android:title="Machine List" />
 
     <item
+        android:id="@+id/action_fieldList"
+        android:orderInCategory="100"
+        android:title="Fields"/>
+
+    <item
         android:id="@+id/action_idleReport"
         android:orderInCategory="100"
         android:title="Report Idle" />

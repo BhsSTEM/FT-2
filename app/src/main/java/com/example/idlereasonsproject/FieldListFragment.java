@@ -30,6 +30,7 @@ public class FieldListFragment extends Fragment
         return binding.getRoot();
     }
 
+    @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
@@ -38,5 +39,12 @@ public class FieldListFragment extends Fragment
 
         //setup list
         //setup buttons
+
+        binding.addFieldButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 }

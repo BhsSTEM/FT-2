@@ -7,6 +7,7 @@ import java.util.Map;
 public class FieldObject
 {
     private String name;
+    //add map info stuff later
 
     public FieldObject(){}
 

@@ -26,6 +26,12 @@
         app:popUpTo="@id/TrackerFragment"
         app:popUpToInclusive="true"  />
 
+    <action
+        android:id="@+id/action_redirect_to_fieldlist"
+        app:destination="@id/FieldListFragment"
+        app:popUpTo="@id/FieldListFragment"
+        app:popUpToInclusive="true"/>
+
     <fragment
         android:id="@+id/domain_fragment"
         android:name="com.example.idlereasonsproject.DomainFragment"
@@ -108,6 +114,12 @@
             android:id="@+id/action_MachineListFragment_to_TrackerFragment"
             app:destination="@id/TrackerFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/FieldListFragment"
+        android:name="com.example.idlereasonsproject.FieldListFragment"
+        tools:layout="@layout/fragment_field_list"/>
+
     <fragment
         android:id="@+id/ReportIdle"
         android:name="com.example.idlereasonsproject.ReportIdleFragment"
@@ -119,7 +131,14 @@
             app:destination="@id/HomeFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/CreateFieldFragment"
+        android:name="com.example.idlereasonsproject.CreateFieldFragment"
+        tools:layout="@layout/fragment_create_field">
 
-
+        <action
+            android:id="@+id/action_CreateField_to_FieldList"
+            app:destination="@id/FieldListFragment"/>
+    </fragment>
 
 </navigation>

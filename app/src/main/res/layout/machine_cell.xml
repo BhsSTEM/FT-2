@@ -5,8 +5,6 @@
     android:layout_height="60dp"
     android:background="@color/white">
 
-
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="200dp"
