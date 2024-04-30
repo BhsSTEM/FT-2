@@ -91,20 +91,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item)
     {
+        int itemId = item.getItemId();
         //check what option was clicked
-        if (item.getItemId() == R.id.action_tracker)
+        if (itemId == R.id.action_tracker)
         {
             navController.navigate(R.id.action_redirect_to_tracker);
         }
-        else if (item.getItemId() == R.id.home_redirect)
+        else if (itemId == R.id.home_redirect)
         {
             navController.navigate(R.id.action_redirect_to_home);
         }
-        else if (item.getItemId() == R.id.action_machineList)
+        else if (itemId == R.id.action_machineList)
         {
             navController.navigate(R.id.action_redirect_to_machine_list);
         }
-        else if(item.getItemId() == R.id.action_idleReport)
+        else if(itemId == R.id.action_idleReport)
         {
             switch (reportAnalysis.numOfUnresolvedReports(reportAnalysis.reportsFromReporter(Database.getUserLoggedIn().fullName(), ReportNode.getReportMap()))) {
                 case 0:
@@ -123,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             }
         }
-        else if (item.getItemId() == android.R.id.home)
+        else if (itemId == android.R.id.home)
         {
             navController.navigateUp();
         }
