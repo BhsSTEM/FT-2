@@ -51,12 +51,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.v("mainActivity", "fb domain: " + Database.getDomain());
+        //Log.v("mainActivity", "fb domain: " + Database.getDomain());
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
 
 
         //create a navigation fragment

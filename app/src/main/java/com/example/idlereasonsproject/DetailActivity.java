@@ -31,21 +31,29 @@ public class DetailActivity extends AppCompatActivity implements NavigationView.
     private AppBarConfiguration appBarConfiguration;
 
     public DrawerLayout drawerLayout;
-    public ActionBarDrawerToggle actionBarDrawerToggle;
-    NavHostFragment navHostFragment;
+
+    NavController navController;
+
+NavHostFragment navHostFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
         setContentView(R.layout.activity_detail);
-        getSelectedShape();
-
-       // setValues();
-        TextView tv = (TextView) findViewById(R.id.machineName);
 
 
-        Log.d("DetailActivity", "selected shape:" + selectedShape.getName());
-        tv.setText(selectedShape.getName());
+        navHostFragment = NavHostFragment.create(R.navigation.nav_graph_detail);
+
+       // TextView tv = (TextView) findViewById(R.id.machineName);
+
+
+        //Log.d("DetailActivity", "selected shape:" + selectedShape.getName());
+        //tv.setText(selectedShape.getName());
+
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
 
@@ -59,6 +67,10 @@ public class DetailActivity extends AppCompatActivity implements NavigationView.
 
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+
+        getSelectedShape();
+        setValues();
 
         Button backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -108,12 +120,12 @@ public class DetailActivity extends AppCompatActivity implements NavigationView.
         startActivity(intent);
         return true;
     }
-
+/*
     @Override
     public boolean onSupportNavigateUp () {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main_detail);
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-
+*/
 }

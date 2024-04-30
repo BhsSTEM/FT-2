@@ -12,10 +12,12 @@
 
 
         <ImageView
-            android:layout_width="458sp"
-            android:layout_height="230sp"
+            android:layout_width="428sp"
+            android:layout_height="100sp"
             android:src="@drawable/map_placeholder"
-            tools:ignore="MissingConstraints">
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="120dp">
 
         </ImageView>
 
