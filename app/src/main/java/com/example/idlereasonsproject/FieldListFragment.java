@@ -8,6 +8,7 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.idlereasonsproject.databinding.FragmentFieldListBinding;
 
@@ -43,7 +44,8 @@ public class FieldListFragment extends Fragment
         binding.addFieldButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                NavHostFragment.findNavController(FieldListFragment.this)
+                        .navigate(R.id.action_FieldList_to_CreateField);
             }
         });
     }

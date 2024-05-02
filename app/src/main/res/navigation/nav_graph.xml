@@ -118,7 +118,13 @@
     <fragment
         android:id="@+id/FieldListFragment"
         android:name="com.example.idlereasonsproject.FieldListFragment"
-        tools:layout="@layout/fragment_field_list"/>
+        tools:layout="@layout/fragment_field_list">
+
+        <action
+            android:id="@+id/action_FieldList_to_CreateField"
+            app:destination="@id/CreateFieldFragment"/>
+
+    </fragment>
 
     <fragment
         android:id="@+id/ReportIdle"
