@@ -38,10 +38,8 @@ import android.widget.Toast;
 //some change :)
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
-
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
-
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
     NavHostFragment navHostFragment;
@@ -63,7 +61,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .replace(R.id.fragment_container, navHostFragment)
                 .setPrimaryNavigationFragment(navHostFragment)
                 .commit();
-
 
         Toolbar toolbar = findViewById(R.id.toolbar);
 
@@ -87,10 +84,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         goingToFrag();
     }
 
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item)
     {
+        //TODO: See if this can be replaced with a switch
         int itemId = item.getItemId();
         //check what option was clicked
         if (itemId == R.id.action_tracker)
@@ -121,7 +118,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Log.e("Reports in database", "More than 1 unresolved report (or maybe less than 0 somehow) from user " + Database.getUserLoggedIn().fullName());
                     Toast.makeText(this,"You have more than one report active, this is likely the result of some error",Toast.LENGTH_LONG).show();
                     break;
-
             }
         }
         else if (itemId == android.R.id.home)
@@ -144,7 +140,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //method to check if we are going to a specific fragment when the activity is created
     private void goingToFrag()
     {
-
         //statement to check if its going back to the default fragment(domain fragment)
         if(getIntent().getExtras() == null)
         {
@@ -153,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         int intentFragId = getIntent().getExtras().getInt("frgToLoad");
 
+        //TODO: See if this can be replaced with a switch
         //check what option was clicked
         if (intentFragId == R.id.action_tracker)
         {
@@ -190,7 +186,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navController.navigate(R.id.action_redirect_to_home);
         }
     }
-
-
-
 }
