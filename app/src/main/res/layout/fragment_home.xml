@@ -61,20 +61,7 @@
             android:layout_margin="40dp"
             android:background="@color/white"
             android:text="Machine List"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/resolveReport_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:text="Resolve Report"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/machineList_btn" />
+            />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/fields_list_btn"
@@ -85,5 +72,19 @@
             android:text="Fields"
             app:layout_constraintTop_toBottomOf="@id/machineList_btn"
             />
+
+        <Button
+            android:id="@+id/resolveReport_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Resolve Report"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fields_list_btn"
+            app:layout_constraintVertical_bias="1.0" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

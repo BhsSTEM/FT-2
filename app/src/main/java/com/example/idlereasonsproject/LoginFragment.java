@@ -15,11 +15,12 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.idlereasonsproject.FBDatabase.Database;
 import com.example.idlereasonsproject.FBDatabase.UserNode;
-import com.example.idlereasonsproject.databinding.FragmentFirstBinding;
 
-public class FirstFragment extends Fragment {
+import com.example.idlereasonsproject.databinding.FragmentLoginBinding;
 
-    private FragmentFirstBinding binding;
+public class LoginFragment extends Fragment {
+
+    private FragmentLoginBinding binding;
     private EditText emailInput;
     private EditText passwordInput;
 
@@ -31,7 +32,7 @@ public class FirstFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = FragmentFirstBinding.inflate(inflater, container, false);
+        binding = FragmentLoginBinding.inflate(inflater, container, false);
         //((MainActivity) requireActivity()).getSupportActionBar().hide();
 
         emailInput = binding.emailTextInputLayout.getEditText();
@@ -46,8 +47,8 @@ public class FirstFragment extends Fragment {
         binding.registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(FirstFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                NavHostFragment.findNavController(LoginFragment.this)
+                        .navigate(R.id.action_LoginFragment_to_RegisterFragment);
             }
         });
 
@@ -67,8 +68,8 @@ public class FirstFragment extends Fragment {
                 {
                     Log.i("login","complete");
                     Database.setNodes();
-                    NavHostFragment.findNavController(FirstFragment.this)
-                            .navigate(R.id.action_FirstFragment_to_HomeFragment);
+                    NavHostFragment.findNavController(LoginFragment.this)
+                            .navigate(R.id.action_LoginFragment_to_HomeFragment);
                 }
                 else
                 {

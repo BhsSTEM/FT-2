@@ -15,14 +15,21 @@ public class Database {
     public static MachineNode machineNode;
 
     public static FieldNode fieldNode;
+    private static ReportObject currentReport;
 
     public Database() { }
 
     //make a set node method protected void
-    protected void setUserLoggedIn(User _user)
+    protected static void setUserLoggedIn(User _user)
     {
         user = _user;
     }
+    public static User getUserLoggedIn() { return user;}
+
+
+    public static void setCurrentReport(ReportObject report) {currentReport = report;} //not sure why the others are protected but this needs to be called in reportidlefragment and I didn't want to risk it not working
+    public static ReportObject getCurrentReport() {return currentReport;}
+
 
     public static String getDomain()
     {

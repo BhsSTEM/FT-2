@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.idlereasonsproject.FBDatabase.Database;
+import com.example.idlereasonsproject.FBDatabase.MachineObject;
 import com.example.idlereasonsproject.FBDatabase.ReportNode;
 import com.example.idlereasonsproject.FBDatabase.ReportObject;
 import com.example.idlereasonsproject.databinding.ReportIdleBinding;
