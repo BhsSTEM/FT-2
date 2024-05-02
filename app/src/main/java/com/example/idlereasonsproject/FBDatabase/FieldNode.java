@@ -17,7 +17,7 @@ import java.util.Map;
 public class FieldNode extends Database
 {
     private final DatabaseReference fieldNode = database.child("fields").child(getDomain()).getRef();
-    private static Map<String, FieldObject> fieldMap;
+    private static Map<String, FieldObject> fieldMap = new HashMap<>();
 
     public FieldNode()
     {

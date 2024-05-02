@@ -77,14 +77,18 @@
 
         <action
            android:id="@+id/action_HomeFragment_to_TrackerFragment"
-           app:destination="@+id/TrackerFragment"/>
+           app:destination="@id/TrackerFragment"/>
         <action
             android:id="@+id/action_HomeFragment_to_MachineListFragment"
-            app:destination="@+id/MachineListFragment"/>
+            app:destination="@id/MachineListFragment"/>
 
         <action
             android:id="@+id/action_HomeFragment_to_ReportIdle"
-            app:destination="@+id/ReportIdle"/>
+            app:destination="@id/ReportIdle"/>
+
+        <action
+            android:id="@+id/action_HomeFragment_to_FieldList"
+            app:destination="@id/FieldListFragment"/>
 
     </fragment>
 

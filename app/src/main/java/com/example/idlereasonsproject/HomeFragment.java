@@ -53,6 +53,14 @@ public class HomeFragment extends Fragment {
                         .navigate(R.id.action_HomeFragment_to_ReportIdle);
             }
         });
+
+        binding.fieldsListBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment.findNavController(HomeFragment.this)
+                        .navigate(R.id.action_HomeFragment_to_FieldList);
+            }
+        });
     }
 
     @Override
