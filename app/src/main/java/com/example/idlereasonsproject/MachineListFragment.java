@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.shapes.Shape;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.idlereasonsproject.FBDatabase.MachineObject;
 import com.example.idlereasonsproject.databinding.FragmentMachineListBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.search.SearchView;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -75,6 +77,23 @@ public class MachineListFragment extends Fragment {
         });
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     private void setupData(){
 
         Map<String, MachineObject> machineMap = Database.machineNode.getMachineMap();
@@ -152,6 +171,8 @@ public class MachineListFragment extends Fragment {
 
         EditText editTextName = dialog.findViewById(R.id.editTextName);
         EditText editTextType = dialog.findViewById(R.id.editTextType);
+        EditText editTextOperator = dialog.findViewById(R.id.editTextOperatorName);
+        EditText editTextMachineTask = dialog.findViewById(R.id.editTextMachineTask);
 
         Button addButton = dialog.findViewById(R.id.addButton); // Use existing addButton reference
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -159,18 +180,18 @@ public class MachineListFragment extends Fragment {
             public void onClick(View v) {
                 String name = editTextName.getText().toString().trim();
                 String type = editTextType.getText().toString().trim();
+                String operator = editTextOperator.getText().toString().trim();
+                String task = editTextMachineTask.getText().toString().trim();
 
                 Map<String, MachineObject> machineMap = Database.machineNode.getMachineMap();
                 Log.e("MachineListFragment", "machineMap size: " + machineMap.size());
                 Integer newId = machineMap.size();
 
-                ArrayList<String>  blue = new ArrayList<>();
-
                 if (!name.isEmpty() && !type.isEmpty()) {
                     // Create a new MachineObject and add it to the list
 
                     Log.d("MachineListFragment", "Assigning new ID: " + newId + " to machine: " + name);
-                    MachineObject newMachine = new MachineObject(newId, name, type, blue);
+                    MachineObject newMachine = new MachineObject(newId, name, type, operator, task);
                     machineList.add(newMachine);
                     Log.d("MachineListFragment", "Current machineList: " + machineList.toString());
 
@@ -185,7 +206,7 @@ public class MachineListFragment extends Fragment {
                     dialog.dismiss();
                 } else {
                     // Show a message if either name or type is empty
-                    Toast.makeText(requireContext(), "Please enter both name and type", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "Please enter both name, type and operator", Toast.LENGTH_SHORT).show();
                 }
             }
         });

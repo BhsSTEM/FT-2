@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.idlereasonsproject.FBDatabase.MachineObject;
@@ -59,27 +60,28 @@ NavHostFragment navHostFragment;
 
         setSupportActionBar(toolbar);
 
-        drawerLayout = findViewById(R.id.navigation_drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        drawerLayout = findViewById(R.id.just_toolbar);
+       // NavigationView navigationView = findViewById(R.id.nav_view);
+        //navigationView.setNavigationItemSelectedListener(this);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
+        //ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
 
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
+        //drawerLayout.addDrawerListener(toggle);
+        //toggle.syncState();
 
 
         getSelectedShape();
         setValues();
 
-        Button backButton = findViewById(R.id.backButton);
+        ImageButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Perform the action you want when the Button is clicked
+                Log.d("DetailActivity", "Back button clicked");
                 finish(); // Close the current activity and go back to the previous one
             }
         });
+
 
     }
 
@@ -109,7 +111,14 @@ NavHostFragment navHostFragment;
     private void setValues(){
         TextView tv = (TextView) findViewById(R.id.machineName);
 
-        tv.setText(selectedShape.getName());
+        tv.setText("Machine Name: " + selectedShape.getName());
+
+        TextView tv2 = (TextView) findViewById(R.id.machineOperator);
+        tv2.setText("Operated By: "+ selectedShape.getOperator());
+
+        TextView tv3 = (TextView) findViewById(R.id.machineTask);
+        tv3.setText("Machine Task: "+ selectedShape.getTask());
+
     }
 
     @Override

@@ -12,6 +12,10 @@ public class MachineObject {
     String id ="";
 
     Integer val;
+
+    String operator = "";
+
+    String task = "";
     ArrayList<String> operators = new ArrayList<String>();
 
 
@@ -57,6 +61,15 @@ public class MachineObject {
         name = machineName;
         type = machineType;
         operators = operatorsList;
+    }
+
+    public MachineObject(Integer machineId, String machineName, String machineType, String machineOperator, String machineTask)
+    {
+        val = machineId;
+        name = machineName;
+        type = machineType;
+        operator = machineOperator;
+        task = machineTask;
     }
 
     public void addOperator (String addedOperator)
@@ -107,4 +120,10 @@ public class MachineObject {
     public int getVal(){
         return val;
     }
+
+    public String getOperator(){
+        return operator;
+    }
+
+    public String getTask() {return task;}
 }
