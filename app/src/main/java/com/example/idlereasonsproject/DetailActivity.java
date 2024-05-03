@@ -82,6 +82,15 @@ NavHostFragment navHostFragment;
             }
         });
 
+        Button idleReasonButton = findViewById(R.id.idleReasonsButton);
+        idleReasonButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("DetailActivity", "idle reasons button clicked");
+                navController.navigate(R.id.action_redirect_to_machine_reason_list);
+            }
+        });
+
 
     }
 

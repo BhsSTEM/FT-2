@@ -9,20 +9,17 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.idlereasonsproject.databinding.FragmentMachineReasonListBinding;
 
-import com.example.idlereasonsproject.databinding.FragmentDetailBinding;
-
-
-public class DetailFragment extends Fragment{
-
-    private FragmentDetailBinding binding;
-
+public class MachineReasonListFragment extends Fragment
+{
+    private FragmentMachineReasonListBinding binding;
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-        binding = FragmentDetailBinding.inflate(inflater, container, false);
+        binding = FragmentMachineReasonListBinding.inflate(inflater, container, false);
 
         return binding.getRoot();
     }
@@ -40,4 +37,6 @@ public class DetailFragment extends Fragment{
         super.onDestroyView();
         binding = null;
     }
+
+
 }
