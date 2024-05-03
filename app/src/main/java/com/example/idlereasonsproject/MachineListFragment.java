@@ -80,20 +80,6 @@ public class MachineListFragment extends Fragment {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     private void setupData(){
 
         Map<String, MachineObject> machineMap = Database.machineNode.getMachineMap();
