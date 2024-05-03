@@ -49,32 +49,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        binding.idleReportBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(HomeFragment.this)
-                        .navigate(R.id.action_HomeFragment_to_ReportIdle);
-            }
-        });
-
-        binding.resolveReportBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ReportObject resolvedReport = Database.getCurrentReport();
-                if (resolvedReport != null) {
-                    //two seperate if statements to prevent the chance of a null pointer function
-                    if (!resolvedReport.isResolved()) {
-                        Database.setCurrentReport(ReportNode.resolveReport(resolvedReport));
-                    }
-                    else {
-                        Log.i("Report Resolution", "Report already resolved");
-                    }
-                }
-                else {
-                    Log.i("Report Resolution", "No report currently");
-                }
-            }
-        });
+      
 
         binding.fieldsListBtn.setOnClickListener(new View.OnClickListener() {
             @Override
