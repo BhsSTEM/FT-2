@@ -2,9 +2,13 @@ package com.example.idlereasonsproject;
 
 import android.util.Log;
 
+import com.example.idlereasonsproject.FBDatabase.Database;
+import com.example.idlereasonsproject.FBDatabase.MachineNode;
 import com.example.idlereasonsproject.FBDatabase.MachineObject;
 import com.example.idlereasonsproject.FBDatabase.ReportNode;
 import com.example.idlereasonsproject.FBDatabase.ReportObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -39,14 +43,30 @@ public class machineAnalysis {
         Log.e("machinesIdleReport", machine.getName() + " was said to be idle by isMachineIdle, but machinesIdleReport found no report");
         return new ReportObject("error", "error", "error", "error");
     }
+    //Ignores inconsistent capitalization by converting to lowercase, only searches full list of machines, sorted alphabetically
+    public static ArrayList<String> arrayListOfTypes() {
+        Map<String, MachineObject> machineMap = Database.machineNode.getMachineMap();
+        ArrayList<String> returnedArrayList = new ArrayList<String>();
+        for (Map.Entry<String, MachineObject> entry : machineMap.entrySet()) {
+            String type = entry.getValue().getType().toLowerCase();
+            if (!returnedArrayList.contains(type)) {
+                returnedArrayList.add(type);
+            }
+        }
+        returnedArrayList.sort(String::compareTo);
+        return returnedArrayList;
+    }
+    //Uses ArrayList from arrayListOfTypes
+    public static int numOfTypes() {return arrayListOfTypes().size();}
 //For Filtering
-    //No checks for inconsistent capitalization
+    //Checks for inconsistent capitalization by converting strings to lower case
     public static Map<String, MachineObject> getMapOfMachinesOfType(String type, Map<String, MachineObject> map) {
+        type = type.toLowerCase();
         Map<String, MachineObject> returnedMap = new HashMap<>();
         for (Map.Entry<String, MachineObject> entry : map.entrySet()) {
             String key = entry.getKey();
             MachineObject value = entry.getValue();
-            if (type.equals(value.getType())){
+            if (type.equals(value.getType().toLowerCase())){
                 returnedMap.put(key, value);
             }
         }
@@ -75,5 +95,35 @@ public class machineAnalysis {
         }
         return returnedMap;
     }
-//For sorting (if i can think of anything)
+//For sorting, the way
+    //Works off arrayListOfTypes, doesn't seem to work
+    public static Map<String, MachineObject> sortByType(Map<String, MachineObject> map) {
+        Map<String, MachineObject> returnedMap = new HashMap<>();
+        ArrayList<String> types = machineAnalysis.arrayListOfTypes();
+        for(int i=0; i < types.size(); i++) {
+            String type = types.get(i);
+            for (Map.Entry<String, MachineObject> entry : map.entrySet()) {
+                String key = entry.getKey();
+                MachineObject value = entry.getValue();
+                if (value.getType().equals(type)){
+                    returnedMap.put(key, value);
+                }
+            }
+        }
+        return returnedMap;
+    }
+//For searching
+    //Ignores inconsistent capitalization by converting to lowercase, only searches name not type
+    public static Map<String, MachineObject> containsSearchTerm(String searchTerm, Map<String, MachineObject> map) {
+        searchTerm = searchTerm.toLowerCase();
+        Map<String, MachineObject> returnedMap = new HashMap<>();
+        for (Map.Entry<String, MachineObject> entry : map.entrySet()) {
+            String key = entry.getKey();
+            MachineObject value = entry.getValue();
+            if (value.getName().contains(searchTerm)){
+                returnedMap.put(key, value);
+            }
+        }
+        return returnedMap;
+    }
 }
