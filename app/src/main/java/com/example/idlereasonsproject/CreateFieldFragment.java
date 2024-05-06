@@ -51,7 +51,6 @@ public class CreateFieldFragment extends Fragment
 
                 NavHostFragment.findNavController(CreateFieldFragment.this)
                         .navigate(R.id.action_CreateField_to_FieldList); //later change to go to that new field details screen
-
             }
         });
     }
