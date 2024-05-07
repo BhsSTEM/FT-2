@@ -1,6 +1,6 @@
 package com.example.idlereasonsproject;
 
-import android.content.Intent;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,6 +22,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.idlereasonsproject.FBDatabase.Database;
 import com.example.idlereasonsproject.FBDatabase.MachineObject;
+import com.example.idlereasonsproject.FBDatabase.ReportNode;
 import com.example.idlereasonsproject.iface.DrawerLocker;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
@@ -35,6 +36,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -59,7 +61,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
+
+
+
         setContentView(binding.getRoot());
+
 
         //create a navigation fragment
         navHostFragment = NavHostFragment.create(R.navigation.nav_graph);
@@ -110,9 +116,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             navController.navigate(R.id.action_redirect_to_machine_list);
         }
-        else if(item.getItemId() == R.id.action_idleReport)
+        else if(item.getItemId() == R.id.action_idleReport) // fix this
         {
-            navController.navigate(R.id.action_redirect_to_idle);
+            switch (reportAnalysis.numOfUnresolvedReports(reportAnalysis.reportsFromReporter(Database.getUserLoggedIn().fullName(), ReportNode.getReportMap()))) {
+                case 0:
+                    Log.i("Report page block", "case 0");
+                    navController.navigate(R.id.action_redirect_to_idle);
+                    break;
+                case 1:
+                    Log.i("Report page block", "case 1");
+                    Toast.makeText(this, "You already have a report active, please resolve that before making another report", Toast.LENGTH_LONG).show();
+                    break;
+                default:
+                    Log.i("Report page block", "default");
+                    Log.e("Reports in database", "More than 1 unresolved report (or maybe less than 0 somehow) from user " + Database.getUserLoggedIn().fullName());
+                    Toast.makeText(this, "You have more than one report active, this is likely the result of some error", Toast.LENGTH_LONG).show();
+                    break;
+            }
         }
         else if (item.getItemId() == android.R.id.home)
         {
@@ -171,7 +191,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else if(intentFragId == R.id.action_idleReport)
         {
-            navController.navigate(R.id.action_redirect_to_idle);
+            switch (reportAnalysis.numOfUnresolvedReports(reportAnalysis.reportsFromReporter(Database.getUserLoggedIn().fullName(), ReportNode.getReportMap()))) {
+                case 0:
+                    Log.i("Report page block", "case 0");
+                    navController.navigate(R.id.action_redirect_to_idle);
+                    break;
+                case 1:
+                    Log.i("Report page block", "case 1");
+                    Toast.makeText(this,"You already have a report active, please resolve that before making another report",Toast.LENGTH_LONG).show();
+                    break;
+                default:
+                    Log.i("Report page block", "default");
+                    Log.e("Reports in database", "More than 1 unresolved report (or maybe less than 0 somehow) from user " + Database.getUserLoggedIn().fullName());
+                    Toast.makeText(this,"You have more than one report active, this is likely the result of some error",Toast.LENGTH_LONG).show();
+                    break;
+
+            }
         }
         else
         {

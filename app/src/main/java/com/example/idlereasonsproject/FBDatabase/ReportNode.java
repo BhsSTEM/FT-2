@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.idlereasonsproject.slothfulNotifications;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -11,6 +12,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,7 +33,8 @@ public class ReportNode extends Database
                 Map<String, ReportObject> map = new HashMap<>();
                 for(DataSnapshot child : snapshot.getChildren())
                 {
-                    reportMap.put(child.getKey(), child.getValue(ReportObject.class));
+                    map.put(child.getKey(), child.getValue(ReportObject.class));
+                    //Log.i("ReportNode.java", child.getKey() + " | " + child.getValue(ReportObject.class));
                 }
 
                 Log.i("ReportNode", "updated!");
@@ -68,14 +72,14 @@ public class ReportNode extends Database
         Database.machineNode.addMachineReports(report, key);
     }
 
-    public void setReportMap(Map<String, ReportObject> map)
-    {
-        reportMap = map;
+    //Returns a report object so you can have a copy of the resolved report locally if you want
+    public static ReportObject resolveReport(ReportObject report) {
+        database.child("reports").child(getDomain()).child(String.valueOf(report.getKey())).child("resolved").setValue(true);
+        Date resolutionTime = Calendar.getInstance().getTime();
+        database.child("reports").child(getDomain()).child(String.valueOf(report.getKey())).child("timeOfResolution").setValue(resolutionTime);
+        report.resolutionHelp(resolutionTime);
+        return report;
     }
-
-    public Map getReportMap()
-    {
-        return reportMap;
-    }
-
+    public void setReportMap(Map<String, ReportObject> map) {reportMap = map;}
+    public static Map<String, ReportObject> getReportMap() {return reportMap;}
 }
