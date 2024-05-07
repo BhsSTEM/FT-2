@@ -53,4 +53,5 @@
         <item>Reason 3</item>
         <item>Other (please explain)</item>
     </string-array>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>
