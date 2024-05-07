@@ -39,6 +39,7 @@ public class DomainFragment extends Fragment
     {
         super.onViewCreated(view, savedInstanceState);
 
+
         //put binding check here
         binding.domainEnterBtn.setOnClickListener(new View.OnClickListener() {
             String domain;
