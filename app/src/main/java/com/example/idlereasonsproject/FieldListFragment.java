@@ -16,6 +16,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.idlereasonsproject.FBDatabase.Database;
 import com.example.idlereasonsproject.FBDatabase.FieldObject;
 import com.example.idlereasonsproject.databinding.FragmentFieldListBinding;
+import com.example.idlereasonsproject.iface.DataObject;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -64,16 +65,8 @@ public class FieldListFragment extends Fragment
 
     private void setFieldListView()
     {
-        String[] fieldNames = new String[fieldList.size()];
-
-        for(int i=0; i<fieldList.size(); i++)
-        {
-            fieldNames[i] = fieldList.get(i).getName();
-        }
-
-        ArrayAdapter<String> fieldAdapter = new ArrayAdapter<>(getActivity(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, fieldNames);
-
-        listView.setAdapter(fieldAdapter);
+        ObjectAdaptor adapter = new ObjectAdaptor(requireContext(), 0, fieldListToDataObject());
+        listView.setAdapter(adapter);
     }
 
     private void setUpOnClickListener()
@@ -82,12 +75,20 @@ public class FieldListFragment extends Fragment
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                //FieldObject fieldSelected = (FieldObject)(listView.getItemAtPosition(position));
-                Log.v("fieldList", "Item selected " + listView.getItemAtPosition(position).toString());
+                FieldObject fieldSelected = (FieldObject)(listView.getItemAtPosition(position));
+                Log.v("fieldList", "Item selected " + fieldSelected.getName());
                 //later switch to a field detail object
             }
         });
     }
+
+    private ArrayList<DataObject> fieldListToDataObject()
+    {
+        ArrayList<DataObject> list = new ArrayList<>();
+        list.addAll(fieldList);
+        return list;
+    }
+
 
     @Override
     public void onDestroyView() {

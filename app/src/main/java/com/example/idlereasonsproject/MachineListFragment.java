@@ -3,6 +3,7 @@ package com.example.idlereasonsproject;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.idlereasonsproject.FBDatabase.MachineObject;
 import com.example.idlereasonsproject.databinding.FragmentMachineListBinding;
+import com.example.idlereasonsproject.iface.DataObject;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -133,7 +135,7 @@ Database.MachineNode.addMachine()
         if(binding != null){
             listView = binding.machineObjectListView;
             if(listView != null){
-                ObjectAdaptor adaptor = new ObjectAdaptor(requireContext(), 0, machineList);
+                ObjectAdaptor adaptor = new ObjectAdaptor(requireContext(), 0,  machineListToDataObject());
                 listView.setAdapter(adaptor);
 
                 Log.d("MachineListFragment", "Current machineList: " + machineList.toString());
@@ -165,7 +167,7 @@ Database.MachineNode.addMachine()
 
     private void setUpList() {
         if (getContext() != null) {
-            ObjectAdaptor adapter = new ObjectAdaptor(getContext(), 0, machineList);
+            ObjectAdaptor adapter = new ObjectAdaptor(getContext(), 0, machineListToDataObject());
             listView.setAdapter(adapter);
         }
     }
@@ -212,6 +214,14 @@ Database.MachineNode.addMachine()
         dialog.show();
     }
 
+    private ArrayList<DataObject> machineListToDataObject()
+    {
+        ArrayList<DataObject> list = new ArrayList<>();
+
+        list.addAll(machineList);
+
+        return list;
+    }
 
 
 

@@ -77,7 +77,7 @@ public class DetailActivity extends AppCompatActivity implements NavigationView.
     }
 
     private void setValues(){
-        TextView tv = (TextView) findViewById(R.id.machineName);
+        TextView tv = (TextView) findViewById(R.id.text_view);
 
         tv.setText(selectedShape.getName());
     }

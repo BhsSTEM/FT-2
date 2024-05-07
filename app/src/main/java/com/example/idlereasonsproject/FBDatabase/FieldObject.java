@@ -1,10 +1,12 @@
 package com.example.idlereasonsproject.FBDatabase;
 
+import com.example.idlereasonsproject.iface.DataObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FieldObject
+public class FieldObject implements DataObject
 {
     private String name;
     //add map info stuff later
