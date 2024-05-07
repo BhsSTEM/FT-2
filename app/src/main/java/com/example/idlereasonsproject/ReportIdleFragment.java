@@ -38,7 +38,7 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
     String furtherInformation = "";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
+                             Bundle savedInstanceState
     ) {
         binding = ReportIdleBinding.inflate(inflater, container,false);
         return binding.getRoot();

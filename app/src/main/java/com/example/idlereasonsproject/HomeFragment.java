@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -94,6 +95,14 @@ public class HomeFragment extends Fragment {
                 else {
                     Log.i("Report Resolution", "No report currently");
                 }
+            }
+        });
+
+        binding.fieldsListBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment.findNavController(HomeFragment.this)
+                        .navigate(R.id.action_HomeFragment_to_FieldList);
             }
         });
     }

@@ -12,9 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import com.example.idlereasonsproject.FBDatabase.Database;
 import com.example.idlereasonsproject.FBDatabase.UserNode;
-import com.example.idlereasonsproject.databinding.FragmentSecondBinding;
+import com.example.idlereasonsproject.databinding.FragmentRegisterBinding;
 
-public class SecondFragment extends Fragment {
+public class RegisterFragment extends Fragment {
 
     private FragmentSecondBinding binding;
     private EditText firstNameInput;
@@ -30,7 +30,7 @@ public class SecondFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = FragmentSecondBinding.inflate(inflater, container, false);
+        binding = FragmentRegisterBinding.inflate(inflater, container, false);
 
         firstNameInput = binding.firstNameInput.getEditText();
         lastNameInput = binding.lastNameInput.getEditText();
@@ -49,8 +49,8 @@ public class SecondFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.v("btnTest", "login click");
-                NavHostFragment.findNavController(SecondFragment.this)
-                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
+                NavHostFragment.findNavController(RegisterFragment.this)
+                        .navigate(R.id.action_RegisterFragment_to_LoginFragment);
             }
         });
 
@@ -83,8 +83,8 @@ public class SecondFragment extends Fragment {
                         emailInput.setError("EMAIL ALREADY IN USE");
                     } else {
                         Database.setNodes();
-                        NavHostFragment.findNavController(SecondFragment.this)
-                                .navigate(R.id.action_SecondFragment_to_HomeFragment);
+                        NavHostFragment.findNavController(RegisterFragment.this)
+                                .navigate(R.id.action_RegisterFragment_to_HomeFragment);
                     }
                 }
             }

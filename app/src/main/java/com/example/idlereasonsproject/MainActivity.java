@@ -1,6 +1,6 @@
 package com.example.idlereasonsproject;
 
-import android.content.Intent;
+
 import android.os.Bundle;
 import com.example.idlereasonsproject.FBDatabase.Database;
 import com.example.idlereasonsproject.FBDatabase.ReportNode;
@@ -21,6 +21,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.example.idlereasonsproject.FBDatabase.Database;
 import com.example.idlereasonsproject.FBDatabase.MachineObject;
+import com.example.idlereasonsproject.FBDatabase.ReportNode;
+import com.example.idlereasonsproject.iface.DrawerLocker;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -31,12 +33,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import android.view.Window;
 import android.widget.Toast;
 
 //some change :)
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DrawerLocker
 {
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
@@ -45,13 +49,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavHostFragment navHostFragment;
     NavController navController;
 
+    ActionBarDrawerToggle toggle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.v("mainActivity", "fb domain: " + Database.getDomain());
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
+
+
+
         setContentView(binding.getRoot());
+
 
         //create a navigation fragment
         navHostFragment = NavHostFragment.create(R.navigation.nav_graph);
@@ -70,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
 
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
@@ -124,6 +134,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             navController.navigateUp();
         }
+        else if(item.getItemId() == R.id.action_fieldList)
+        {
+            navController.navigate(R.id.action_redirect_to_fieldlist);
+        }
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -135,6 +149,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    //method to set navigation drawer to be enabled or not
+    public void setDrawerEnabled(boolean enabled)
+    {
+        int lockMode = enabled ? DrawerLayout.LOCK_MODE_UNLOCKED :
+                DrawerLayout.LOCK_MODE_LOCKED_CLOSED;
+        drawerLayout.setDrawerLockMode(lockMode);
+        toggle.setDrawerIndicatorEnabled(enabled);
     }
 
     //method to check if we are going to a specific fragment when the activity is created

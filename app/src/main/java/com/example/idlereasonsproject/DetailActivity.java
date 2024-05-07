@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -16,6 +17,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.idlereasonsproject.FBDatabase.MachineObject;
@@ -28,17 +32,27 @@ public class DetailActivity extends AppCompatActivity implements NavigationView.
     private AppBarConfiguration appBarConfiguration;
 
     public DrawerLayout drawerLayout;
-    public ActionBarDrawerToggle actionBarDrawerToggle;
-    NavHostFragment navHostFragment;
+
+    NavController navController;
+
+NavHostFragment navHostFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
-        getSelectedShape();
 
-        Log.d("DetailActivity", "selected shape");
-       // setValues();
+
+
+        setContentView(R.layout.activity_detail);
+
+
+        navHostFragment = NavHostFragment.create(R.navigation.nav_graph_detail);
+
+       // TextView tv = (TextView) findViewById(R.id.machineName);
+
+
+        //Log.d("DetailActivity", "selected shape:" + selectedShape.getName());
+        //tv.setText(selectedShape.getName());
 
 
 
@@ -46,40 +60,74 @@ public class DetailActivity extends AppCompatActivity implements NavigationView.
 
         setSupportActionBar(toolbar);
 
-        drawerLayout = findViewById(R.id.navigation_drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        drawerLayout = findViewById(R.id.just_toolbar);
+       // NavigationView navigationView = findViewById(R.id.nav_view);
+        //navigationView.setNavigationItemSelectedListener(this);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
+        //ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
 
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
+        //drawerLayout.addDrawerListener(toggle);
+        //toggle.syncState();
+
+
+        getSelectedShape();
+        setValues();
+
+        ImageButton backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("DetailActivity", "Back button clicked");
+                finish(); // Close the current activity and go back to the previous one
+            }
+        });
+
+        Button idleReasonButton = findViewById(R.id.idleReasonsButton);
+        idleReasonButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("DetailActivity", "idle reasons button clicked");
+                navController.navigate(R.id.action_redirect_to_machine_reason_list);
+            }
+        });
+
+
     }
 
     private void getSelectedShape(){
         Intent previousIntent = getIntent();
-        String parsedStringId = previousIntent.getStringExtra("id");
+        int id = previousIntent.getIntExtra("id", -1);
 
-        Log.d("DetailActivity", "Parsed ID: " + parsedStringId);
+        Log.d("DetailActivity", "Parsed ID: " + id);
         Log.d("DetailActivity", "Machine List Size: " + MachineListFragment.machineList.size());
+        Log.e("MachineListFragment", "machineList size: " + MachineListFragment.machineList.size()); // Log the size of machineList
+        for (MachineObject machine : MachineListFragment.machineList) {
+            Integer val = machine.getVal();
+            Log.d("MachineListFragment", "Machine ID: " + val);
+        }
         // Ensure parsedStringId is not null and is a valid integer before converting
-        if (parsedStringId != null && !parsedStringId.isEmpty()) {
-            int id = Integer.parseInt(parsedStringId);
-            // Check if the ID is within the bounds of the list
+
             if (id >= 0 && id < MachineListFragment.machineList.size()) {
                 selectedShape = MachineListFragment.machineList.get(id);
+                Log.d("DetailActivity", "selected shape: " + selectedShape.getVal() );
+
             } else {
                 Log.e("DetailActivity", "Invalid ID: " + id);
             }
-        } else {
-            Log.e("DetailActivity", "Parsed ID is null or empty");
         }
-    }
+
 
     private void setValues(){
         TextView tv = (TextView) findViewById(R.id.machineName);
 
-        tv.setText(selectedShape.getName());
+        tv.setText("Machine Name: " + selectedShape.getName());
+
+        TextView tv2 = (TextView) findViewById(R.id.machineOperator);
+        tv2.setText("Operated By: "+ selectedShape.getOperator());
+
+        TextView tv3 = (TextView) findViewById(R.id.machineTask);
+        tv3.setText("Machine Task: "+ selectedShape.getTask());
+
     }
 
     @Override
@@ -90,12 +138,12 @@ public class DetailActivity extends AppCompatActivity implements NavigationView.
         startActivity(intent);
         return true;
     }
-
+/*
     @Override
     public boolean onSupportNavigateUp () {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main_detail);
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-
+*/
 }

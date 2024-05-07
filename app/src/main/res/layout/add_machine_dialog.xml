@@ -16,9 +16,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Machine Type" />
+    <EditText
+        android:id="@+id/editTextOperatorName"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="Machine Operator"/>
+
+    <EditText
+        android:id="@+id/editTextMachineTask"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="Machine Task"/>
 
     <Button
         android:id="@+id/addButton"
+        android:backgroundTint="@color/brown"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add" />

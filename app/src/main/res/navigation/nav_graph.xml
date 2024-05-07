@@ -26,6 +26,21 @@
         app:popUpTo="@id/TrackerFragment"
         app:popUpToInclusive="true"  />
 
+    <action
+        android:id="@+id/action_redirect_to_fieldlist"
+        app:destination="@id/FieldListFragment"
+        app:popUpTo="@id/FieldListFragment"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/action_redirect_to_machine_reason_list"
+        app:destination="@id/MachineReasonListFragment"
+        app:popUpTo="@id/MachineReasonListFragment"
+        app:popUpToInclusive="true"/>
+
+
+
+
     <fragment
         android:id="@+id/domain_fragment"
         android:name="com.example.idlereasonsproject.DomainFragment"
@@ -33,34 +48,34 @@
 
         <action
             android:id="@+id/action_DomainFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment"/>
+            app:destination="@id/LoginFragment"/>
     </fragment>
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.idlereasonsproject.FirstFragment"
-        tools:layout="@layout/fragment_first">
+        android:id="@+id/LoginFragment"
+        android:name="com.example.idlereasonsproject.LoginFragment"
+        tools:layout="@layout/fragment_login">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_LoginFragment_to_RegisterFragment"
+            app:destination="@id/RegisterFragment" />
       
         <action
-            android:id="@+id/action_FirstFragment_to_HomeFragment"
+            android:id="@+id/action_LoginFragment_to_HomeFragment"
             app:destination="@id/HomeFragment"/>
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.idlereasonsproject.SecondFragment"
+        android:id="@+id/RegisterFragment"
+        android:name="com.example.idlereasonsproject.RegisterFragment"
 
-        tools:layout="@layout/fragment_second"
+        tools:layout="@layout/fragment_register"
         >
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_RegisterFragment_to_LoginFragment"
+            app:destination="@id/LoginFragment" />
         <action
-            android:id="@+id/action_SecondFragment_to_HomeFragment"
+            android:id="@+id/action_RegisterFragment_to_HomeFragment"
             app:destination="@id/HomeFragment" />
 
     </fragment>
@@ -71,14 +86,18 @@
 
         <action
            android:id="@+id/action_HomeFragment_to_TrackerFragment"
-           app:destination="@+id/TrackerFragment"/>
+           app:destination="@id/TrackerFragment"/>
         <action
             android:id="@+id/action_HomeFragment_to_MachineListFragment"
-            app:destination="@+id/MachineListFragment"/>
+            app:destination="@id/MachineListFragment"/>
 
         <action
             android:id="@+id/action_HomeFragment_to_ReportIdle"
-            app:destination="@+id/ReportIdle"/>
+            app:destination="@id/ReportIdle"/>
+
+        <action
+            android:id="@+id/action_HomeFragment_to_FieldList"
+            app:destination="@id/FieldListFragment"/>
 
     </fragment>
 
@@ -108,6 +127,18 @@
             android:id="@+id/action_MachineListFragment_to_TrackerFragment"
             app:destination="@id/TrackerFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/FieldListFragment"
+        android:name="com.example.idlereasonsproject.FieldListFragment"
+        tools:layout="@layout/fragment_field_list">
+
+        <action
+            android:id="@+id/action_FieldList_to_CreateField"
+            app:destination="@id/CreateFieldFragment"/>
+
+    </fragment>
+
     <fragment
         android:id="@+id/ReportIdle"
         android:name="com.example.idlereasonsproject.ReportIdleFragment"
@@ -119,7 +150,22 @@
             app:destination="@id/HomeFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/CreateFieldFragment"
+        android:name="com.example.idlereasonsproject.CreateFieldFragment"
+        tools:layout="@layout/fragment_create_field">
 
+        <action
+            android:id="@+id/action_CreateField_to_FieldList"
+            app:destination="@id/FieldListFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/MachineReasonListFragment"
+        android:name="com.example.idlereasonsproject.MachineReasonListFragment"
+        tools:layout="@layout/fragment_machine_reason_list">
+
+    </fragment>
 
 
 </navigation>

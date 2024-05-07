@@ -12,6 +12,7 @@
         android:padding="32dp">
 
         <TextView
+            android:id="@+id/home_page_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
@@ -23,13 +24,13 @@
             android:id="@+id/idleReport_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/home_page_text_view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="40dp"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
-            android:background="@color/black"
+            android:backgroundTint="@color/brown"
             android:text="Idle Report"
             />
 
@@ -39,39 +40,53 @@
             android:id="@+id/tracker_Btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/idleReport_btn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="180dp"
+            android:layout_marginTop="40dp"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
-            android:background="@color/black"
+            android:backgroundTint="@color/brown"
             android:text="Tracker"
             />
+
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/machineList_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="280dp"
-            android:layout_marginEnd="40dp"
-            android:background="@color/black"
-            android:text="Machine List"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tracker_Btn"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="40dp"
+            android:backgroundTint="@color/brown"
+            android:text="Machine List"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/fields_list_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="40dp"
+            android:backgroundTint="@color/brown"
+            android:text="Fields"
+            app:layout_constraintTop_toBottomOf="@id/machineList_btn"
+            />
 
         <Button
             android:id="@+id/resolveReport_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="40dp"
             android:text="Resolve Report"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/machineList_btn" />
+            app:layout_constraintTop_toBottomOf="@+id/fields_list_btn"
+            app:layout_constraintVertical_bias="1.0"
+            android:backgroundTint="@color/brown"
+            />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
