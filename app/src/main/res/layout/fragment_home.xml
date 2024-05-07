@@ -30,7 +30,7 @@
             android:layout_marginTop="40dp"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
-            android:background="@color/white"
+            android:backgroundTint="@color/brown"
             android:text="Idle Report"
             />
 
@@ -46,7 +46,7 @@
             android:layout_marginTop="40dp"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
-            android:background="@color/white"
+            android:backgroundTint="@color/brown"
             android:text="Tracker"
             />
 
@@ -59,7 +59,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="40dp"
-            android:background="@color/white"
+            android:backgroundTint="@color/brown"
             android:text="Machine List"
             />
 
@@ -68,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="40dp"
-            android:background="@color/white"
+            android:backgroundTint="@color/brown"
             android:text="Fields"
             app:layout_constraintTop_toBottomOf="@id/machineList_btn"
             />
@@ -83,7 +83,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fields_list_btn"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="1.0"
+            android:backgroundTint="@color/brown"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

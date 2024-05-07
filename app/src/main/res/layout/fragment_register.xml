@@ -14,6 +14,8 @@
         <!--  sign up text     -->
         <TextView
             android:id="@+id/heading"
+            android:textColor="@color/brown"
+            android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
@@ -24,6 +26,8 @@
         <TextView
             android:id="@+id/nameHeading"
             android:layout_width="match_parent"
+            android:textColor="@color/brown"
+            android:textStyle="bold"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/heading"
             android:textSize="20sp"
@@ -35,7 +39,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/first_name"
-            app:boxBackgroundColor="#F8E9FD"
+            app:boxBackgroundColor="@color/tan"
+            android:textColorHint="@color/brown"
             app:layout_constraintTop_toBottomOf="@+id/nameHeading"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -55,7 +60,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/last_name"
-            app:boxBackgroundColor="#F8E9FD"
+            app:boxBackgroundColor="@color/tan"
+            android:textColorHint="@color/brown"
             app:layout_constraintTop_toBottomOf="@+id/firstNameInput"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -78,6 +84,8 @@
             android:layout_marginTop="10dp"
             app:layout_constraintTop_toBottomOf="@+id/lastNameInput"
             android:textSize="20sp"
+            android:textColor="@color/brown"
+            android:textStyle="bold"
             android:text="Email" />
 
         <!-- email input             -->
@@ -86,7 +94,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/email"
-            app:boxBackgroundColor="#F8E9FD"
+            app:boxBackgroundColor="@color/tan"
+            android:textColorHint="@color/brown"
             app:layout_constraintTop_toBottomOf="@+id/emailHeading"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -109,6 +118,8 @@
             android:layout_marginTop="10dp"
             app:layout_constraintTop_toBottomOf="@+id/emailInput"
             android:textSize="20sp"
+            android:textColor="@color/brown"
+            android:textStyle="bold"
             android:text="Password" />
 
         <!-- password input  -->
@@ -120,7 +131,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="40dp"
             android:hint="@string/password"
-            app:boxBackgroundColor="#F8E9FD"
+            android:textColorHint="@color/brown"
+            app:boxBackgroundColor="@color/tan"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pwdHeading"
@@ -143,8 +155,9 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="40dp"
             android:hint="@string/confirm_password"
+            android:textColorHint="@color/brown"
             app:passwordToggleEnabled="true"
-            app:boxBackgroundColor="#F8E9FD"
+            app:boxBackgroundColor="@color/tan"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/passwordInput"
@@ -170,6 +183,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Have an account?"
+                android:textColorHint="@color/brown"
+                android:textStyle="bold"
                 android:layout_marginTop="610dp"
                 android:layout_marginLeft="30dp"
 
@@ -181,6 +196,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Login"
+                android:backgroundTint="@color/brown"
                 android:layout_marginTop="600dp"
                 android:layout_alignParentEnd ="true"
                 android:layout_marginEnd="70dp"
@@ -193,6 +209,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Register"
+                android:textColor="@color/brown"
+                android:textStyle="bold"
                 android:layout_marginTop="520dp"
                 android:layout_toLeftOf="@id/loginBtn"
                 android:layout_marginEnd="4dp"
