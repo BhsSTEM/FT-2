@@ -9,7 +9,6 @@ public class MachineObject {
     String name = "";
     String type = "";
 
-
     Integer val;
 
     String operator = "";
@@ -64,9 +63,7 @@ public class MachineObject {
     public String getName() {return name;}
     public String getType() {return type;}
     public ArrayList<String> getOperatorsArrayList() {return operators; }
-
     public ArrayList<String> getReports() { return reports; }
-
     public void addReport(String reportObjKey) { reports.add(reportObjKey); }
 
     //Map
@@ -80,16 +77,9 @@ public class MachineObject {
         return map;
     }
 
-
-
-    public int getVal(){
-        return val;
-    }
-
-
+    public int getVal(){return val;}
     public String getOperator(){
         return operator;
     }
-
     public String getTask() {return task;}
 }

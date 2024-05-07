@@ -1,10 +1,7 @@
 package com.example.idlereasonsproject;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.drawable.shapes.Shape;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,28 +13,17 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.example.idlereasonsproject.FBDatabase.Database;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
-
 import com.example.idlereasonsproject.FBDatabase.MachineObject;
 import com.example.idlereasonsproject.databinding.FragmentMachineListBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.search.SearchView;
-
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Objects;
-
 
 public class MachineListFragment extends Fragment {
-
-
     private FragmentMachineListBinding binding;
     private ListView listView;
-
-
 
     public static ArrayList<MachineObject> machineList = new ArrayList<>();
 
@@ -47,20 +33,15 @@ public class MachineListFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-
         binding = FragmentMachineListBinding.inflate(inflater, container, false);
         listView = binding.machineObjectListView;
-
-
 
         setupData();
         setUpList();
 
         setUpOnclickListener();
 
-
         return binding.getRoot();
-
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -77,8 +58,6 @@ public class MachineListFragment extends Fragment {
         });
 
     }
-
-
 
     private void setupData(){
 
@@ -127,7 +106,6 @@ public class MachineListFragment extends Fragment {
 
 
     }
-
 
     private void setUpOnclickListener(){
         Log.d("MainActivity", "ListView value: " + listView);
@@ -183,8 +161,6 @@ public class MachineListFragment extends Fragment {
 
                     Database.machineNode.addMachine(newMachine);
 
-
-
                     // Update the ListView adapter
                     ((ObjectAdaptor) listView.getAdapter()).notifyDataSetChanged();
 
@@ -200,11 +176,9 @@ public class MachineListFragment extends Fragment {
         dialog.show();
     }
 
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
-
 }

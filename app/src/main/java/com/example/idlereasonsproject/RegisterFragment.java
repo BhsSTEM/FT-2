@@ -16,7 +16,7 @@ import com.example.idlereasonsproject.databinding.FragmentRegisterBinding;
 
 public class RegisterFragment extends Fragment {
 
-    private FragmentSecondBinding binding;
+    private FragmentRegisterBinding binding;
     private EditText firstNameInput;
     private EditText lastNameInput;
     private EditText emailInput;
