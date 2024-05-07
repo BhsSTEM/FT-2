@@ -78,7 +78,6 @@ public class MachineListFragment extends Fragment {
             Integer id = machine.getVal();
             Log.d("MachineListFragment", "Machine ID: " + id);
         }
-
         // Notify the adapter that the data set has changed
         if (listView.getAdapter() != null) {
             ((ObjectAdaptor) listView.getAdapter()).notifyDataSetChanged();

@@ -43,7 +43,10 @@ public class machineAnalysis {
         Log.e("machinesIdleReport", machine.getName() + " was said to be idle by isMachineIdle, but machinesIdleReport found no report");
         return new ReportObject("error", "error", "error", "error");
     }
-    //Ignores inconsistent capitalization by converting to lowercase, only searches full list of machines, sorted alphabetically
+
+    /**
+     * Ignores inconsistent capitalization by converting to lowercase, only searches full list of machines, sorted alphabetically
+     */
     public static ArrayList<String> arrayListOfTypes() {
         Map<String, MachineObject> machineMap = Database.machineNode.getMachineMap();
         ArrayList<String> returnedArrayList = new ArrayList<String>();
@@ -96,21 +99,23 @@ public class machineAnalysis {
         return returnedMap;
     }
 //For sorting, the way
-    //Works off arrayListOfTypes, doesn't seem to work
-    public static Map<String, MachineObject> sortByType(Map<String, MachineObject> map) {
-        Map<String, MachineObject> returnedMap = new HashMap<>();
+    /**
+    *Works off arrayListOfTypes, doesn't seem to work, not sure why
+     * Might be a problem with how I'm putting it into MachineListFragment
+    **/
+    public static ArrayList<MachineObject> sortByType(Map<String, MachineObject> map) {
+        ArrayList<MachineObject> returnedArrayList = new ArrayList<>();
         ArrayList<String> types = machineAnalysis.arrayListOfTypes();
         for(int i=0; i < types.size(); i++) {
             String type = types.get(i);
             for (Map.Entry<String, MachineObject> entry : map.entrySet()) {
-                String key = entry.getKey();
                 MachineObject value = entry.getValue();
                 if (value.getType().equals(type)){
-                    returnedMap.put(key, value);
+                    returnedArrayList.add(value);
                 }
             }
         }
-        return returnedMap;
+        return returnedArrayList;
     }
 //For searching
     //Ignores inconsistent capitalization by converting to lowercase, only searches name not type
