@@ -15,7 +15,9 @@ import java.util.Objects;
 
 public class machineAnalysis {
 //Basic machine analysis
-    //isMachineIdle only searches the full report list, and also rely on getMachine returning a string and not a machine object
+    /**
+    * isMachineIdle only searches the full report list, and also rely on getMachine returning a string and not a machine object
+    */
     public static boolean isMachineIdle (MachineObject machine) {
         Map<String, ReportObject> unresolvedReports = reportAnalysis.getUnresolvedReports(ReportNode.getReportMap());
         for (Map.Entry<String, ReportObject> entry : unresolvedReports.entrySet()) {
@@ -26,8 +28,11 @@ public class machineAnalysis {
         }
         return false;
     }
-    //machinesIdleReport only searches the full report list, if there's multiple reports with a machine it'll return the first
-    //Might be redundant too I think Jackson added something so machineObjects have report objects attached to them
+    /**
+    * machinesIdleReport only searches the full report list, if there's multiple reports with a machine it'll return the first
+    * <p></p>
+    * Might be redundant too I think Jackson added something so machineObjects have report objects attached to them
+    */
     public static ReportObject machinesIdleReport (MachineObject machine) {
         if (!isMachineIdle(machine)) {
             Log.w("machinesIdleReport", machine.getName() + "isn't idle");
@@ -100,8 +105,8 @@ public class machineAnalysis {
     }
 //For sorting, the way
     /**
-    *Works off arrayListOfTypes, doesn't seem to work, not sure why
-     * Might be a problem with how I'm putting it into MachineListFragment
+    *Works off arrayListOfTypes, doesn't seem to work, not sure why,
+    * might be a problem with how I'm putting it into MachineListFragment
     **/
     public static ArrayList<MachineObject> sortByType(Map<String, MachineObject> map) {
         ArrayList<MachineObject> returnedArrayList = new ArrayList<>();
@@ -118,7 +123,10 @@ public class machineAnalysis {
         return returnedArrayList;
     }
 //For searching
-    //Ignores inconsistent capitalization by converting to lowercase, only searches name not type
+
+    /**
+     * Ignores inconsistent capitalization by converting to lowercase, only searches name not type
+     */
     public static Map<String, MachineObject> containsSearchTerm(String searchTerm, Map<String, MachineObject> map) {
         searchTerm = searchTerm.toLowerCase();
         Map<String, MachineObject> returnedMap = new HashMap<>();
