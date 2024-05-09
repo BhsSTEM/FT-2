@@ -9,6 +9,7 @@ import com.example.idlereasonsproject.FBDatabase.ReportNode;
 import com.example.idlereasonsproject.FBDatabase.ReportObject;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -64,7 +65,10 @@ public class machineAnalysis {
         returnedArrayList.sort(String::compareTo);
         return returnedArrayList;
     }
-    //Uses ArrayList from arrayListOfTypes
+
+    /**
+     * Uses ArrayList from arrayListOfTypes
+     */
     public static int numOfTypes() {return arrayListOfTypes().size();}
 //For Filtering
     /**
@@ -128,6 +132,18 @@ public class machineAnalysis {
                 }
             }
         }
+        return returnedArrayList;
+    }
+    /**
+     * Sorts the inputted machineMap alphabetically and outputs a sorted arrayList
+     */
+    public static ArrayList<MachineObject> alphabeticallySortMachineList(Map<String, MachineObject> machineMap) {
+        ArrayList<MachineObject> returnedArrayList = new ArrayList<MachineObject>();
+        for (Map.Entry<String, MachineObject> entry : machineMap.entrySet()) {
+            MachineObject value = entry.getValue();
+            returnedArrayList.add(value);
+        }
+        returnedArrayList.sort(Comparator.comparing(MachineObject::getName));
         return returnedArrayList;
     }
 //For searching

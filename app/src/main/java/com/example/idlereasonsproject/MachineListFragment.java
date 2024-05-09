@@ -66,8 +66,8 @@ public class MachineListFragment extends Fragment {
 
         machineList.clear();
 
-        //For testing sortByType
-        /*ArrayList<MachineObject> sortedMachineList = machineAnalysis.sortByType(machineMap);
+        //For testing
+        /*ArrayList<MachineObject> sortedMachineList = machineAnalysis.alphabeticallySortMachineList(machineMap);
         for (int i = 0; i < sortedMachineList.size(); i++) {
             machineList.add(sortedMachineList.get(i));
             Log.i("sortedMachineList", sortedMachineList.get(i).getName());
