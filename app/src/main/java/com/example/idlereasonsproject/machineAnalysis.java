@@ -105,8 +105,7 @@ public class machineAnalysis {
     }
 //For sorting, the way
     /**
-    *Works off arrayListOfTypes, doesn't seem to work, not sure why,
-    * might be a problem with how I'm putting it into MachineListFragment
+    *Works off arrayListOfTypes
     **/
     public static ArrayList<MachineObject> sortByType(Map<String, MachineObject> map) {
         ArrayList<MachineObject> returnedArrayList = new ArrayList<>();
@@ -114,9 +113,10 @@ public class machineAnalysis {
         for(int i=0; i < types.size(); i++) {
             String type = types.get(i);
             for (Map.Entry<String, MachineObject> entry : map.entrySet()) {
-                MachineObject value = entry.getValue();
-                if (value.getType().equals(type)){
-                    returnedArrayList.add(value);
+                String value = entry.getValue().getType().toLowerCase();
+                Log.i("Type vs type of MachineObject", type + " vs " + value);
+                if (value.equals(type)){
+                    returnedArrayList.add(entry.getValue());
                 }
             }
         }
