@@ -5,15 +5,19 @@
     android:id="@+id/nav_graph_detail"
     app:startDestination="@id/detail_fragment">
 
+    <action
+        android:id="@+id/action_redirect_to_machine_reason_list"
+        app:destination="@id/MachineReasonListFragment"
+        app:popUpTo="@id/MachineReasonListFragment"
+        app:popUpToInclusive="true"/>
 
 
     <fragment
-        android:id="@+id/MachineIdleReasons"
+        android:id="@+id/MachineReasonListFragment"
         android:name="com.example.idlereasonsproject.MachineReasonListFragment"
         tools:layout="@layout/fragment_machine_reason_list">
 
     </fragment>
-
 
 
 

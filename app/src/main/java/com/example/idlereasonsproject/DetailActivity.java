@@ -21,8 +21,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.idlereasonsproject.FBDatabase.Database;
 import com.example.idlereasonsproject.FBDatabase.MachineObject;
+import com.example.idlereasonsproject.FBDatabase.ReportNode;
 import com.google.android.material.navigation.NavigationView;
 
 public class DetailActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
@@ -48,12 +51,12 @@ NavHostFragment navHostFragment;
 
         navHostFragment = NavHostFragment.create(R.navigation.nav_graph_detail);
 
-       // TextView tv = (TextView) findViewById(R.id.machineName);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.just_toolbar, navHostFragment)
+                .setPrimaryNavigationFragment(navHostFragment)
+                .commit();
 
-
-        //Log.d("DetailActivity", "selected shape:" + selectedShape.getName());
-        //tv.setText(selectedShape.getName());
-
+        //replace fragment container in navigation_drawer.xml with nav fragment
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -82,18 +85,25 @@ NavHostFragment navHostFragment;
             }
         });
 
+/*
         Button idleReasonButton = findViewById(R.id.idleReasonsButton);
         idleReasonButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("DetailActivity", "idle reasons button clicked");
-                navController.navigate(R.id.action_redirect_to_machine_reason_list);
+
             }
         });
-
+*/
 
     }
 
+    @Override
+    public void onStart()
+    {
+        super.onStart();
+        navController = navHostFragment.getNavController();
+        goingToFrag();
+    }
     private void getSelectedShape(){
         Intent previousIntent = getIntent();
         int id = previousIntent.getIntExtra("id", -1);
@@ -138,6 +148,27 @@ NavHostFragment navHostFragment;
         startActivity(intent);
         return true;
     }
+
+    private void goingToFrag()
+    {
+        //statement to check if its going back to the default fragment(domain fragment)
+        if(getIntent().getExtras() == null)
+        {
+            return;
+        }
+
+        int intentFragId = getIntent().getExtras().getInt("frgToLoad");
+
+        //check what option was clicked
+        if (intentFragId == R.id.action_redirect_to_machine_reason_list)
+        {
+            navController.navigate(R.id.action_redirect_to_machine_reason_list);
+        }
+
+    }
+
+
+
 /*
     @Override
     public boolean onSupportNavigateUp () {
