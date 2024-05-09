@@ -67,7 +67,9 @@ public class machineAnalysis {
     //Uses ArrayList from arrayListOfTypes
     public static int numOfTypes() {return arrayListOfTypes().size();}
 //For Filtering
-    //Checks for inconsistent capitalization by converting strings to lower case
+    /**
+    *Checks for inconsistent capitalization by converting strings to lower case
+    */
     public static Map<String, MachineObject> getMapOfMachinesOfType(String type, Map<String, MachineObject> map) {
         type = type.toLowerCase();
         Map<String, MachineObject> returnedMap = new HashMap<>();
@@ -80,7 +82,10 @@ public class machineAnalysis {
         }
         return returnedMap;
     }
-    //Uses isMachineIdle and therefore works with the full report list
+
+    /**
+     * Uses isMachineIdle and therefore uses the full report list
+     */
     public static Map<String, MachineObject> getMapOfIdleMachines(Map<String, MachineObject> map) {
         Map<String, MachineObject> returnedMap = new HashMap<>();
         for (Map.Entry<String, MachineObject> entry : map.entrySet()) {
@@ -92,6 +97,9 @@ public class machineAnalysis {
         }
         return returnedMap;
     }
+    /**
+     * Uses isMachineIdle and therefore uses the full report list
+     */
     public static Map<String, MachineObject> getMapOfNotIdleMachines(Map<String, MachineObject> map) {
         Map<String, MachineObject> returnedMap = new HashMap<>();
         for (Map.Entry<String, MachineObject> entry : map.entrySet()) {

@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 public class reportAnalysis {
 //Logging
+    /**
+     * prints the result of reportText() for each ReportObject in a hashmap to logcat
+     */
     public static void reportObjectHashmapToLogCat(Map<String, ReportObject> map) {
         for (Map.Entry<String, ReportObject> entry : map.entrySet()) {
             String key = entry.getKey();
@@ -14,10 +17,16 @@ public class reportAnalysis {
             Log.i("reportMap", "Key=" + key + ", Value=" + value);
         }
     }
+    /**
+     * does the same as reportObjectHashmapToLogCat but with the full report map
+     */
     public static void reportMapReportTextToLogCat() {
         reportObjectHashmapToLogCat(ReportNode.getReportMap());
     }
 //Time related functions
+    /**
+     * Returns a string that says how long a machine was/has been idle for. Probably should be rewritten to have less inputs
+     */
     public static String idleLength (long lengthValue, boolean resolvedOrNot, String machine) {
         lengthValue = lengthValue - (lengthValue % 1000);
         long numOfSeconds = lengthValue/1000;
@@ -55,10 +64,16 @@ public class reportAnalysis {
         }
         return returnedString;
     }
+    /**
+     * Returns the time (in milliseconds) between when the report was filed and when it was resolved.
+     * Assumes the report has been resolved, otherwise it'll return a negative value which would be weird.*/
     public static long timeBetweenReportAndResolution(ReportObject report) {
         return report.getTimeOfResolution().getTime() - report.getTimeOfSubmission().getTime();
     }
 //Reports from a reporter
+    /**
+     * Returns how many reports have come from the inputted reporter, which I think should be the reporter's name, in lowercase
+     */
     public static int numOfReportsFromReporter(String reporter, Map<String, ReportObject> map) {
         int numOfReports = 0;
         for (Map.Entry<String, ReportObject> entry : map.entrySet()) {
@@ -69,6 +84,9 @@ public class reportAnalysis {
         }
         return numOfReports;
     }
+    /**
+     * Returns a hashmap of reports that have come from the inputted reporter, which I think should be the reporter's name, in lowercase
+     */
     public static Map<String, ReportObject> reportsFromReporter(String reporter, Map<String, ReportObject> map) {
         Map<String, ReportObject> returnedMap = new HashMap<>();
         for (Map.Entry<String, ReportObject> entry : map.entrySet()) {
@@ -81,6 +99,9 @@ public class reportAnalysis {
         return returnedMap;
     }
 //Reports from a machine
+    /**
+     * Returns how many reports have come from the inputted machine, which I think should just be the machine's name
+     */
     public static int numOfReportsFromMachine(String machine, Map<String, ReportObject> map) {
         int numOfReports = 0;
         for (Map.Entry<String, ReportObject> entry : map.entrySet()) {
@@ -91,6 +112,9 @@ public class reportAnalysis {
         }
         return numOfReports;
     }
+    /**
+     * Returns a hashmap of reports that have come from the inputted machine, which I think should be the machine's name
+     */
     public static Map<String, ReportObject> reportsFromMachine(String machine, Map<String, ReportObject> map) {
         Map<String, ReportObject> returnedMap = new HashMap<>();
         for (Map.Entry<String, ReportObject> entry : map.entrySet()) {
@@ -103,6 +127,9 @@ public class reportAnalysis {
         return returnedMap;
     }
 //Unresolved reports
+    /**
+     * Returns how many reports there are that are unresolved
+     */
     public static int numOfUnresolvedReports(Map<String, ReportObject> map) {
         int numOfReports = 0;
         for (Map.Entry<String, ReportObject> entry : map.entrySet()) {
@@ -113,6 +140,9 @@ public class reportAnalysis {
         }
         return numOfReports;
     }
+    /**
+     * Returns a hashmap of unresolved reports
+     */
     public static Map<String, ReportObject> getUnresolvedReports(Map<String, ReportObject> map) {
         Map<String, ReportObject> returnedMap = new HashMap<>();
         for (Map.Entry<String, ReportObject> entry : map.entrySet()) {
