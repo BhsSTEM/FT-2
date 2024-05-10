@@ -40,7 +40,7 @@ public class MachineReasonListFragment extends Fragment
 
 
 
-        setupData();
+       // setupData();
        // setUpList();
 
         return binding.getRoot();

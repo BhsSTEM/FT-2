@@ -73,6 +73,7 @@ public class DetailActivity extends AppCompatActivity implements NavigationView.
 
         drawerLayout = findViewById(R.id.navigation_drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+
         navigationView.setNavigationItemSelectedListener(this);
 
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
@@ -95,7 +96,13 @@ public class DetailActivity extends AppCompatActivity implements NavigationView.
 
     }
 
-
+    @Override
+    public void onStart()
+    {
+        super.onStart();
+        navController = navHostFragment.getNavController();
+        goingToFrag();
+    }
     private void getSelectedShape(){
         Intent previousIntent = getIntent();
         int id = previousIntent.getIntExtra("id", -1);
