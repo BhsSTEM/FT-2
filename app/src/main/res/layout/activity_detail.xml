@@ -13,6 +13,10 @@
 
         <include layout="@layout/machine_detail"/>
     <include layout="@layout/toolbar"/>
+    <FrameLayout
+        android:id="@+id/fragment_container1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 
 

@@ -20,6 +20,40 @@
             android:layout_height="wrap_content"
             app:iconifiedByDefault="false" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/allBtn"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="All"
+                android:backgroundTint="@color/brown"/>
+
+            <Button
+                android:id="@+id/typeBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Machine Type"
+            android:backgroundTint="@color/brown"/>
+
+            <Button
+                android:id="@+id/fieldBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Field"
+                android:backgroundTint="@color/brown"/>
+
+            <Button
+                android:id="@+id/operatorBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Operator"
+                android:backgroundTint="@color/brown"/>
+        </LinearLayout>
+
         <ListView
             android:id="@+id/machine_object_ListView"
             android:layout_width="match_parent"

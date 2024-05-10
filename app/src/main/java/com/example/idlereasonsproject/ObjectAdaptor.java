@@ -18,6 +18,8 @@ public class ObjectAdaptor extends ArrayAdapter<MachineObject> {
         super(context,resource,objectList);
     }
 
+
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         MachineObject object = getItem(position);

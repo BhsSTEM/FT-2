@@ -32,11 +32,6 @@
         app:popUpTo="@id/FieldListFragment"
         app:popUpToInclusive="true"/>
 
-    <action
-        android:id="@+id/action_redirect_to_machine_reason_list"
-        app:destination="@id/MachineReasonListFragment"
-        app:popUpTo="@id/MachineReasonListFragment"
-        app:popUpToInclusive="true"/>
 
 
 
@@ -160,12 +155,6 @@
             app:destination="@id/FieldListFragment"/>
     </fragment>
 
-    <fragment
-        android:id="@+id/MachineReasonListFragment"
-        android:name="com.example.idlereasonsproject.MachineReasonListFragment"
-        tools:layout="@layout/fragment_machine_reason_list">
-
-    </fragment>
 
 
 </navigation>

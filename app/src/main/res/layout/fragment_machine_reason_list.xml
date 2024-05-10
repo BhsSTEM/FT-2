@@ -4,24 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MachineReasonListFragment"
-    >
+    tools:context=".MachineReasonListFragment">
 
-    <!-- Nested LinearLayout to hold SearchView and ListView -->
 
-        >
+   <LinearLayout
+       android:id="@+id/machine_idle_reason_layout"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="70sp"
+           android:layout_gravity="center"
+           android:textSize="50dp"
+           android:text="hello"
+           />
 
-        <ListView
-            android:id="@+id/machine_object_ListView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            />
+       <ListView
+           android:id="@+id/machine_Idle_Reason_ListView"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:layout_weight="1"
+           />
+
+
+   </LinearLayout>
+
 
 
 
