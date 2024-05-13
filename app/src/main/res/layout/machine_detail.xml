@@ -116,6 +116,23 @@
             android:clickable="true"
             tools:ignore="MissingConstraints" />
 
+        <TextView
+            android:id="@+id/idleDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2sp"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="Task"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/idleReasonsButton"
+            app:layout_constraintTop_toBottomOf="@+id/idleOrNot"
+            app:layout_constraintVertical_bias="1.0"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="0dp" />
+
         <View
             android:id="@+id/view2"
             android:layout_width="match_parent"

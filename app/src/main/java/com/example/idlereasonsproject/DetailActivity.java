@@ -124,6 +124,10 @@ NavHostFragment navHostFragment;
         TextView tv4 = (TextView) findViewById(R.id.idleOrNot);
         if (machineAnalysis.isMachineIdle(selectedShape)) {tv4.setText("Idle");}
         else {tv4.setText("Not idle");}
+
+        TextView tv5 = (TextView) findViewById(R.id.idleDetails);
+        if (machineAnalysis.isMachineIdle(selectedShape)) {tv5.setText(machineAnalysis.machinesIdleReport(selectedShape).reportText());}
+        else {tv5.setText("No idle report to display");}
     }
 
     @Override
