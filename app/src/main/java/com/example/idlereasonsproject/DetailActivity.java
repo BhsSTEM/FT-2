@@ -1,6 +1,7 @@
 package com.example.idlereasonsproject;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -31,6 +32,8 @@ import com.example.idlereasonsproject.FBDatabase.MachineObject;
 import com.example.idlereasonsproject.FBDatabase.ReportNode;
 import com.google.android.material.navigation.NavigationView;
 
+import org.checkerframework.checker.units.qual.A;
+
 public class DetailActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
 
@@ -40,6 +43,7 @@ public class DetailActivity extends AppCompatActivity implements NavigationView.
     public ActionBarDrawerToggle actionBarDrawerToggle;
     NavHostFragment navHostFragment;
     NavController navController;
+    ActionBar actionBar;
 
     ActionBarDrawerToggle toggle;
     private AppBarConfiguration appBarConfiguration;
@@ -51,7 +55,18 @@ public class DetailActivity extends AppCompatActivity implements NavigationView.
 
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.fragment_detail);
+
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // Enable back button
+
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_detail);
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+
+
 
         getSelectedShape();
         setValues();
@@ -59,39 +74,6 @@ public class DetailActivity extends AppCompatActivity implements NavigationView.
 
 
 
-        navHostFragment = NavHostFragment.create(R.navigation.nav_graph);
-
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, navHostFragment)
-                .setPrimaryNavigationFragment(navHostFragment)
-                .commit();
-
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-
-        setSupportActionBar(toolbar);
-
-        drawerLayout = findViewById(R.id.navigation_drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-
-        navigationView.setNavigationItemSelectedListener(this);
-
-        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
-
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-
-
-        Button idleReasonButton = findViewById(R.id.idleReasonsButton);
-        idleReasonButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("selectedShapeName", selectedShape.getName());
-
-                navController.navigate(R.id.action_redirect_to_machine_reason_list);
-            }
-        });
 
 
     }
@@ -100,8 +82,8 @@ public class DetailActivity extends AppCompatActivity implements NavigationView.
     public void onStart()
     {
         super.onStart();
-        navController = navHostFragment.getNavController();
-        goingToFrag();
+//        navController = navHostFragment.getNavController();
+        //goingToFrag();
     }
     private void getSelectedShape(){
         Intent previousIntent = getIntent();
@@ -142,114 +124,21 @@ public class DetailActivity extends AppCompatActivity implements NavigationView.
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item)
     {
-        //check what option was clicked
-        if (item.getItemId() == R.id.action_tracker)
-        {
-            navController.navigate(R.id.action_redirect_to_tracker);
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed(); // Handle back button click
+            return true;
         }
-        else if (item.getItemId() == R.id.home_redirect)
-        {
-            navController.navigate(R.id.action_redirect_to_home);
-        }
-        else if (item.getItemId() == R.id.action_machineList)
-        {
-            navController.navigate(R.id.action_redirect_to_machine_list);
-        }
-        else if(item.getItemId() == R.id.action_idleReport) // fix this
-        {
-            switch (reportAnalysis.numOfUnresolvedReports(reportAnalysis.reportsFromReporter(Database.getUserLoggedIn().fullName(), ReportNode.getReportMap()))) {
-                case 0:
-                    Log.i("Report page block", "case 0");
-                    navController.navigate(R.id.action_redirect_to_idle);
-                    break;
-                case 1:
-                    Log.i("Report page block", "case 1");
-                    Toast.makeText(this, "You already have a report active, please resolve that before making another report", Toast.LENGTH_LONG).show();
-                    break;
-                default:
-                    Log.i("Report page block", "default");
-                    Log.e("Reports in database", "More than 1 unresolved report (or maybe less than 0 somehow) from user " + Database.getUserLoggedIn().fullName());
-                    Toast.makeText(this, "You have more than one report active, this is likely the result of some error", Toast.LENGTH_LONG).show();
-                    break;
-            }
-        }
-        else if (item.getItemId() == android.R.id.home)
-        {
-            navController.navigateUp();
-        }
-        else if(item.getItemId() == R.id.action_fieldList)
-        {
-            navController.navigate(R.id.action_redirect_to_fieldlist);
-        }
+        return super.onOptionsItemSelected(item);
 
-        drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     @Override
     public boolean onSupportNavigateUp ()
     {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_detail);
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }
 
-    //method to set navigation drawer to be enabled or not
-    public void setDrawerEnabled(boolean enabled)
-    {
-        int lockMode = enabled ? DrawerLayout.LOCK_MODE_UNLOCKED :
-                DrawerLayout.LOCK_MODE_LOCKED_CLOSED;
-        drawerLayout.setDrawerLockMode(lockMode);
-        toggle.setDrawerIndicatorEnabled(enabled);
-    }
 
-    //method to check if we are going to a specific fragment when the activity is created
-    private void goingToFrag()
-    {
-
-        //statement to check if its going back to the default fragment(domain fragment)
-        if(getIntent().getExtras() == null)
-        {
-            return;
-        }
-
-        int intentFragId = getIntent().getExtras().getInt("frgToLoad");
-
-        //check what option was clicked
-        if (intentFragId == R.id.action_tracker)
-        {
-            navController.navigate(R.id.action_redirect_to_tracker);
-        }
-        else if (intentFragId == R.id.home_redirect)
-        {
-            navController.navigate(R.id.action_redirect_to_home);
-        }
-        else if (intentFragId == R.id.action_machineList)
-        {
-            navController.navigate(R.id.action_redirect_to_machine_list);
-        }
-        else if(intentFragId == R.id.action_idleReport)
-        {
-            switch (reportAnalysis.numOfUnresolvedReports(reportAnalysis.reportsFromReporter(Database.getUserLoggedIn().fullName(), ReportNode.getReportMap()))) {
-                case 0:
-                    Log.i("Report page block", "case 0");
-                    navController.navigate(R.id.action_redirect_to_idle);
-                    break;
-                case 1:
-                    Log.i("Report page block", "case 1");
-                    Toast.makeText(this,"You already have a report active, please resolve that before making another report",Toast.LENGTH_LONG).show();
-                    break;
-                default:
-                    Log.i("Report page block", "default");
-                    Log.e("Reports in database", "More than 1 unresolved report (or maybe less than 0 somehow) from user " + Database.getUserLoggedIn().fullName());
-                    Toast.makeText(this,"You have more than one report active, this is likely the result of some error",Toast.LENGTH_LONG).show();
-                    break;
-
-            }
-        }
-        else
-        {
-            navController.navigate(R.id.action_redirect_to_home);
-        }
-    }
 }
