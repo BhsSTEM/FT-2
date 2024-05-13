@@ -97,7 +97,7 @@ NavHostFragment navHostFragment;
     //selectedShape seems to be the selected machine
     private void getSelectedShape() {
         Intent previousIntent = getIntent();
-        int pos = previousIntent.getIntExtra("id", -1);
+        int pos = previousIntent.getIntExtra("pos", -1);
         // Ensure pos is not null and is a valid integer before converting
 
         if (pos >= 0 && pos < MachineListFragment.machineList.size()) {
@@ -121,6 +121,9 @@ NavHostFragment navHostFragment;
         TextView tv3 = (TextView) findViewById(R.id.machineTask);
         tv3.setText("Machine Task: "+ selectedShape.getTask());
 
+        TextView tv4 = (TextView) findViewById(R.id.idleOrNot);
+        if (machineAnalysis.isMachineIdle(selectedShape)) {tv4.setText("Idle");}
+        else {tv4.setText("Not idle");}
     }
 
     @Override
