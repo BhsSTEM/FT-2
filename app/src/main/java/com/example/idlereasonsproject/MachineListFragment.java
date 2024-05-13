@@ -122,7 +122,7 @@ public class MachineListFragment extends Fragment {
                 Integer selectedId = selectedMachine.getVal();
                 Log.d("MachineListFragment", "Selected Machine ID: " + selectedId); // Print the selected ID
                 Intent showDetail = new Intent(requireContext(), DetailActivity.class);
-                showDetail.putExtra("id", selectedId);
+                showDetail.putExtra("pos", position);
                 startActivity(showDetail);
             }
         });

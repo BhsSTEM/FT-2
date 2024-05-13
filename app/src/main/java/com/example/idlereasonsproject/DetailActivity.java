@@ -96,7 +96,7 @@ NavHostFragment navHostFragment;
 
     private void getSelectedShape(){
         Intent previousIntent = getIntent();
-        int id = previousIntent.getIntExtra("id", -1);
+        int id = previousIntent.getIntExtra("pos", -1);
 
         Log.d("DetailActivity", "Parsed ID: " + id);
         Log.d("DetailActivity", "Machine List Size: " + MachineListFragment.machineList.size());
@@ -107,14 +107,18 @@ NavHostFragment navHostFragment;
         }
         // Ensure parsedStringId is not null and is a valid integer before converting
 
-            if (id >= 0 && id < MachineListFragment.machineList.size()) {
-                selectedShape = MachineListFragment.machineList.get(id);
-                Log.d("DetailActivity", "selected shape: " + selectedShape.getVal() );
+        if (id >= 0 && id < MachineListFragment.machineList.size()) {
+            selectedShape = MachineListFragment.machineList.get(id);
+            Log.d("DetailActivity", "selected shape: " + selectedShape.getVal() );
 
-            } else {
-                Log.e("DetailActivity", "Invalid ID: " + id);
-            }
+        } else {
+            Log.e("DetailActivity", "Invalid ID: " + id);
         }
+    }
+    private void getSelectedShape2() {
+        Intent previousIntent = getIntent();
+        int id = previousIntent.getIntExtra("id", -1);
+    }
 
 
     private void setValues(){
