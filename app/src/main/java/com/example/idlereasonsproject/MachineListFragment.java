@@ -118,9 +118,6 @@ public class MachineListFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MachineObject selectedMachine = (MachineObject) listView.getItemAtPosition(position);
-                Integer selectedId = selectedMachine.getVal();
-                Log.d("MachineListFragment", "Selected Machine ID: " + selectedId); // Print the selected ID
                 Intent showDetail = new Intent(requireContext(), DetailActivity.class);
                 showDetail.putExtra("pos", position);
                 startActivity(showDetail);

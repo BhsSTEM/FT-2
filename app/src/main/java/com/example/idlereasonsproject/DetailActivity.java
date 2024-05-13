@@ -94,30 +94,19 @@ NavHostFragment navHostFragment;
 
     }
 
-    private void getSelectedShape(){
+    //selectedShape seems to be the selected machine
+    private void getSelectedShape() {
         Intent previousIntent = getIntent();
-        int id = previousIntent.getIntExtra("pos", -1);
+        int pos = previousIntent.getIntExtra("id", -1);
+        // Ensure pos is not null and is a valid integer before converting
 
-        Log.d("DetailActivity", "Parsed ID: " + id);
-        Log.d("DetailActivity", "Machine List Size: " + MachineListFragment.machineList.size());
-        Log.e("MachineListFragment", "machineList size: " + MachineListFragment.machineList.size()); // Log the size of machineList
-        for (MachineObject machine : MachineListFragment.machineList) {
-            Integer val = machine.getVal();
-            Log.d("MachineListFragment", "Machine ID: " + val);
-        }
-        // Ensure parsedStringId is not null and is a valid integer before converting
-
-        if (id >= 0 && id < MachineListFragment.machineList.size()) {
-            selectedShape = MachineListFragment.machineList.get(id);
-            Log.d("DetailActivity", "selected shape: " + selectedShape.getVal() );
+        if (pos >= 0 && pos < MachineListFragment.machineList.size()) {
+            selectedShape = MachineListFragment.machineList.get(pos);
+            Log.d("DetailActivity", "selected shape: " + MachineListFragment.machineList.get(pos).getVal() );
 
         } else {
-            Log.e("DetailActivity", "Invalid ID: " + id);
+            Log.e("DetailActivity", "Invalid position: " + pos);
         }
-    }
-    private void getSelectedShape2() {
-        Intent previousIntent = getIntent();
-        int id = previousIntent.getIntExtra("id", -1);
     }
 
 
