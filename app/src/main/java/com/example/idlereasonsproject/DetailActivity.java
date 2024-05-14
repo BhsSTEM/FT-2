@@ -111,7 +111,7 @@ NavHostFragment navHostFragment;
 
 
     private void setValues(){
-        TextView tv = (TextView) findViewById(R.id.text_view);
+        TextView tv = (TextView) findViewById(R.id.machineName);
 
         tv.setText("Machine Name: " + selectedShape.getName());
 

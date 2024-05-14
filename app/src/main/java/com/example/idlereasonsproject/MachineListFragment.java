@@ -97,26 +97,6 @@ public class MachineListFragment extends Fragment {
         }
     }
 
-    private void setUpList1(){
-        if(binding != null){
-            listView = binding.machineObjectListView;
-            if(listView != null){
-                ObjectAdaptor adaptor = new ObjectAdaptor(requireContext(), 0,  machineListToDataObject());
-                listView.setAdapter(adaptor);
-
-                Log.d("MachineListFragment", "Current machineList: " + machineList.toString());
-            }
-            else{
-                Log.e("MachineListFragment", "list view is null");
-            }
-        }
-        else{
-            Log.e("MachineListFragment", "binding is null");
-        }
-
-
-    }
-
     private void setUpOnclickListener(){
         Log.d("MainActivity", "ListView value: " + listView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -185,11 +165,7 @@ public class MachineListFragment extends Fragment {
 
     private ArrayList<DataObject> machineListToDataObject()
     {
-        ArrayList<DataObject> list = new ArrayList<>();
-
-        list.addAll(machineList);
-
-        return list;
+        return new ArrayList<>(machineList);
     }
 
 
