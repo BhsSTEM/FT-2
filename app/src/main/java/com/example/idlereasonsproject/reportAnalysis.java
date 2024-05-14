@@ -3,6 +3,8 @@ package com.example.idlereasonsproject;
 import android.util.Log;
 import com.example.idlereasonsproject.FBDatabase.ReportNode;
 import com.example.idlereasonsproject.FBDatabase.ReportObject;
+
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 public class reportAnalysis {
@@ -69,6 +71,13 @@ public class reportAnalysis {
      * Assumes the report has been resolved, otherwise it'll return a negative value which would be weird.*/
     public static long timeBetweenReportAndResolution(ReportObject report) {
         return report.getTimeOfResolution().getTime() - report.getTimeOfSubmission().getTime();
+    }
+
+    /**
+     * Returns the time (in milliseconds) between when the report was filed and now*/
+    public static long timeBetweenReportAndNow(ReportObject report) {
+        Date now = new Date();
+        return now.getTime() - report.getTimeOfSubmission().getTime();
     }
 //Reports from a reporter
     /**
