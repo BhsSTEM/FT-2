@@ -85,10 +85,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if(polygonPoints.size() > 1)
                 {
                     //polygonPoints.size()-1
-                    //int index = setNewPoint(latLng);
-                    markerMap.put(marker, polygonPoints.size()-1);
-                    polygonPoints.add(polygonPoints.size()-1, latLng);
-
+                    int index = setNewPoint(latLng);
+                    Log.v("setNewPoint", String.valueOf(index));
+                    markerMap.put(marker, index);
+                    polygonPoints.add(index, latLng);
 
                     polygon.setPoints(polygonPoints);
                 }
@@ -104,10 +104,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     polygon = mMap.addPolygon(polygonOptions);
                 }
+
+                Log.v("PolygonPoints", String.valueOf(polygonPoints.size()) + "\n" + polygonPoints.toString());
+
             }});
 
+
         mMap.setOnMarkerClickListener(this);
-        mMap.setOnMarkerDragListener(this);
+        //mMap.setOnMarkerDragListener(this);
     }
 
     @Override
@@ -160,7 +164,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     {
         if(polygonPoints.size() <= 3)
         {
-            return 1;
+            return polygonPoints.size()-1;
         }
 
         int smallestIndex = 0;
@@ -175,6 +179,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             if(dist < smallestDist)
             {
+                secondSmallestIndex = smallestIndex;
+                secondSmallestDist = smallestDist;
+
                 smallestIndex = i;
                 smallestDist = dist;
             }
@@ -185,8 +192,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
 
-        Log.v("index", smallestIndex + " " + smallestDist + "\n" + secondSmallestIndex + " " + secondSmallestDist +"\n" + polygonPoints.toString());
-        return Math.min(smallestIndex, secondSmallestIndex);
+        Log.v("index", point.toString()+ "\n" + smallestIndex + " " + smallestDist + "\n" + secondSmallestIndex + " " + secondSmallestDist);
+        int minIndex = Math.min(smallestIndex, secondSmallestIndex);
+
+        //stops the start point from being replaced
+        if(minIndex == 0)
+        {
+            minIndex = secondSmallestIndex;
+        }
+
+        return smallestIndex;
     }
 
     public double findDistance(LatLng pnt1, LatLng pnt2)
