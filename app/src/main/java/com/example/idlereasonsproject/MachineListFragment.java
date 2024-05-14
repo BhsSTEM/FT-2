@@ -3,6 +3,7 @@ package com.example.idlereasonsproject;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import com.example.idlereasonsproject.FBDatabase.MachineObject;
 import com.example.idlereasonsproject.databinding.FragmentMachineListBinding;
+import com.example.idlereasonsproject.iface.DataObject;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.Map;
@@ -24,6 +26,8 @@ import java.util.Map;
 public class MachineListFragment extends Fragment {
     private FragmentMachineListBinding binding;
     private ListView listView;
+    private int blahCounter = 0;
+
 
     public static ArrayList<MachineObject> machineList = new ArrayList<>();
 
@@ -97,7 +101,7 @@ public class MachineListFragment extends Fragment {
         if(binding != null){
             listView = binding.machineObjectListView;
             if(listView != null){
-                ObjectAdaptor adaptor = new ObjectAdaptor(requireContext(), 0, machineList);
+                ObjectAdaptor adaptor = new ObjectAdaptor(requireContext(), 0,  machineListToDataObject());
                 listView.setAdapter(adaptor);
 
                 Log.d("MachineListFragment", "Current machineList: " + machineList.toString());
@@ -127,7 +131,7 @@ public class MachineListFragment extends Fragment {
 
     private void setUpList() {
         if (getContext() != null) {
-            ObjectAdaptor adapter = new ObjectAdaptor(getContext(), 0, machineList);
+            ObjectAdaptor adapter = new ObjectAdaptor(getContext(), 0, machineListToDataObject());
             listView.setAdapter(adapter);
         }
     }
@@ -178,6 +182,28 @@ public class MachineListFragment extends Fragment {
 
         dialog.show();
     }
+
+    private ArrayList<DataObject> machineListToDataObject()
+    {
+        ArrayList<DataObject> list = new ArrayList<>();
+
+        list.addAll(machineList);
+
+        return list;
+    }
+
+
+
+
+
+
+
+
+    // public void showIdleDialog(){
+  //      Dialog dialog = new Dialog(requireContext());
+    //    dialog.setContentView(R.layout.idle_instances_popup);
+     //   dialog.show();
+   // }
 
     @Override
     public void onDestroyView() {

@@ -1,11 +1,14 @@
 package com.example.idlereasonsproject.FBDatabase;
 import android.util.Log;
 
+import com.example.idlereasonsproject.iface.DataObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MachineObject {
+public class MachineObject implements DataObject
+{
     String name = "";
     String type = "";
 

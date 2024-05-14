@@ -1,5 +1,6 @@
 package com.example.idlereasonsproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -41,8 +42,11 @@ public class HomeFragment extends Fragment {
         binding.trackerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /*
                 NavHostFragment.findNavController(HomeFragment.this)
-                        .navigate(R.id.action_HomeFragment_to_TrackerFragment);
+                        .navigate(R.id.action_HomeFragment_to_TrackerFragment);*/
+                Intent intent = new Intent(requireContext(), MapsActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -105,6 +109,7 @@ public class HomeFragment extends Fragment {
                         .navigate(R.id.action_HomeFragment_to_FieldList);
             }
         });
+
     }
 
     @Override

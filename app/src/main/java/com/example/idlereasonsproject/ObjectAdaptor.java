@@ -8,25 +8,28 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 
+import com.example.idlereasonsproject.FBDatabase.FieldObject;
 import com.example.idlereasonsproject.FBDatabase.MachineObject;
+import com.example.idlereasonsproject.iface.DataObject;
 
 import java.util.ArrayList;
 
-public class ObjectAdaptor extends ArrayAdapter<MachineObject> {
+public class ObjectAdaptor extends ArrayAdapter<DataObject> {
 
-    public ObjectAdaptor(Context context, int resource, ArrayList<MachineObject> objectList){
-        super(context,resource,objectList);
+    public ObjectAdaptor(Context context, int resource, ArrayList<DataObject> objectList){
+        super(context, resource, objectList);
     }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        MachineObject object = getItem(position);
+        DataObject object = getItem(position);
 
         if(convertView == null){
-        convertView = LayoutInflater.from(getContext()).inflate(R.layout.machine_cell, parent, false);
+        convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_cell, parent, false);
         }
 
-        TextView tv = (TextView) convertView.findViewById(R.id.machineName);
+        TextView tv = (TextView) convertView.findViewById(R.id.text_view);
 
         tv.setText(object.getName());
 
