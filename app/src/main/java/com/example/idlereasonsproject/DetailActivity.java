@@ -55,16 +55,25 @@ public class DetailActivity extends AppCompatActivity implements NavigationView.
 
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.fragment_detail);
+        setContentView(R.layout.activity_detail);
 
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.just_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // Enable back button
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_detail);
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        //navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_detail);
+
+        //create a navigation fragment
+        navHostFragment = NavHostFragment.create(R.navigation.nav_graph_detail);
+
+        //replace fragment container in navigation_drawer.xml with nav fragment
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container1, navHostFragment)
+                .setPrimaryNavigationFragment(navHostFragment)
+                .commit();
+
+
 
 
 
@@ -82,7 +91,12 @@ public class DetailActivity extends AppCompatActivity implements NavigationView.
     public void onStart()
     {
         super.onStart();
-//        navController = navHostFragment.getNavController();
+
+        navController = navHostFragment.getNavController();
+
+       // AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+       // NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+
         //goingToFrag();
     }
     private void getSelectedShape(){
@@ -125,8 +139,7 @@ public class DetailActivity extends AppCompatActivity implements NavigationView.
     public boolean onNavigationItemSelected(@NonNull MenuItem item)
     {
         if (item.getItemId() == android.R.id.home) {
-            onBackPressed(); // Handle back button click
-            return true;
+            navController.navigateUp();
         }
         return super.onOptionsItemSelected(item);
 

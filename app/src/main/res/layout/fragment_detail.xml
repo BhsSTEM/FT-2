@@ -12,8 +12,8 @@
 
 
 
-    <include layout="@layout/toolbar"></include>
-    <include layout="@layout/machine_detail"/>
+<!--    <include layout="@layout/toolbar"></include>-->
+<!--    <include layout="@layout/machine_detail"/>-->
 
 
 

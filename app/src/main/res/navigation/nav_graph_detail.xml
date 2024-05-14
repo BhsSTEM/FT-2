@@ -20,13 +20,11 @@
     </fragment>
 
 
-
-
-
-
     <fragment
         android:id="@+id/detail_fragment"
         android:name="com.example.idlereasonsproject.DetailFragment"
         tools:layout="@layout/fragment_detail">
     </fragment>
+
+
 </navigation>
