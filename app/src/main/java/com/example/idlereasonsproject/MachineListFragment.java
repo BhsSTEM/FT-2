@@ -14,23 +14,16 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.example.idlereasonsproject.FBDatabase.Database;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
 import com.example.idlereasonsproject.FBDatabase.MachineObject;
 import com.example.idlereasonsproject.databinding.FragmentMachineListBinding;
 import com.example.idlereasonsproject.iface.DataObject;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Objects;
-
 
 public class MachineListFragment extends Fragment {
-
-
     private FragmentMachineListBinding binding;
     private ListView listView;
     private int blahCounter = 0;
@@ -47,8 +40,9 @@ public class MachineListFragment extends Fragment {
         binding = FragmentMachineListBinding.inflate(inflater, container, false);
         listView = binding.machineObjectListView;
 
-        setUpList1();
         setupData();
+        setUpList();
+
         setUpOnclickListener();
 
         return binding.getRoot();
@@ -58,9 +52,7 @@ public class MachineListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         listView = binding.machineObjectListView;
 
-        // Retrieve machineList data from MainActivity and update the adapter
-        //machineList = MainActivity.machineList;
-        setUpList();
+        //setUpList();
         FloatingActionButton addMachineButton = view.findViewById(R.id.addMachineButton);
         addMachineButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,51 +60,22 @@ public class MachineListFragment extends Fragment {
                 showAddMachineDialog(v);
             }
         });
-/*
-Database.MachineNode.addMachine()
-        binding.idleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showIdleDialog();
-            }
-        });
 
-*/
     }
+
     private void setupData(){
-        //MachineObject combine = new MachineObject("0","john", "Combine");
-      //  machineList.add(combine);
 
-       // MachineObject tractor = new MachineObject("1","bob", "Tractor" );
-       // machineList.add(tractor);
-        /*
-        Map<String, MachineObject> machineMap = Database.machineNode.getMachineMap();
-
-
-        for(Map.Entry<String, MachineObject> entry : machineMap.entrySet()){
-
-            machineList.add(entry.getValue().getName());
-        }
-    setUpList1();
-
-
-        Map<String, MachineObject> machineMap = Database.machineNode.getMachineMap();
-        Log.e("MachineListFragment", machineMap.toString());
-
-        machineList.clear();
-
-        // Add values from machineMap to machineList
-        for (Map.Entry<String, MachineObject> entry : machineMap.entrySet()) {
-            machineList.add(entry.getValue());
-        }
-
-        // Notify the adapter that the data set has changed
-        ((ObjectAdaptor) listView.getAdapter()).notifyDataSetChanged();
-*/
         Map<String, MachineObject> machineMap = Database.machineNode.getMachineMap();
         Log.e("MachineListFragment", "machineMap size: " + machineMap.size()); // Log the size of machineMap
 
         machineList.clear();
+
+        //For testing
+        /*ArrayList<MachineObject> sortedMachineList = machineAnalysis.alphabeticallySortMachineList(machineMap);
+        for (int i = 0; i < sortedMachineList.size(); i++) {
+            machineList.add(sortedMachineList.get(i));
+            Log.i("sortedMachineList", sortedMachineList.get(i).getName());
+        }*/
 
         // Add values from machineMap to machineList
         for (Map.Entry<String, MachineObject> entry : machineMap.entrySet()) {
@@ -122,7 +85,10 @@ Database.MachineNode.addMachine()
         }
 
         Log.e("MachineListFragment", "machineList size: " + machineList.size()); // Log the size of machineList
-
+        for (MachineObject machine : machineList) {
+            Integer id = machine.getVal();
+            Log.d("MachineListFragment", "Machine ID: " + id);
+        }
         // Notify the adapter that the data set has changed
         if (listView.getAdapter() != null) {
             ((ObjectAdaptor) listView.getAdapter()).notifyDataSetChanged();
@@ -131,35 +97,13 @@ Database.MachineNode.addMachine()
         }
     }
 
-    private void setUpList1(){
-        if(binding != null){
-            listView = binding.machineObjectListView;
-            if(listView != null){
-                ObjectAdaptor adaptor = new ObjectAdaptor(requireContext(), 0,  machineListToDataObject());
-                listView.setAdapter(adaptor);
-
-                Log.d("MachineListFragment", "Current machineList: " + machineList.toString());
-            }
-            else{
-                Log.e("MachineListFragment", "list view is null");
-            }
-        }
-        else{
-            Log.e("MachineListFragment", "binding is null");
-        }
-
-
-    }
-
-
     private void setUpOnclickListener(){
         Log.d("MainActivity", "ListView value: " + listView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MachineObject selectShape = (MachineObject) (listView.getItemAtPosition(position));
                 Intent showDetail = new Intent(requireContext(), DetailActivity.class);
-                showDetail.putExtra("id",selectShape.getId());
+                showDetail.putExtra("pos", position);
                 startActivity(showDetail);
             }
         });
@@ -178,6 +122,8 @@ Database.MachineNode.addMachine()
 
         EditText editTextName = dialog.findViewById(R.id.editTextName);
         EditText editTextType = dialog.findViewById(R.id.editTextType);
+        EditText editTextOperator = dialog.findViewById(R.id.editTextOperatorName);
+        EditText editTextMachineTask = dialog.findViewById(R.id.editTextMachineTask);
 
         Button addButton = dialog.findViewById(R.id.addButton); // Use existing addButton reference
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -185,16 +131,19 @@ Database.MachineNode.addMachine()
             public void onClick(View v) {
                 String name = editTextName.getText().toString().trim();
                 String type = editTextType.getText().toString().trim();
-                String blah = String.valueOf(blahCounter++);
+                String operator = editTextOperator.getText().toString().trim();
+                String task = editTextMachineTask.getText().toString().trim();
 
-                ArrayList<String>  blue = new ArrayList<>();
+                Map<String, MachineObject> machineMap = Database.machineNode.getMachineMap();
+                Log.e("MachineListFragment", "machineMap size: " + machineMap.size());
+                Integer newId = machineMap.size();
 
                 if (!name.isEmpty() && !type.isEmpty()) {
                     // Create a new MachineObject and add it to the list
-                    MachineObject newMachine = new MachineObject(blah, name, type, blue);
 
+                    Log.d("MachineListFragment", "Assigning new ID: " + newId + " to machine: " + name);
+                    MachineObject newMachine = new MachineObject(newId, name, type, operator, task);
                     machineList.add(newMachine);
-
                     Log.d("MachineListFragment", "Current machineList: " + machineList.toString());
 
                     Database.machineNode.addMachine(newMachine);
@@ -206,7 +155,7 @@ Database.MachineNode.addMachine()
                     dialog.dismiss();
                 } else {
                     // Show a message if either name or type is empty
-                    Toast.makeText(requireContext(), "Please enter both name and type", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "Please enter both name, type and operator", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -216,11 +165,7 @@ Database.MachineNode.addMachine()
 
     private ArrayList<DataObject> machineListToDataObject()
     {
-        ArrayList<DataObject> list = new ArrayList<>();
-
-        list.addAll(machineList);
-
-        return list;
+        return new ArrayList<>(machineList);
     }
 
 
@@ -241,5 +186,4 @@ Database.MachineNode.addMachine()
         super.onDestroyView();
         binding = null;
     }
-
 }

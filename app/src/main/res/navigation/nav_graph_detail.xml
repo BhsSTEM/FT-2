@@ -4,6 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_detail"
     app:startDestination="@id/detail_fragment">
+
+
+
+    <fragment
+        android:id="@+id/MachineIdleReasons"
+        android:name="com.example.idlereasonsproject.MachineReasonListFragment"
+        tools:layout="@layout/fragment_machine_reason_list">
+
+    </fragment>
+
+
+
+
+
     <fragment
         android:id="@+id/detail_fragment"
         android:name="com.example.idlereasonsproject.DetailFragment"

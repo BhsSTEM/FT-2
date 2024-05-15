@@ -1,5 +1,8 @@
 package com.example.idlereasonsproject;
 
+import static com.example.idlereasonsproject.FBDatabase.Database.getCurrentReport;
+import static com.example.idlereasonsproject.FBDatabase.ReportNode.resolveReport;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -12,17 +15,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.idlereasonsproject.FBDatabase.Database;
 import com.example.idlereasonsproject.FBDatabase.MachineObject;
+import com.example.idlereasonsproject.FBDatabase.ReportNode;
 import com.example.idlereasonsproject.FBDatabase.ReportObject;
 import com.example.idlereasonsproject.databinding.ReportIdleBinding;
 import com.google.android.material.textfield.TextInputLayout;
-
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Objects;
@@ -34,13 +36,9 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
     String machine = "";
     String reason = "";
     String furtherInformation = "";
-
-    Map<String, MachineObject> machineMap = Database.machineNode.getMachineMap();
-    ArrayList<String> machineList = new ArrayList<>();
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
+                             Bundle savedInstanceState
     ) {
         binding = ReportIdleBinding.inflate(inflater, container,false);
         return binding.getRoot();
@@ -50,17 +48,14 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
         super.onViewCreated(view, savedInstanceState);
         //Field Spinner
         Spinner fieldSpinner = getView().findViewById(R.id.report_idle_field);
-
         // Create an ArrayAdapter using the string array and a default spinner layout.
         ArrayAdapter<CharSequence> fieldAdapter = ArrayAdapter.createFromResource(
                 getActivity(),
                 R.array.fields_array,
                 android.R.layout.simple_spinner_item
         );
-
         // Specify the layout to use when the list of choices appears.
         fieldAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         // Apply the adapter to the spinner.
         fieldSpinner.setAdapter(fieldAdapter);
         fieldSpinner.setOnItemSelectedListener(this);
@@ -71,6 +66,8 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
 
         //Creating an array to use for this specfic spinner, the goal is to have this in the future be pulled from somewhere else instead of just created here
         //Idealy, in the future, if the user is marked as using a machine that one would pop up first, and if they're using multiple, those would pop up first
+        ArrayList<String> machineList = new ArrayList<>();
+        Map<String, MachineObject> machineMap = Database.machineNode.getMachineMap();
 
         for(MachineObject machine: machineMap.values())
         {
@@ -78,8 +75,7 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
         }
 
         // Create an ArrayAdapter using the string array and a default spinner layout.
-        ArrayAdapter<String> machineAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, machineList.toArray());
-
+        ArrayAdapter<String> machineAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, machineList);
         // Specify the layout to use when the list of choices appears.
         machineAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -110,22 +106,25 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
         TextInputLayout furtherInfoTextBox = getView().findViewById(R.id.report_idle_further_information);
 
         //Are you sure? Pop up
+        //This is where report object is sent to the database and create and everything
         DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
             switch (which){
                 case DialogInterface.BUTTON_POSITIVE:
                     //Yes button clicked
                     furtherInformation = Objects.requireNonNull(furtherInfoTextBox.getEditText()).getText().toString();
                     ReportObject report = new ReportObject(location, machine, reason, furtherInformation);
-
+                    slothfulNotifications.idleReportNotifications(getContext(), getActivity(), report);
                     //method to send to database
                     Database.reportNode.addReportToDB(report);
+                    Database.setCurrentReport(report);
 
                     NavHostFragment.findNavController(ReportIdleFragment.this)
                             .navigate(R.id.action_ReportIdle_to_HomeFragment);
                     break;
 
                 case DialogInterface.BUTTON_NEGATIVE:
-                    //No button clicked
+                    //No button clicked, used for debugging purposes
+                    String loggedInUser = Database.getUserLoggedIn().getFirstName() + " " + Database.getUserLoggedIn().getLastName();
                     break;
             }
         };
@@ -158,8 +157,14 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
                 R.array.fields_array,
                 android.R.layout.simple_spinner_item
         );
+        ArrayList<String> machineList = new ArrayList<>();
+        Map<String, MachineObject> machineMap = Database.machineNode.getMachineMap();
 
-        ArrayAdapter<String> machineAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, machineList);
+        for(MachineObject machine: machineMap.values())
+        {
+            machineList.add(machine.getName());
+        }
+        ArrayAdapter<String> machineAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, machineList);
         ArrayAdapter<CharSequence> reasonAdapter = ArrayAdapter.createFromResource(
                 getActivity(),
                 R.array.reasons_array,
@@ -173,12 +178,12 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
             Log.i("Chosen Spinner", chosenSpinner);
         } else if (machineAdapter.getCount() >= posPlusOne && result.equals(machineAdapter.getItem(position))) {
             chosenSpinner = "Machine";
-            Log.v("Chosen Spinner", chosenSpinner+"\n" + machineAdapter+ " " + machineAdapter.getCount());
+            Log.i("Chosen Spinner", chosenSpinner);
         }  else if (reasonAdapter.getCount() >= posPlusOne && result == reasonAdapter.getItem(position)) {
             chosenSpinner = "Reason";
             Log.i("Chosen Spinner", chosenSpinner);
         } else {
-            Log.w("Chosen Spinner", "Cannot find chosen spinner"+"\n" + machineAdapter+ " " + machineAdapter.getCount());
+            Log.w("Chosen Spinner", "Cannot find chosen spinner");
         }
 
         //Changing correct variable
@@ -199,5 +204,7 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
 
     @Override
     public void onNothingSelected(AdapterView<?> parent)
-    {}
+    {
+
+    }
 }

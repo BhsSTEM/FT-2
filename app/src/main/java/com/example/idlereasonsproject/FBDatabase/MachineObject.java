@@ -12,7 +12,11 @@ public class MachineObject implements DataObject
     String name = "";
     String type = "";
 
-    String id ="";
+    Integer val;
+
+    String operator = "";
+
+    String task = "";
     ArrayList<String> operators = new ArrayList<String>();
 
     //object to hold keys of reports
@@ -23,36 +27,13 @@ public class MachineObject implements DataObject
     public MachineObject() {}
 
 
-    public MachineObject(String machineId, String machineName, String machineType)
+    public MachineObject(Integer machineId, String machineName, String machineType, String machineOperator, String machineTask)
     {
-        id = machineId;
+        val = machineId;
         name = machineName;
         type = machineType;
-    }
-
-    //constructor with name and type
-    public MachineObject(String machineName, String machineType)
-    {
-        name = machineName;
-        type = machineType;
-    }
-
-
-
-    public MachineObject(String machineName, String machineType, ArrayList<String> operatorsList)
-    {
-        name = machineName;
-        type = machineType;
-        operators = operatorsList;
-    }
-
-
-    public MachineObject(String machineId, String machineName, String machineType, ArrayList<String> operatorsList)
-    {
-        id = machineId;
-        name = machineName;
-        type = machineType;
-        operators = operatorsList;
+        operator = machineOperator;
+        task = machineTask;
     }
 
     public void addOperator (String addedOperator)
@@ -85,9 +66,7 @@ public class MachineObject implements DataObject
     public String getName() {return name;}
     public String getType() {return type;}
     public ArrayList<String> getOperatorsArrayList() {return operators; }
-
     public ArrayList<String> getReports() { return reports; }
-
     public void addReport(String reportObjKey) { reports.add(reportObjKey); }
 
     //Map
@@ -101,7 +80,9 @@ public class MachineObject implements DataObject
         return map;
     }
 
-    public String getId() {
-        return id;
+    public int getVal(){return val;}
+    public String getOperator(){
+        return operator;
     }
+    public String getTask() {return task;}
 }
