@@ -122,6 +122,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             navController.navigate(R.id.action_redirect_to_fieldlist);
         }
+        else if(item.getItemId() == R.id.action_settings)
+        {
+            Intent intent = new Intent(getBaseContext(), AccountActivity.class);
+            startActivity(intent);
+
+        }
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

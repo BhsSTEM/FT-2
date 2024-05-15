@@ -9,12 +9,14 @@ public class User
     private String lastName;
     private String password;
 
+    private String email;
     public User(){} // Default constructor required for calls to DataSnapshot.getValue(User.class)
-    public User(String _firstName, String _lastName, String _password)
+    public User(String _firstName, String _lastName, String _password, String _email)
     {
         firstName = _firstName;
         lastName = _lastName;
         password = _password;
+        email = _email;
     }
     
     //store object variables in a map
@@ -24,6 +26,7 @@ public class User
         map.put("firstName", firstName);
         map.put("lastName", lastName);
         map.put("password", password);
+        map.put("email", email);
 
         return map;
     }
@@ -42,4 +45,6 @@ public class User
     {
         return password;
     }
+
+    public String getEmail() { return email; }
 }

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".AccountActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/green"
+        app:title="@string/app_name"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <!-- title -->
+    <TextView
+        android:id="@+id/account_title_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-1dp"
+        android:text="Account"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:background="@color/green"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"/>
+
+    <!-- maybe an image for account? -->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/account_title_text_view">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- name info -->
+            <TextView
+                android:id="@+id/name_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/account_text_info_horizontal_margins"
+                android:text="Name:"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textSize="@dimen/account_text_info_text_size"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/name_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="name input"
+                android:textAlignment="center"
+                android:textSize="@dimen/account_text_info_text_size"
+                android:layout_toEndOf="@id/name_title"/>
+
+            <!-- email info -->
+            <TextView
+                android:id="@+id/email_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/account_text_info_horizontal_margins"
+                android:text="email:"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textSize="@dimen/account_text_info_text_size"
+                android:layout_below="@id/name_title"/>
+
+            <TextView
+                android:id="@+id/email_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="email input"
+                android:textAlignment="center"
+                android:textSize="@dimen/account_text_info_text_size"
+                android:layout_alignTop="@id/email_title"
+                android:layout_toEndOf="@id/email_title" />
+
+            <!-- map stuff -->
+
+            <!-- if no farm map has been set -->
+            <TextView
+            android:id="@+id/no_map_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No map has been set"
+            android:textAlignment="center"
+            android:textSize="@dimen/account_text_info_text_size"
+            android:textColor="@color/error_red"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/email_text_view"/>
+
+            <FrameLayout
+                android:id="@+id/map_frame"
+                android:layout_width="match_parent"
+                android:layout_height="450dp"
+                android:layout_margin="8dp"
+                android:layout_below="@id/no_map_error"
+                android:layout_centerHorizontal="true">
+
+                <com.google.android.gms.maps.MapView xmlns:map="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/mapView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clickable="false"
+                    map:liteMode="true"
+                    map:mapType="satellite"
+                    map:cameraZoom="5" />
+            </FrameLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Edit map"
+                android:textSize="13dp"
+                android:layout_alignBottom="@id/map_frame"
+                android:layout_alignEnd="@id/map_frame"/>
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

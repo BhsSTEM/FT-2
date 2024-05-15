@@ -87,7 +87,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     //polygonPoints.size()-1
                     int index = setNewPoint(latLng);
                     Log.v("setNewPoint", String.valueOf(index));
-                    markerMap.put(marker, index);
+                    markerMap.put(marker, polygonPoints.size()-1);
                     polygonPoints.add(index, latLng);
 
                     polygon.setPoints(polygonPoints);
@@ -170,37 +170,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         int smallestIndex = 0;
         double smallestDist = findDistance(point, polygonPoints.get(0));
 
-        int secondSmallestIndex = 1;
-        double secondSmallestDist = findDistance(point, polygonPoints.get(1));
-
         for(int i=0; i<polygonPoints.size();i++)
         {
             double dist = findDistance(point, polygonPoints.get(i));
 
             if(dist < smallestDist)
             {
-                secondSmallestIndex = smallestIndex;
-                secondSmallestDist = smallestDist;
-
                 smallestIndex = i;
                 smallestDist = dist;
             }
-            else if(dist < secondSmallestDist && dist > smallestDist && i != smallestIndex)
-            {
-                secondSmallestIndex = i;
-                secondSmallestDist = dist;
-            }
         }
 
-        Log.v("index", point.toString()+ "\n" + smallestIndex + " " + smallestDist + "\n" + secondSmallestIndex + " " + secondSmallestDist);
-        int minIndex = Math.min(smallestIndex, secondSmallestIndex);
+        Log.v("index", point.toString()+ "\n" + smallestIndex + " " + smallestDist);
 
         //stops the start point from being replaced
-        if(minIndex == 0)
+        if(smallestIndex == 0)
         {
-            minIndex = secondSmallestIndex;
+            return 1;
         }
 
+        //find if it should replace this or go one after
         return smallestIndex;
     }
 

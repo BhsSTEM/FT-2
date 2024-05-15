@@ -66,7 +66,7 @@ public class UserNode extends Database
 
         DatabaseReference ref = userNode.child(key);
 
-        User user = new User(firstName, lastName, pass);
+        User user = new User(firstName, lastName, pass, email);
 
         ref.setValue(user)
                 .addOnSuccessListener(new OnSuccessListener<Void>()
@@ -125,6 +125,4 @@ public class UserNode extends Database
     {
         usersHashMap = map;
     }
-
-
 }
