@@ -1,8 +1,15 @@
 package com.example.idlereasonsproject;
 
+
+import android.Manifest.permission;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -22,11 +29,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
-    GoogleMap.OnMarkerClickListener, GoogleMap.OnMarkerDragListener{
+public class MapsActivity extends FragmentActivity implements ActivityCompat.OnRequestPermissionsResultCallback, OnMapReadyCallback,
+        GoogleMap.OnMarkerClickListener, GoogleMap.OnMarkerDragListener, GoogleMap.OnMyLocationButtonClickListener {
 
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
+
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+
+    private boolean permissionDenied = false;
 
     //map to keep track of which marker goes with which polygon point
     private final Map<Marker, Integer> markerMap = new HashMap<>();
@@ -42,6 +53,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private int markerDragged = -1;
     private boolean wasDragged = false;
 
+    // Register the permissions callback, which handles the user's response to the
+    // system permissions dialog. Save the return value, an instance of
+    // ActivityResultLauncher, as an instance variable.
+    private ActivityResultLauncher<String> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    // Permission is granted. Continue the action or workflow in your
+                    // app.
+                } else {
+                    // Explain to the user that the feature is unavailable because the
+                    // feature requires a permission that the user has denied. At the
+                    // same time, respect the user's decision. Don't link to system
+                    // settings in an effort to convince the user to change their
+                    // decision.
+                }
+            });
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +82,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        // Register the permissions callback, which handles the user's response to the
+        // system permissions dialog. Save the return value, an instance of
+        // ActivityResultLauncher, as an instance variable.
+
     }
 
     /**
@@ -67,7 +101,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
-
+        if (ActivityCompat.checkSelfPermission(this, permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        mMap.setMyLocationEnabled(true);
+        mMap.getUiSettings().setMyLocationButtonEnabled(true);
         PolygonOptions polygonOptions = new PolygonOptions();
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
@@ -85,10 +130,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if(polygonPoints.size() > 1)
                 {
                     //polygonPoints.size()-1
-                    int index = setNewPoint(latLng);
-                    Log.v("setNewPoint", String.valueOf(index));
                     markerMap.put(marker, polygonPoints.size()-1);
-                    polygonPoints.add(index, latLng);
+                    polygonPoints.add(polygonPoints.size()-1, latLng);
 
                     polygon.setPoints(polygonPoints);
                 }
@@ -111,7 +154,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         mMap.setOnMarkerClickListener(this);
-        //mMap.setOnMarkerDragListener(this);
+        mMap.setOnMarkerDragListener(this);
     }
 
     @Override
@@ -160,55 +203,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         markerDragged = markerMap.get(marker);
     }
 
-    public int setNewPoint(LatLng point)
-    {
-        if(polygonPoints.size() <= 3)
-        {
-            return polygonPoints.size()-1;
-        }
-
-        int smallestIndex = 0;
-        double smallestDist = findDistance(point, polygonPoints.get(0));
-
-        for(int i=0; i<polygonPoints.size();i++)
-        {
-            double dist = findDistance(point, polygonPoints.get(i));
-
-            if(dist < smallestDist)
-            {
-                smallestIndex = i;
-                smallestDist = dist;
-            }
-        }
-
-        Log.v("index", point.toString()+ "\n" + smallestIndex + " " + smallestDist);
-
-        //stops the start point from being replaced
-        if(smallestIndex == 0)
-        {
-            return 1;
-        }
-
-        //find if it should replace this or go one after
-        return smallestIndex;
+    @Override
+    public boolean onMyLocationButtonClick() {
+        return false;
     }
 
-    public double findDistance(LatLng pnt1, LatLng pnt2)
-    {
-        double degsToRads = Math.PI/180;
-        double earthRadius = 6371; //average radius in km
-
-        //convert to radians
-        double lon1 = pnt1.longitude * degsToRads;
-        double lon2 = pnt2.longitude * degsToRads;
-        double lat1 = pnt1.latitude * degsToRads;
-        double lat2 = pnt2.latitude * degsToRads;
-
-        //I split the equation to find distance using
-        //lat/lon into 3 parts
-        double a = Math.sin(lat1) * Math.sin(lat2);
-        double b = Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon2 - lon1);
-
-        return Math.acos(a+b) * earthRadius;
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.idlereasonsproject;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import com.example.idlereasonsproject.FBDatabase.Database;
 import com.example.idlereasonsproject.FBDatabase.ReportNode;

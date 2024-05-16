@@ -6,7 +6,14 @@ import android.app.NotificationManager;
 import android.os.Build;
 import android.util.Log;
 
-public class AppStartUp extends Application {
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+
+public class AppStartUp extends Application
+{
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private boolean permissionDenied = false;
+
     public void MyApp() {
         // this method fires only once per application start.
         // getApplicationContext returns null here
@@ -23,6 +30,8 @@ public class AppStartUp extends Application {
 
         Log.i("main", "onCreate fired");
     }
+
+
     //id for notifications is "Slothful Notifications"
     private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
