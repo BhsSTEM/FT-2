@@ -48,7 +48,7 @@ public class ReportObject {
     public long getKey() {return timeOfSubmission.getTime();}
 
     public String reportText() {
-        return machine + " at " + location + " is idle because " + reason + ". Further information: " + furtherInformation;
+        return machine + " is at " + location + " and is idle because " + reason + ". Further information: " + furtherInformation;
     }
     public Map<String, Object> toMap()
     {
