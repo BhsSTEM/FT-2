@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.idlereasonsproject.FBDatabase.Database;
+import com.example.idlereasonsproject.FBDatabase.FieldObject;
 import com.example.idlereasonsproject.FBDatabase.MachineObject;
 import com.example.idlereasonsproject.FBDatabase.ReportNode;
 import com.example.idlereasonsproject.FBDatabase.ReportObject;
@@ -49,11 +50,14 @@ public class ReportIdleFragment extends Fragment implements OnItemSelectedListen
         //Field Spinner
         Spinner fieldSpinner = getView().findViewById(R.id.report_idle_field);
         // Create an ArrayAdapter using the string array and a default spinner layout.
-        ArrayAdapter<CharSequence> fieldAdapter = ArrayAdapter.createFromResource(
-                getActivity(),
-                R.array.fields_array,
-                android.R.layout.simple_spinner_item
-        );
+        ArrayList<String> fieldList = new ArrayList<>();
+        Map<String, FieldObject> fieldMap = Database.fieldNode.getFieldMap();
+
+        for(FieldObject field: fieldMap.values())
+        {
+            fieldList.add(field.getName());
+        }
+        ArrayAdapter<String> fieldAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, fieldList);
         // Specify the layout to use when the list of choices appears.
         fieldAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner.
