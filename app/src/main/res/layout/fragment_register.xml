@@ -196,8 +196,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Login"
-                android:backgroundTint="@color/brown"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_marginTop="600dp"
+                android:textColor="@color/brown"
                 android:layout_alignParentEnd ="true"
                 android:layout_marginEnd="70dp"
                 tools:ignore="MissingConstraints" />
@@ -205,12 +206,11 @@
             <!--  register button          -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/registerBtn"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Register"
-                android:textColor="@color/brown"
-                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/brown"
                 android:layout_marginTop="520dp"
                 android:layout_toLeftOf="@id/loginBtn"
                 android:layout_marginEnd="4dp"

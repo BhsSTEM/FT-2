@@ -2,25 +2,28 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.IdleReasonsProject" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-<!--         <item name="colorPrimary">@color/design_default_color_primary</item>-->
-        <item name="windowActionBar">true</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="Theme.IdleReasonsProject" parent="Base.Theme.IdleReasonsProject"
-
-    />
-
-    <style name="Theme.IdleReasonsProject.NoActionBar">
-
+        <!--         <item name="colorPrimary">@color/design_default_color_primary</item>-->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <!--        <item name="colorAccent">@color/colorAccent</item>-->
+    </style>
+    <!--    <style name="Theme.IdleReasonsProject" parent="Base.Theme.IdleReasonsProject"-->
 
-    <style name="Theme.IdleReasonsProject.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark"
+    <!--    />-->
 
-        />
+    <!--    <style name="Theme.IdleReasonsProject.NoActionBar">-->
+    <!--        <item name="windowActionBar">false</item>-->
+    <!--        <item name="windowNoTitle">true</item>-->
+    <!--    </style>-->
 
-    <style name="Theme.IdleReasonsProject.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"
-        />
+    <!--    <style name="Theme.IdleReasonsProject.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark"-->
+
+    <!--        />-->
+
+    <!--    <style name="Theme.IdleReasonsProject.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"-->
+    <!--        />-->
 </resources>

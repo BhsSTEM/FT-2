@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -42,7 +43,7 @@ NavHostFragment navHostFragment;
         super.onCreate(savedInstanceState);
 
 
-
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_detail);
 
 
@@ -61,13 +62,6 @@ NavHostFragment navHostFragment;
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.just_toolbar);
-       // NavigationView navigationView = findViewById(R.id.nav_view);
-        //navigationView.setNavigationItemSelectedListener(this);
-
-        //ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
-
-        //drawerLayout.addDrawerListener(toggle);
-        //toggle.syncState();
 
 
         getSelectedShape();
@@ -82,14 +76,7 @@ NavHostFragment navHostFragment;
             }
         });
 
-        Button idleReasonButton = findViewById(R.id.idleReasonsButton);
-        idleReasonButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("DetailActivity", "idle reasons button clicked");
-                navController.navigate(R.id.action_redirect_to_machine_reason_list);
-            }
-        });
+
 
 
     }

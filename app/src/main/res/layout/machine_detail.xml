@@ -26,15 +26,16 @@
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="0dp" />
 
-        <ImageView
+
+
+        <TextView
             android:layout_width="428sp"
             android:layout_height="100sp"
-            android:src="@drawable/map_placeholder"
             app:layout_constraintBottom_toTopOf="@+id/view"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="0dp">
 
-        </ImageView>
+        </TextView>
 
         <TextView
             android:layout_width="wrap_content"
@@ -127,7 +128,7 @@
             android:text="Task"
             android:textColor="@color/black"
             android:textSize="15dp"
-            app:layout_constraintBottom_toTopOf="@+id/idleReasonsButton"
+            app:layout_constraintBottom_toTopOf="@+id/view3"
             app:layout_constraintTop_toBottomOf="@+id/idleOrNot"
             app:layout_constraintVertical_bias="1.0"
             tools:ignore="MissingConstraints"
@@ -145,22 +146,11 @@
             tools:ignore="MissingConstraints" />
 
 
-        <Button
-            android:id="@+id/idleReasonsButton"
-            android:layout_width="400dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="210dp"
-            android:text="Idle Reasons"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.454"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.554" />
+
 
         <View
             android:layout_width="match_parent"
+            android:id="@+id/view3"
             android:layout_height="1dp"
             android:background="@android:color/darker_gray"
             app:layout_constraintTop_toTopOf="parent"
@@ -177,10 +167,12 @@
             android:clickable="true"
             android:focusable="true"
             android:scaleType="fitCenter"
+            android:background="@color/brown"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="165dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/idleReasonsButton"
+            app:layout_constraintTop_toBottomOf="@+id/view3"
             app:srcCompat="@drawable/backbtn" />
 
 

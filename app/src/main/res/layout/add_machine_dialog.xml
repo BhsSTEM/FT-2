@@ -7,6 +7,7 @@
 
     <EditText
         android:id="@+id/editTextName"
+        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Machine Name" />
@@ -14,6 +15,7 @@
     <EditText
         android:id="@+id/editTextType"
         android:layout_width="match_parent"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:hint="Machine Type" />
     <EditText
@@ -25,7 +27,7 @@
     <EditText
         android:id="@+id/editTextMachineTask"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="100dp"
         android:hint="Machine Task"/>
 
     <Button
