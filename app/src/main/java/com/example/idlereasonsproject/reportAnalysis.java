@@ -38,7 +38,7 @@ public class reportAnalysis {
         numOfMinutes = numOfMinutes%60;
         String returnedString ="";
         if (resolvedOrNot) {returnedString = machine + " was idle for ";}
-        else {returnedString = machine + "has been idle for ";}
+        else {returnedString = machine + " has been idle for ";}
         if (numOfHours != 0) {
             if (numOfHours == 1) {
                 returnedString = returnedString + "1 hour, ";
@@ -57,11 +57,14 @@ public class reportAnalysis {
             }
         }
         if (numOfSeconds != 0) {
+            if (numOfHours != 0 || numOfMinutes != 0) {
+                returnedString = returnedString + "and ";
+            }
             if (numOfSeconds == 1) {
-                returnedString = returnedString + "and 1 second.";
+                returnedString = returnedString + "1 second.";
             }
             else {
-                returnedString = returnedString + "and " + numOfSeconds + " seconds.";
+                returnedString = returnedString + numOfSeconds + " seconds.";
             }
         }
         return returnedString;

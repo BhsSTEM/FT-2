@@ -122,7 +122,10 @@ NavHostFragment navHostFragment;
         tv3.setText("Machine Task: "+ selectedShape.getTask());
 
         TextView tv4 = (TextView) findViewById(R.id.idleOrNot);
-        if (machineAnalysis.isMachineIdle(selectedShape)) {tv4.setText("Idle");}
+        if (machineAnalysis.isMachineIdle(selectedShape)) {
+            long idleLength = reportAnalysis.timeBetweenReportAndNow(machineAnalysis.machinesIdleReport(selectedShape));
+            tv4.setText(reportAnalysis.idleLength(idleLength, false, selectedShape.getName()));
+        }
         else {tv4.setText("Not idle");}
 
         TextView tv5 = (TextView) findViewById(R.id.idleDetails);
