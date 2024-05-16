@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".FirstFragment">
+    tools:context=".LoginFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/email"
-            app:boxBackgroundColor="#F8E9FD"
+            app:boxBackgroundColor="@color/tan"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +63,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="40dp"
             android:hint="@string/password"
-            app:boxBackgroundColor="#F8E9FD"
+            app:passwordToggleEnabled="true"
+            app:boxBackgroundColor="@color/tan"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/emailTextInputLayout"
@@ -90,6 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Login"
+                android:backgroundTint="@color/brown"
                 android:layout_marginTop="300dp"
                 android:layout_alignParentEnd ="true"
                 android:layout_marginEnd="150dp"
@@ -99,6 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Don't have an account?"
+                android:textColorHint="@color/brown"
                 android:layout_marginTop="370dp"
                 android:layout_toLeftOf="@id/registerBtn"
                 />
@@ -109,17 +112,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Register"
+                android:textColor="@color/brown"
                 android:layout_marginTop="355dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginEnd="40dp"
                 />
 
         </RelativeLayout>
-
-
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
 

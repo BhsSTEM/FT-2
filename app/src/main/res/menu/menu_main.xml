@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.idlereasonsproject.MainActivity">
+    tools:ignore="HardcodedText"
+    >
 
     <item
         android:id="@+id/home_redirect"
@@ -24,6 +25,11 @@
         android:id="@+id/action_machineList"
         android:orderInCategory="100"
         android:title="Machine List" />
+
+    <item
+        android:id="@+id/action_fieldList"
+        android:orderInCategory="100"
+        android:title="Fields"/>
 
     <item
         android:id="@+id/action_idleReport"

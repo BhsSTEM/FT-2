@@ -1,5 +1,8 @@
 package com.example.idlereasonsproject;
 
+import static com.example.idlereasonsproject.FBDatabase.Database.getCurrentReport;
+import static com.example.idlereasonsproject.FBDatabase.ReportNode.resolveReport;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -12,33 +15,33 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.idlereasonsproject.FBDatabase.Database;
+import com.example.idlereasonsproject.FBDatabase.MachineObject;
+import com.example.idlereasonsproject.FBDatabase.ReportNode;
 import com.example.idlereasonsproject.FBDatabase.ReportObject;
 import com.example.idlereasonsproject.databinding.ReportIdleBinding;
 import com.google.android.material.textfield.TextInputLayout;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Objects;
 
-public class ReportIdle extends Fragment implements OnItemSelectedListener {
+public class ReportIdleFragment extends Fragment implements OnItemSelectedListener {
     private ReportIdleBinding binding;
     //Variable set up
-    String location = "Unknown";
-    String machine = "Unknown";
-    String reason = "Unknown";
-    String furtherInformation = "Blank";
+    String location = "";
+    String machine = "";
+    String reason = "";
+    String furtherInformation = "";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-
+                             Bundle savedInstanceState
     ) {
-
-
         binding = ReportIdleBinding.inflate(inflater, container,false);
         return binding.getRoot();
-
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -58,79 +61,83 @@ public class ReportIdle extends Fragment implements OnItemSelectedListener {
         fieldSpinner.setOnItemSelectedListener(this);
         Log.i("My Tag", "Field spinner up");
 
-//Machine Spinner
+        //Machine Spinner
         Spinner machineSpinner = getView().findViewById(R.id.report_idle_machine);
+
         //Creating an array to use for this specfic spinner, the goal is to have this in the future be pulled from somewhere else instead of just created here
         //Idealy, in the future, if the user is marked as using a machine that one would pop up first, and if they're using multiple, those would pop up first
-        String[] machineList = new String[]{"Machine 1", "Machine 2", "Machine 3"};
-        // Create an ArrayAdapter using the string array and a default spinner layout.
-        /* ArrayAdapter<CharSequence> machineAdapter = ArrayAdapter.createFromResource(
-                getActivity(),
-                R.array.machines_array,
-                android.R.layout.simple_spinner_item
-        ); */
+        ArrayList<String> machineList = new ArrayList<>();
+        Map<String, MachineObject> machineMap = Database.machineNode.getMachineMap();
 
+        for(MachineObject machine: machineMap.values())
+        {
+            machineList.add(machine.getName());
+        }
+
+        // Create an ArrayAdapter using the string array and a default spinner layout.
         ArrayAdapter<String> machineAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, machineList);
         // Specify the layout to use when the list of choices appears.
         machineAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         // Apply the adapter to the spinner.
         machineSpinner.setAdapter(machineAdapter);
         machineSpinner.setOnItemSelectedListener(this);
         Log.i("My Tag", "Machine spinner up");
-//Reason Spinner
+
+        //Reason Spinner
         Spinner reasonSpinner = getView().findViewById(R.id.report_idle_reason);
+
         // Create an ArrayAdapter using the string array and a default spinner layout.
         ArrayAdapter<CharSequence> reasonAdapter = ArrayAdapter.createFromResource(
                 getActivity(),
                 R.array.reasons_array,
                 android.R.layout.simple_spinner_item
         );
+
         // Specify the layout to use when the list of choices appears.
         reasonAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         // Apply the adapter to the spinner.
         reasonSpinner.setAdapter(reasonAdapter);
         reasonSpinner.setOnItemSelectedListener(this);
         Log.i("My Tag", "Reason spinner up");
-//Text box
+
+        //Text box
         TextInputLayout furtherInfoTextBox = getView().findViewById(R.id.report_idle_further_information);
-//Are you sure? Pop up
+
+        //Are you sure? Pop up
+        //This is where report object is sent to the database and create and everything
         DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
             switch (which){
                 case DialogInterface.BUTTON_POSITIVE:
                     //Yes button clicked
                     furtherInformation = Objects.requireNonNull(furtherInfoTextBox.getEditText()).getText().toString();
-                    ReportObject newReport = new ReportObject();
-                    newReport.assignData(location, machine, reason, furtherInformation);
-                    newReport.reportToLogCat();
+                    ReportObject report = new ReportObject(location, machine, reason, furtherInformation);
+                    slothfulNotifications.idleReportNotifications(getContext(), getActivity(), report);
                     //method to send to database
-                    //Change to proper home page when everything is merged
-                    NavHostFragment.findNavController(ReportIdle.this)
+                    Database.reportNode.addReportToDB(report);
+                    Database.setCurrentReport(report);
+
+                    NavHostFragment.findNavController(ReportIdleFragment.this)
                             .navigate(R.id.action_ReportIdle_to_HomeFragment);
                     break;
 
                 case DialogInterface.BUTTON_NEGATIVE:
-                    //No button clicked
+                    //No button clicked, used for debugging purposes
+                    String loggedInUser = Database.getUserLoggedIn().getFirstName() + " " + Database.getUserLoggedIn().getLastName();
                     break;
             }
         };
-//Submit button
+
+        //Submit button
         Button button = getView().findViewById(R.id.report_idle_button_submit);
         button.setOnClickListener(v -> {
+            //add user check to make sure they don't have empty boxes
+
             AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
             builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
                     .setNegativeButton("No", dialogClickListener).show();
         });
-        /*
-        binding.loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(SecondFragment.this)
-                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
-            }
-        });
-
-         */
-
     }
 
     @Override
@@ -150,8 +157,14 @@ public class ReportIdle extends Fragment implements OnItemSelectedListener {
                 R.array.fields_array,
                 android.R.layout.simple_spinner_item
         );
-        String[] machineList = new String[]{"Machine 1", "Machine 2", "Machine 3"};
-        ArrayAdapter<String> machineAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, machineList);
+        ArrayList<String> machineList = new ArrayList<>();
+        Map<String, MachineObject> machineMap = Database.machineNode.getMachineMap();
+
+        for(MachineObject machine: machineMap.values())
+        {
+            machineList.add(machine.getName());
+        }
+        ArrayAdapter<String> machineAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, machineList);
         ArrayAdapter<CharSequence> reasonAdapter = ArrayAdapter.createFromResource(
                 getActivity(),
                 R.array.reasons_array,
@@ -190,8 +203,8 @@ public class ReportIdle extends Fragment implements OnItemSelectedListener {
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    public void onNothingSelected(AdapterView<?> parent)
+    {
 
     }
-
 }
